@@ -5,7 +5,7 @@ https://www.notion.so/NB-5-2-26fa0b8db76380fa81c0e30d66c763f3?source=copy_link
 
 ## 팀원
 손훈석 (https://github.com/HS-hand)  
-정인성 (개인 Github 링크)  
+정인성 (https://github.com/jung-insung)  
 오창섭 (https://github.com/GhostGN95)  
 양승빈 (개인 Github 링크)  
 정지원 (개인 Github 링크)  
