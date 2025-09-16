@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -14,10 +13,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Reply {
+model Comment {
   id        String   @id @default(uuid())
   nickname  String
   content   String
+  password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

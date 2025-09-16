@@ -3,7 +3,7 @@ import { Server } from "./01-app/server.js";
 export class DepInjector {
   #server;
 
-  constructor(){
+  constructor() {
     this.#server = this.injectDeps();
   }
 
