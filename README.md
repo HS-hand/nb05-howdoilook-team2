@@ -39,7 +39,43 @@ https://www.notion.so/NB-5-2-26fa0b8db76380fa81c0e30d66c763f3?source=copy_link
 
 ## 파일구조
 
+```
+// 예시 입니다
+src
+ ┣ config
+ ┃ ┗ db.ts
+ ┣ controllers
+ ┃ ┣ auth.controller.ts
+ ┃ ┗ user.controller.ts
+ ┣ middleware
+ ┃ ┣ auth.middleware.ts
+ ┃ ┗ error.middleware.ts
+ ┣ models
+ ┃ ┣ user.model.ts
+ ┃ ┗ course.model.ts
+ ┣ routes
+ ┃ ┣ auth.routes.ts
+ ┃ ┗ user.routes.ts
+ ┣ services
+ ┃ ┣ auth.service.ts
+ ┃ ┗ user.service.ts
+ ┣ utils
+ ┃ ┣ jwt.ts
+ ┃ ┣ constants.ts
+ ┃ ┗ logger.ts
+ ┣ app.ts
+ ┗ server.ts
+prisma
+ ┣ schema.prisma
+ ┗ seed.ts
+.env
+.gitignore
+package.json
+tsconfig.json
+README.md
+```
 ## 구현 홈페이지
+(개발한 홈페이지에 대한 링크 게시)
 
 ## 프로젝트 회고록
 (제작한 발표자료 링크 혹은 첨부파일 첨부)
