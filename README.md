@@ -6,13 +6,13 @@ https://www.notion.so/NB-5-2-26fa0b8db76380fa81c0e30d66c763f3?source=copy_link
 ## 팀원
 손훈석 (https://github.com/HS-hand)  
 정인성 (개인 Github 링크)  
-오창섭 (개인 Github 링크)  
+오창섭 (https://github.com/GhostGN95)  
 양승빈 (개인 Github 링크)  
 정지원 (개인 Github 링크)  
 
 ## 프로젝트 소개
 - 프로그래밍 교육 사이트의 백엔드 시스템 구축
-- 프로젝트 기간: 2025.09.15 ~ 2024.10.02
+- 프로젝트 기간: 2025.09.15 ~ 2025.10.02
 
 ## 기술스택
 - Backend: Express.js, PrismaORM
