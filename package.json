@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Node.js 백엔드 트랙 5기 2팀 초급프로젝트 제출 리포지토리입니다.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "format": "prettier . --write",
     "dev": "nodemon ./src/index.js",
