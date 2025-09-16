@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Created by https://www.toptal.com/developers/gitignore/api/node,windows,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,windows,macos
+=======
+# Created by https://www.toptal.com/developers/gitignore/api/macos,windows,node
+# Edit at https://www.toptal.com/developers/gitignore?templates=macos,windows,node
+>>>>>>> 325a7fa9523fe102837574df4be40330077916d9
 
 ### macOS ###
 # General
@@ -201,6 +206,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+<<<<<<< HEAD
 # End of https://www.toptal.com/developers/gitignore/api/node,windows,macos
 =======
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,visualstudiocode,node
@@ -426,3 +432,7 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,visualstudiocode,node
 >>>>>>> 6f8a86f (init)
+=======
+# End of https://www.toptal.com/developers/gitignore/api/macos,windows,node
+/src/generated/prisma
+>>>>>>> 325a7fa9523fe102837574df4be40330077916d9
