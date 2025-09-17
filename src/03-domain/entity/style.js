@@ -12,7 +12,7 @@ export class Style {
   #updatedAt;
   #categories;
   #tags;
-  #imageUrls;
+  #images;
 
   constructor ({
     id = undefined,
@@ -26,7 +26,7 @@ export class Style {
     updatedAt = undefined,
     categories,
     tags,
-    imageUrls,
+    images,
   }) {
     this.#id = id;
     this.#nickname = nickname;
@@ -39,18 +39,18 @@ export class Style {
     this.#updatedAt = updatedAt;
     this.#categories = categories;
     this.#tags = tags;
-    this.#imageUrls = imageUrls;
+    this.#images = images;
   }
 
-  static forCreate({ nickname, title, content, password, categories, tags, imageUrls }) {
+  static forCreate({ nickname, title, content, password, categories, tags, images }) {
     this.validateNicknameRule(nickname);
     this.validateTitleRule(title);
     this.validateContentRule(content);
     this.validatePasswordRule(password);
     this.validateCategoriesRule(categories);
     this.validateTagsRule(tags);
-    this.validateImageUrlsRule(imageUrls);
-    return new Style({ nickname, title, content, password, categories, tags, imageUrls });
+    this.validateImagesRule(images);
+    return new Style({ nickname, title, content, password, categories, tags, images });
   }
 
   static validateNicknameRule(nickname) {
@@ -104,8 +104,8 @@ export class Style {
     }
   }
 
-  static validateImageUrlsRule(imageUrls) {
-    if (imageUrls.length < 0) {
+  static validateImagesRule(images) {
+    if (images.length < 0) {
       throw new Exception('NOTICE');
     }
   }
@@ -140,11 +140,11 @@ export class Style {
   get tags() {
     return this.#tags;
   }
-  get imageUrls() {
-    return this.#imageUrls;
+  get images() {
+    return this.#images;
   }
 
-  isPasswordMatch(password) {
+  passwordMatch(password) {
     return this.#password = password;
   }
 }

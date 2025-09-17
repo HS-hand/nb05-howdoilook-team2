@@ -5,10 +5,11 @@ import { Exception } from "../common/exception.js";
 
 export class Server {
   #server;
-  //#controllers;
+  #controllers;
+
   constructor() {
-    //this.#controllers = controllers;
     this.#server = express();
+    this.#controllers = controllers;
   }
 
   listen = () => {
@@ -23,6 +24,12 @@ export class Server {
     this.#server.use(express.json());
   };
 
+  registerControllerMiddleware = () => {
+    // for (const controller of this.#controllers) {
+    //   this.#server.use(controller.basePath, controller.router);
+    // }
+  };
+
   registerExceptionMiddleware = () => {
     this.#server.use((err, req, res, next) => {
       if (err instanceof Exception) {
@@ -34,16 +41,12 @@ export class Server {
     });
   };
 
-  registerControllerMiddleware = () => {
-    // for (const controller of this.#controllers) {
-    //   this.#server.use(controller.basePath, controller.router);
-    // }
-  };
-
   start = () => {
     this.registerBaseMiddlewares();
     this.registerControllerMiddleware();
     this.registerExceptionMiddleware();
-    this.listen();
+    this.#server.listen(3000, () => {
+      console.log("Server is running on port 3000");
+    });
   };
 }

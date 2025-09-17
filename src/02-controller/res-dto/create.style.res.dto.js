@@ -6,7 +6,7 @@ export class CreateStyleResDto {
   curationCount;
   categories;
   tags;
-  imageUrls;
+  images;
 
   constructor(style) {
     this.nickname = style.title;
@@ -16,6 +16,6 @@ export class CreateStyleResDto {
     this.curationCount = style.likeCount;
     this.categories = style.categories;
     this.tags = style.tags;
-    this.imageUrls = style.imageUrls;
+    this.images = style.images;
   }
 }

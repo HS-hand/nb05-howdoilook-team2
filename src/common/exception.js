@@ -35,6 +35,18 @@ export const EXCEPTIONS = {
     statusCode: 400,
     message: "스타일 수정에 실패했습니다.",
   },
+  BAD_REQUEST: {
+    statusCode: 400,
+    message: "잘못된 요청입니다.",
+  },
+  FORBIDDEN: {
+    statusCode: 403,
+    message: "비밀번호가 틀렸습니다.",
+  },
+  NOT_FOUND: {
+    statusCode: 404,
+    message: "존재하지 않습니다."
+  },
 };
 
 export class Exception extends Error {
