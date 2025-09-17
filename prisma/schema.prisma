@@ -47,9 +47,9 @@ model StyleImage {
 }
 
 model StyleContainTag {
-  style   Style  @relation(fields: [styleId], references: [id])
+  style   Style  @relation(fields: [styleId], references: [id], onDelete: Cascade)
   styleId String
-  tag     Tag    @relation(fields: [tagId], references: [id])
+  tag     Tag    @relation(fields: [tagId], references: [id], onDelete: Restrict)
   tagId   String
 
   @@id([styleId, tagId])
