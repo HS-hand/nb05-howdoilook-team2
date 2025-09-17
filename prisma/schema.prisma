@@ -14,14 +14,132 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Style {
+  id            String   @id @default(uuid())
+  nickname      String
+  title         String
+  content       String
+  password      String
+  viewCount     Int      @default(0)
+  curationCount Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  tags      String[] @default([])
+  imageUrls String[]
+
+  category  Category?
+  curations Curation[]
+}
+
+model Category {
+  id      String @id @default(uuid())
+  styleId String @unique
+  style   Style  @relation(fields: [styleId], references: [id])
+
+  top                 Top[]
+  bottom              Bottom[]
+  outerwear           Outerwear[]
+  onePiece            OnePiece[]
+  shoes               Shoes[]
+  bag                 Bag[]
+  fashionHaberdashery FashionHaberdashery[]
+}
+
 model Curation {
-  id                 Int      @id @default(autoincrement())
-  nickname           String   @unique
-  content            String
-  trendy             Int
-  personality        Int
-  practicality       Int
+  id                Int      @id @default(autoincrement())
+  nickname          String   @unique
+  content           String
+  trendy            Int
+  personality       Int
+  practicality      Int
   costEffectiveness Int
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  styleId String?
+  style   Style?    @relation(fields: [styleId], references: [id])
+  Comment Comment[]
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  nickname  String   @unique
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  curationId Int?
+  curation   Curation? @relation(fields: [curationId], references: [id])
+}
+
+model Top {
+  id         String   @id @default(uuid())
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  categeoryId String
+  name        String
+  brand       String
+  price       Int
+}
+
+model Bottom {
+  id         String   @id @default(uuid())
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  name  String
+  brand String
+  price Int
+}
+
+model Outerwear {
+  id         String   @id @default(uuid())
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  name  String
+  brand String
+  price Int
+}
+
+model OnePiece {
+  id         String   @id @default(uuid())
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  name  String
+  brand String
+  price Int
+}
+
+model Shoes {
+  id         String   @id @default(uuid())
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  name  String
+  brand String
+  price Int
+}
+
+model Bag {
+  id         String   @id @default(uuid())
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  name  String
+  brand String
+  price Int
+}
+
+model FashionHaberdashery {
+  id         String   @id @default(uuid())
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  name  String
+  brand String
+  price Int
 }
