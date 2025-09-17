@@ -11,9 +11,18 @@ export class StyleService extends BaseService {
     const style = Style.forCreate({ nickname, title, content, password, categories, tags, imageUrls });
     const createdStyle = await this.repos.style.create({
       entity: style,
-      sytleId: style.id,
+      styleId: style.id,
     });
 
     return createdStyle;
+  }
+
+  async updateStyle({ styleId, updateFields, password }) {
+    const foundStyleId = await this.repos.style.findById(styleId);
+    if (!foundStyleId || !foundStyleId.isPasswordMatch(password)) {
+      throw new Exception("PASSWORD_UNMATCH");
+    }
+
+
   }
 }

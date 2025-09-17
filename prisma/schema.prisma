@@ -15,17 +15,18 @@ datasource db {
 }
 
 model Style {
-  id         String         @id @default(uuid())
-  nickname   String
-  title      String
-  content    String
-  password   String
-  viewCount  Int            @default(0)
-  createdAt  DateTime       @default(now())
-  updatedAt  DateTime       @updatedAt
+  id        String   @id @default(uuid())
+  nickname  String
+  title     String
+  content   String
+  password  String
+  viewCount Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   categories CategoryItem[]
-  tags       String[]       @default([])
-  imageUrls  String[]
+  tags       Tag[]
+  imageUrls  ImageUrl[]
 
   curations Curation[]
 }
@@ -76,4 +77,22 @@ enum CATEGORYTYPE {
   shoes
   bag
   accessory
+}
+
+model Tag {
+  id      String  @id @default(uuid())
+  styleId String
+  tag1    String
+  tag2    String?
+  tag3    String?
+
+  style Style @relation(fields: [styleId], references: [id], onDelete: Cascade)
+}
+
+model ImageUrl {
+  id      String @id @default(uuid())
+  styleId String
+  image   String
+
+  style Style @relation(fields: [styleId], references: [id], onDelete: Cascade)
 }

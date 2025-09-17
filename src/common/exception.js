@@ -31,6 +31,10 @@ export const EXCEPTIONS = {
     statusCode: 400,
     message: "*영문, 숫자 조합 8~16자리로 입력해주세요.",
   },
+  PASSWORD_UNMATCH: {
+    statusCode: 400,
+    message: "스타일 수정에 실패했습니다.",
+  },
 };
 
 export class Exception extends Error {
