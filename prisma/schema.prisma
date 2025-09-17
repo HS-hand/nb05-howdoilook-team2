@@ -27,7 +27,6 @@ model Style {
   categories CategoryItem[]
   curations  Curation[]
 
-  tags            Tag[]
   images          StyleImage[]
   StyleContainTag StyleContainTag[]
 }
@@ -35,7 +34,6 @@ model Style {
 model Tag {
   id              String            @id @default(uuid())
   name            String
-  style           Style[]
   StyleContainTag StyleContainTag[]
 }
 

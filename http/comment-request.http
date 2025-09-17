@@ -1,0 +1,6 @@
+POST http://localhost:3000/howdoilook/comments
+Content-Type: application/json
+{
+	"content": "string",
+	"password": "string"
+}
