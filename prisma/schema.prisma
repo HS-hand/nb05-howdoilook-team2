@@ -13,11 +13,83 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Comment {
-  id        String   @id @default(uuid())
-  nickname  String
-  content   String
-  password  String
+model Style {
+  id          String @id @default(uuid())
+  nickname    String @unique
+  title       String
+  password    String
+  description String
+  veiws       Int    @default(0)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  styleCompositions StyleComposition[]
+  images            Image[]
+  tags              Tag[]
+  curations         Curation[]
+}
+
+model StyleComposition {
+  id        String   @id @default(uuid())
+  category  Category
+  clothName String
+  brandName String
+  price     Int
+
+  style   Style  @relation(fields: [styleId], references: [id], onDelete: Cascade)
+  styleId String
+}
+
+enum Category {
+  상의
+  하의
+  아우터
+  원피스
+  신발
+  가방
+  패션잡화
+}
+
+model Image {
+  id      String @id @default(uuid())
+  url     String
+  style   Style  @relation(fields: [styleId], references: [id], onDelete: Cascade)
+  styleId String
+}
+
+model Tag {
+  id      String @id @default(uuid())
+  name    String @unique
+  style   Style  @relation(fields: [styleId], references: [id], onDelete: Cascade)
+  styleId String
+}
+
+model Curation {
+  id                String   @id @default(uuid())
+  nickname          String   @unique
+  password          String
+  content           String
+  trendy            Int
+  personality       Int
+  practicality      Int
+  costEffectiveness Int
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  style   Style  @relation(fields: [styleId], references: [id], onDelete: Cascade)
+  styleId String
+
+  comment Comment[]
+}
+
+model Comment {
+  id         String   @id @default(uuid())
+  nickname   String
+  content    String
+  password   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  curation   Curation @relation(fields: [curationId], references: [id], onDelete: Cascade)
+  curationId String
 }
