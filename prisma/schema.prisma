@@ -73,6 +73,7 @@ model Curation {
 
 model Comment {
   id         String   @id @default(uuid())
+  nickname   String
   curationId String   @unique
   curation   Curation @relation(fields: [curationId], references: [id], onDelete: Cascade)
   content    String

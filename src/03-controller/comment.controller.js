@@ -5,10 +5,10 @@ export class CommentController extends BaseControlloer {
   constructor(commentMiddleware) {
     super("");
     this.#commentMiddleware = commentMiddleware;
-    this.registerCommentRouter();
+    this.registerRoutes();
   }
 
-  registerCommentRouter = () => {
+  registerRoutes = () => {
     this.router.post(
       "/curations/:curationId/comments",
       this.catchException(this.#commentMiddleware.createCommentMiddleware),
