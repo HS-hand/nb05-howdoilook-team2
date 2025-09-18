@@ -6,6 +6,7 @@ import { Exception } from "../common/exception.js";
 export class Server {
   #server;
   #controllers;
+
   constructor(controllers) {
     this.#controllers = controllers;
     this.#server = express();
@@ -28,7 +29,7 @@ export class Server {
       if (err instanceof Exception) {
         res.status(err.statusCode).json({ message: err.message });
       } else {
-        res.status(500).json({ message: "알 수 없는 에러 발생!!!" });
+        res.status(500).json({ message: "알 수 없는 에러 발생" });
         console.error(err);
       }
     });

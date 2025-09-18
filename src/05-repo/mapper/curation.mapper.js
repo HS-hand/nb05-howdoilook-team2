@@ -11,7 +11,7 @@ export class CurationMapper {
       practicality: record.practicality,
       costEffectiveness: record.costEffectiveness,
       createdAt: record.createdAt,
-      updatedAt: record.updatedAt
+      updatedAt: record.updatedAt,
     });
   }
   static toPersistent(entity) {
@@ -23,6 +23,6 @@ export class CurationMapper {
       personality: entity.personality,
       practicality: entity.practicality,
       costEffectiveness: entity.costEffectiveness,
-    }
+    };
   }
 }
