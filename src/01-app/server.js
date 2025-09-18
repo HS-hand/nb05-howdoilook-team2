@@ -6,7 +6,10 @@ import { Exception } from "../common/exception.js";
 export class Server {
   #server;
   #controllers;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ebf936d70e00a327876228b3d40a0a37edbd46b1
   constructor(controllers) {
     this.#controllers = controllers;
     this.#server = express();

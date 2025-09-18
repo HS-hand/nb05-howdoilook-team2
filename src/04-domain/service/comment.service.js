@@ -52,7 +52,7 @@ export class CommentService {
 
   deleteComment = async ({ commentId, password }) => {
     const foundComment =
-      await this.#commentRepo.findCommentBycommentId(commentId);
+      await this.#commentRepo.findCommentById(commentId);
     if (!foundComment) {
       throw new Exception(EXCEPTIONS.COMMENT_NOT_EXSIST);
     }

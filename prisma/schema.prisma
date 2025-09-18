@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  // output   = "../generated/prisma"
 }
 
 datasource db {
@@ -29,27 +28,6 @@ model Style {
 
   images          StyleImage[]
   StyleContainTag StyleContainTag[]
-}
-
-model CategoryItem {
-  id      String       @id @default(uuid())
-  styleId String
-  type    CATEGORYTYPE
-  name    String
-  brand   String
-  price   Int
-
-  style Style @relation(fields: [styleId], references: [id], onDelete: Cascade)
-}
-
-enum CATEGORYTYPE {
-  top
-  bottom
-  outer
-  dress
-  shoes
-  bag
-  accessory
 }
 
 model Tag {
@@ -103,4 +81,23 @@ model Comment {
   updatedAt  DateTime @updatedAt
 }
 
+model CategoryItem {
+  id      String       @id @default(uuid())
+  styleId String
+  type    CATEGORYTYPE
+  name    String
+  brand   String
+  price   Int
 
+  style Style @relation(fields: [styleId], references: [id], onDelete: Cascade)
+}
+
+enum CATEGORYTYPE {
+  top
+  bottom
+  outer
+  dress
+  shoes
+  bag
+  accessory
+}

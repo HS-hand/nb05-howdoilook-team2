@@ -435,4 +435,9 @@ $RECYCLE.BIN/
 =======
 # End of https://www.toptal.com/developers/gitignore/api/macos,windows,node
 /src/generated/prisma
+<<<<<<< HEAD
 >>>>>>> 325a7fa9523fe102837574df4be40330077916d9
+=======
+
+/src/generated/prisma
+>>>>>>> ebf936d70e00a327876228b3d40a0a37edbd46b1
