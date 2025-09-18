@@ -1,22 +1,33 @@
-import { Style } from "../entity/style.js";
+import { Style } from "../entity/style.entity.js";
 import { BaseService } from "./base.service.js";
 import { Exception } from "../../common/exception.js";
 
 export class StyleService extends BaseService {
-  constructor(repos) {
+  constructor({ styleRepo, ...repos }) {
     super(repos);
+    this.styleRepo = styleRepo;
   };
 
   async createStyle(styleData) {
     const styleEntity = Style.forCreate(styleData);
-    const createdStyle = await this.repos.create(styleEntity, styleData);
+    const createdStyle = await this.styleRepo.create(styleEntity, styleData);
 
     return createdStyle;
   };
 
+  async getStyleById(styleId) {
+    const styleEntity = await this.styleRepo.findById(styleId);
+    if (!styleEntity) {
+      throw new Exception("NOT_FOUND");
+    }
+    
+    this.styleRepo.incrementViewCount(styleId);
+    return styleEntity;
+  };
+
   async updateStyle(styleId, updateData) {
     const { password, ...rest } = updateData;
-    const styleEntity = await this.repos.findById(styleId, true);
+    const styleEntity = await this.styleRepo.findById(styleId, true);
     if (!styleEntity) {
       throw new Exception("NOT_FOUND");
     };
@@ -26,13 +37,12 @@ export class StyleService extends BaseService {
       throw new Exception("FORBIDDEN");
     };
 
-    const updatedStyle = await this.repos.update(styleId, rest);
-
+    const updatedStyle = await this.styleRepo.update(styleId, rest);
     return updatedStyle;
   };
 
-  async deletStyle(styleId, password) {
-    const styleEntity = await this.repos.findById(styleId, true);
+  async deleteStyle(styleId, password) {
+    const styleEntity = await this.styleRepo.findById(styleId, true);
     if (!styleEntity) {
       throw new Exception("NOT_FOUND");
     };
@@ -42,7 +52,7 @@ export class StyleService extends BaseService {
       throw new Exception("FORBIDDEN");
     };
 
-    const deletedStyle = await this.repos.delete(styleId);
+    const deletedStyle = await this.styleRepo.delete(styleId);
 
     return deletedStyle;
   };

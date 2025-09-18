@@ -1,24 +1,36 @@
 import { PrismaClient } from "@prisma/client";
 import { Server } from "./01-app/server.js";
+import { ConfigManager } from "./common/libs/config.manager.js";
+import { FileUploader } from "./common/libs/file.uploader.js";
 
 import { StyleRepo } from "./04-repo/style.repo.js";
 
 import { StyleService } from "./03-domain/service/style.service.js";
 
+import { ImageController } from "./02-controller/image.controller.js";
 import { StyleController } from "./02-controller/style.controller.js";
 
 export class DepInjector {
-  #server;
+  server;
 
   constructor(){
-    this.#server = this.injectDeps();
-  }
+    const configManager = new ConfigManager();
+    const fileUploader = new FileUploader(configManager);
+    const prisma = new PrismaClient();
 
-  injectDeps() {
-    return new Server();
-  }
+    const styleRepo = new StyleRepo({ prisma });
 
-  get server() {
-    return this.#server;
-  }
+    const styleService = new StyleService({ styleRepo });
+
+    const imageController = new ImageController({ fileUploader });
+    const styleController = new StyleController({ styleService });
+
+    this.server = new Server({
+      configManager,
+      controllers: [
+        imageController,
+        styleController,
+      ],
+    });
+  };
 }

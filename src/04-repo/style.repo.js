@@ -14,17 +14,24 @@ export class StyleRepo extends BaseRepo {
       data: {
         ...persistentData,
         categories: { create: categories },
-        tags: {
-          connectOrCreate: {
-            where: { name: tagName },
-            create: { name: tagName },
-          },
+        StyleContainTag: {
+          create: tags.map((tagName) => ({
+            tag: {
+              create: { name: tagName },
+            },
+          })),
         },
         images: { create: imageUrls.map((url) => ({ url })) },
       },
+      include: {
+        images: true,
+        categories: true,
+        StyleContainTag: { include: { tag: true } },
+      },
     });
 
-    return StyleMapper.toEntity(record);
+    const result = StyleMapper.toEntity(record);
+    return result;
    };
 
    async findById(styleId, includePassword = false) {
@@ -40,16 +47,12 @@ export class StyleRepo extends BaseRepo {
           },
         },
         images: { select: { url: true } },
-        _count: { select: { curationns: true } },
+        _count: { select: { curations: true } },
       },
     });
 
     const styleEntity = StyleMapper.toEntity(record);
-    if (styleEntity && includePassword) {
-      styleEntity.password = record.password;
-    };
-
-    return entity;
+    return styleEntity;
    };
 
    async update(styleId, updateData) {
@@ -68,14 +71,17 @@ export class StyleRepo extends BaseRepo {
           StyleContainTag: {
             create: tags.map((tagName) => ({
               tag: {
-                connectOrCreate: {
-                  where: { name: tagName },
-                  create: { name: tagName },
-                },
+                create: { name: tagName },
               },
             })),
           },
+          images: { create: imageUrls.map((url) => ({ url })) },
         },
+        include: {
+          images: true,
+          categories: true,
+          StyleContainTag: { include: { tag: true } },
+        }
       });
 
       return updatedRecord;
@@ -87,6 +93,15 @@ export class StyleRepo extends BaseRepo {
    async delete(styleId) {
     return this.prisma.style.delete({
       where: { id: styleId }
+    });
+  };
+
+  async incrementViewCount(styleId) {
+    return this.prisma.style.update({
+      where: { id: styleId },
+      data: {
+        viewCount: { increment: 1 }
+      },
     });
   };
 }

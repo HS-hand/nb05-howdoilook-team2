@@ -1,16 +1,19 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
+import { CONFIG_KEY } from "../common/config.keys.js";
 import { Exception } from "../common/exception.js";
 
 export class Server {
   #server;
-  // #controllers;
+  #controllers;
+  #configManager;
 
-  constructor() {
+  constructor({ configManager, controllers }) {
     this.#server = express();
-    // this.#controllers = controllers;
-  }
+    this.#controllers = controllers;
+    this.#configManager = configManager;
+  };
 
   listen = () => {
     this.#server.listen(3000, () => {
@@ -22,12 +25,16 @@ export class Server {
     this.#server.use(cors());
     this.#server.use(morgan("dev"));
     this.#server.use(express.json());
+    this.#server.use(express.urlencoded({ extended: false }));
+    this.#server.use(
+      express.static(this.#configManager.get(CONFIG_KEY.DISK_STORAGE_PATH))
+    );
   };
 
   registerControllerMiddleware = () => {
-    // for (const controller of this.#controllers) {
-    //   this.#server.use(controller.basePath, controller.router);
-    // }
+    for (const controller of this.#controllers) {
+      this.#server.use(controller.basePath, controller.router);
+    }
   };
 
   registerExceptionMiddleware = () => {
@@ -37,7 +44,7 @@ export class Server {
       } else {
         res.status(500).json({ message: "알 수 없는 에러 발생!!!" });
         console.error(err);
-      }
+      };
     });
   };
 

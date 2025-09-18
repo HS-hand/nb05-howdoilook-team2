@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import multer from "multer";
-import { CONFIG_KEY } from "../consts/config-key.js";
+import { CONFIG_KEY } from "../config.keys.js";
 
 export class FileUploader {
   #path;
@@ -9,30 +9,30 @@ export class FileUploader {
 
   constructor(configManager) {
     this.#path = configManager.get(CONFIG_KEY.DISK_STORAGE_PATH);
-    this.#uploader = multer({ storage: this.#createDiskStorage() });
+    this.#uploader = multer({ storage: this.createDiskStorage() });
   }
 
-  #createDiskStorage() {
+  createDiskStorage() {
     return multer.diskStorage({
       destination: (req, file, callback) => {
-        const uploadPath = this.#getPath();
+        const uploadPath = this.getPath();
         callback(null, uploadPath);
       },
       filename: (req, file, callback) => {
-        const uniqueFilename = this.#getUniqueFilename(file.originalname);
+        const uniqueFilename = this.getUniqueFilename(file.originalname);
         callback(null, uniqueFilename);
       },
     });
   }
 
-  #getPath() {
+  getPath() {
     if (!fs.existsSync(this.#path)) {
       fs.mkdirSync(this.#path, { recursive: true });
     }
     return this.#path;
   }
 
-  #getUniqueFilename(originalname) {
+  getUniqueFilename(originalname) {
     const ext = path.extname(originalname);
     const basename = path.basename(originalname, ext);
     return basename + "-" + Date.now() + ext;
