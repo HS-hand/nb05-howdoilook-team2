@@ -2,7 +2,7 @@ export class Curation {
   #id;
   #styleId;
   #nickname;
-  #password
+  #password;
   #content;
   #trendy;
   #personality;
@@ -11,7 +11,19 @@ export class Curation {
   #createdAt;
   #updatedAt;
 
-  constructor({id = undefined, styleId = undefined, nickname, password, content, trendy, personality, practicality, costEffectiveness, createdAt = undefined, updatedAt = undefined}){
+  constructor({
+    id = undefined,
+    styleId = undefined,
+    nickname,
+    password,
+    content,
+    trendy,
+    personality,
+    practicality,
+    costEffectiveness,
+    createdAt = undefined,
+    updatedAt = undefined,
+  }) {
     this.#id = id;
     this.#styleId = styleId;
     this.#nickname = nickname;
@@ -25,53 +37,59 @@ export class Curation {
     this.#updatedAt = updatedAt;
   }
 
-  static factory ({id, styleId, nickname, content, password, trendy, personality, practicality, costEffectiveness}) {
-    if(nickname !== undefined){
+  static factory({
+    id,
+    styleId,
+    nickname,
+    content,
+    password,
+    trendy,
+    personality,
+    practicality,
+    costEffectiveness,
+  }) {
+    if (nickname !== undefined) {
       this.validateNicknameRule(nickname);
     }
-    if(content !== undefined){
+    if (content !== undefined) {
       this.validateContentRule(content);
     }
-    if(password !== undefined){
+    if (password !== undefined) {
       this.validatePasswordRule(password);
     }
-    if(trendy !== undefined){
+    if (trendy !== undefined) {
       this.validateTrendyRule(trendy);
     }
-    if(personality !== undefined){
+    if (personality !== undefined) {
       this.validatePersonalityRule(personality);
     }
-    if(practicality !== undefined){
+    if (practicality !== undefined) {
       this.validatePracticalityRule(practicality);
     }
-    if(costEffectiveness !== undefined){
+    if (costEffectiveness !== undefined) {
       this.validatecostEffectivenessRule(costEffectiveness);
     }
-    return new Curation({id, styleId, nickname, content, password, trendy, personality, practicality, costEffectiveness});
+    return new Curation({
+      id,
+      styleId,
+      nickname,
+      content,
+      password,
+      trendy,
+      personality,
+      practicality,
+      costEffectiveness,
+    });
   }
 
   // 회의 후 비즈니스 규칙 정하기
-  static validateNicknameRule(value) {
-
-  }
-  static validateContentRule(value) {
-    
-  }
-  static validatePasswordRule(value) {
-    
-  }
-  static validateTrendyRule(value) {
-    
-  }
-  static validatePersonalityRule(value) {
-    
-  }
-  static validatePracticalityRule(value) {
-    
-  }
-  static validatecostEffectivenessRule(value) {
-    
-  }
+  static validateNicknameRule(value) {}
+  static validateContentRule(value) {}
+  static validatePasswordRule(value) {}
+  static validateTrendyRule(value) {}
+  static validatePersonalityRule(value) {}
+  static validatePracticalityRule(value) {}
+  static validatecostEffectivenessRule(value) {}
 
   get id() {
     return this.#id;
@@ -106,5 +124,4 @@ export class Curation {
   get updatedAt() {
     return this.#updatedAt;
   }
-  
 }

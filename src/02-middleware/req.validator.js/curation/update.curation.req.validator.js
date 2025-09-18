@@ -8,11 +8,19 @@ export class UpdateCurationReqValidator extends BaseValidator {
 
   validate() {
     let { curationId } = this.params;
-    const { nickname, content, password, trendy, personality, practicality, costEffectiveness } = this.body;
-   
+    const {
+      nickname,
+      content,
+      password,
+      trendy,
+      personality,
+      practicality,
+      costEffectiveness,
+    } = this.body;
+
     if (!this.isString(curationId) || this.isEmpty(curationId)) {
       throw new Exception(EXCEPTIONS.CURATIONID_FORM);
-    };
+    }
 
     if (!this.body) {
       throw new Exception(EXCEPTIONS.ALL_UNDEFINED);
@@ -28,8 +36,11 @@ export class UpdateCurationReqValidator extends BaseValidator {
         throw new Exception(EXCEPTIONS.CONTENT_FORM);
       }
     }
-    if (!this.isString(password)|| this.isEmpty(password)) {
-      if (!this.isString(password) || !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(password)) {
+    if (!this.isString(password) || this.isEmpty(password)) {
+      if (
+        !this.isString(password) ||
+        !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(password)
+      ) {
         throw new Exception(EXCEPTIONS.PASSWORD_FORM);
       }
     }
@@ -49,15 +60,24 @@ export class UpdateCurationReqValidator extends BaseValidator {
       }
     }
     if (!this.isEmpty(costEffectiveness)) {
-      if (!this.isInt(costEffectiveness) || costEffectiveness < 0 || costEffectiveness > 10) {
+      if (
+        !this.isInt(costEffectiveness) ||
+        costEffectiveness < 0 ||
+        costEffectiveness > 10
+      ) {
         throw new Exception(EXCEPTIONS.COSTEFFECTIVENESS_FORM);
       }
     }
 
     return {
       id: curationId,
-      nickname, content, password, trendy, personality, practicality, costEffectiveness
-    }
+      nickname,
+      content,
+      password,
+      trendy,
+      personality,
+      practicality,
+      costEffectiveness,
+    };
   }
-
 }

@@ -1,9 +1,9 @@
 export class ViewCurationListResDto {
-  constructor({page, pageSize, curationTotalCount,foundCurationList}) {
+  constructor({ page, pageSize, curationTotalCount, foundCurationList }) {
     this.currentPage = page;
     this.totalPages = pageSize;
     this.totalItemCount = curationTotalCount;
-    this.CurationList = foundCurationList.map(Curation => ({
+    this.CurationList = foundCurationList.map((Curation) => ({
       id: Curation.id,
       nickname: Curation.nickname,
       content: Curation.content,
@@ -12,8 +12,7 @@ export class ViewCurationListResDto {
       practicality: Curation.practicality,
       costEffectiveness: Curation.costEffectiveness,
       createdAt: Curation.createdAt,
-      comment: {
-      }
+      comment: {},
     }));
   }
 }

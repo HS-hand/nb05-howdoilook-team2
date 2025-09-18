@@ -1,7 +1,7 @@
 import { CurationMapper } from "./mapper/curation.mapper.js";
 
 export class CurationRepo {
-  prisma
+  prisma;
   constructor(prisma) {
     this.prisma = prisma;
   }
@@ -11,17 +11,16 @@ export class CurationRepo {
       where: { id },
     });
     return curation ? CurationMapper.toEntity(curation) : null;
-  }
+  };
   findStyleById = async (id) => {
     const style = await this.prisma.style.findUnique({
       where: { id },
     });
     return style ? CurationMapper.toEntity(style) : null;
-  }
+  };
 
   findCurationList = async ({ styleId, page, pageSize, searchBy, keyword }) => {
     const curations = await this.prisma.curation.findMany({
-
       where: {
         styleId,
         ...(keyword
@@ -35,8 +34,8 @@ export class CurationRepo {
       },
     });
 
-    return curations.map(curation => CurationMapper.toEntity(curation));
-  }
+    return curations.map((curation) => CurationMapper.toEntity(curation));
+  };
 
   create = async (entity) => {
     const curation = await this.prisma.curation.create({
@@ -56,22 +55,21 @@ export class CurationRepo {
       data: {
         ...CurationMapper.toPersistent(entity),
         updatedAt: new Date(),
-      }
+      },
     });
 
     return CurationMapper.toEntity(updatedcuration);
-  }
+  };
 
   delete = async (id) => {
     const deletedCuration = await this.prisma.curation.delete({
-      where: { id }
-
+      where: { id },
     });
     return deletedCuration;
-  }
+  };
 
   count = async () => {
     const totalCount = await this.prisma.curation.count();
     return totalCount;
-  }
+  };
 }

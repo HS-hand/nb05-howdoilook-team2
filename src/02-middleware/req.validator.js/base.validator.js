@@ -6,7 +6,6 @@ export class BaseValidator {
   file;
   files;
 
-<<<<<<< HEAD
   constructor({
     headers = {},
     body = {},
@@ -15,9 +14,6 @@ export class BaseValidator {
     file = {},
     files = {},
   }) {
-=======
-  constructor({ headers = {}, body = {}, params = {}, query = {}, file = {}, files = {} }){
->>>>>>> ebf936d70e00a327876228b3d40a0a37edbd46b1
     this.headers = headers;
     this.body = body;
     this.params = params;
@@ -38,8 +34,4 @@ export class BaseValidator {
   validate() {
     throw new Error("validate 함수를 구현하세요.");
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> ebf936d70e00a327876228b3d40a0a37edbd46b1
