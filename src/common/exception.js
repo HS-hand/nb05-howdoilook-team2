@@ -86,6 +86,10 @@ export const EXCEPTIONS = {
   CURATION_NOT_EXIST: {
     statusCode: 400,
     message: "큐레이팅이 존재하지 않습니다.",
+  },
+  STYLEID_FORM:{
+    statusCode: 400,
+    message: "styleId가 유효하지 않습니다.",
   }
 };
 

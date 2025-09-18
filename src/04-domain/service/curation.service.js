@@ -8,15 +8,15 @@ export class CurationService{
     this.#curationRepo = curationRepo;
   }
 
-  viewCurationList = async ({ page, pageSize, searchBy, keyword }) => {
+  viewCurationList = async ({ styleId, page, pageSize, searchBy, keyword }) => {
     const curationTotalCount = await this.#curationRepo.count();
-    const foundCurationList = await this.#curationRepo.findCurationList({page, pageSize, searchBy, keyword });
+    const foundCurationList = await this.#curationRepo.findCurationList({styleId, page, pageSize, searchBy, keyword });
     return {page, pageSize, curationTotalCount,foundCurationList};
   }
 
-  createCuration = async ({nickname, content, password, trendy, personality, practicality, costEffectiveness}) => {
+  createCuration = async ({styleId, nickname, content, password, trendy, personality, practicality, costEffectiveness}) => {
     
-    const curation = Curation.factory({nickname, content, password, trendy, personality, practicality, costEffectiveness});
+    const curation = Curation.factory({styleId, nickname, content, password, trendy, personality, practicality, costEffectiveness});
 
     const createdCuration = await this.#curationRepo.create(curation);
 
@@ -36,7 +36,7 @@ export class CurationService{
     return updatedCuration;
   }
 
-  deleteCuration = async ({id}) => {
+  deleteCuration = async ({id, password}) => {
     const foundCuration = await this.#curationRepo.findCurationById(id);
 
     if (!foundCuration) {

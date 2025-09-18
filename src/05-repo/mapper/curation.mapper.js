@@ -17,6 +17,7 @@ export class CurationMapper {
   static toPersistent(entity) {
     return {
       nickname: entity.nickname,
+      password: entity.password,
       content: entity.content,
       trendy: entity.trendy,
       personality: entity.personality,

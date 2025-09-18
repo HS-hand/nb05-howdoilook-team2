@@ -7,50 +7,40 @@ export class CreateCurationReqValidator extends BaseValidator {
   }
 
   validate() {
-    const {styleId} = this.params; // 구현 및 에러 처리 스타일 완성 후에 추가...
-
-    const { nickname, content, password, trendy, personality, practicality, costEffectiveness} = this.body;
-    if (!this.isString(nickname)) {
+    const { styleId } = this.params; 
+    const { nickname, content, password, trendy, personality, practicality, costEffectiveness } = this.body;
+    if(!this.isString(styleId) || this.isEmpty(styleId)){
+      throw new Exception(EXCEPTIONS.STYLEID_FORM);
+    }
+    if (!this.isString(nickname) || this.isEmpty(nickname) || nickname.length > 20) {
       throw new Exception(EXCEPTIONS.NICKNAME_FORM);
-    } else if(this.isEmpty(nickname)){
-      throw new Exception(EXCEPTIONS.NICKNAME_NOT_EXSIST);
     };
 
-    if (!this.isString(content)) {
+    if (!this.isString(content) || this.isEmpty(content) || content.length > 150) {
       throw new Exception(EXCEPTIONS.CONTENT_FORM);
-    } else if(this.isEmpty(content)){
-      throw new Exception(EXCEPTIONS.CONTENT_NOT_EXSIST);
     };
 
-    if (!this.isString(password)) {
+    if (!this.isString(password) || this.isEmpty(password)
+      || !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(password)) {
       throw new Exception(EXCEPTIONS.PASSWORD_FORM);
-    } else if(this.isEmpty(password)){
-      throw new Exception(EXCEPTIONS.PASSWORD_NOT_EXSIST);
     };
 
-    if (!this.isInt(trendy)) {
+    if (!this.isInt(trendy) || this.isEmpty(trendy) || trendy < 0 || trendy > 10) {
       throw new Exception(EXCEPTIONS.TRENDY_FORM);
-    } else if(this.isEmpty(trendy)){
-      throw new Exception(EXCEPTIONS.TRENDY_NOT_EXSIST);
     };
 
-    if (!this.isInt(personality)) {
+    if (!this.isInt(personality) || this.isEmpty(personality) || personality < 0 || personality> 10) {
       throw new Exception(EXCEPTIONS.PERSONALITY_FORM);
-    } else if(this.isEmpty(personality)){
-      throw new Exception(EXCEPTIONS.PERSONALITY_NOT_EXSIST);
     };
 
-    if (!this.isInt(practicality)) {
+    if (!this.isInt(practicality) || this.isEmpty(practicality) || practicality < 0 || practicality > 10) {
       throw new Exception(EXCEPTIONS.PRACTICALITY_FORM);
-    } else if(this.isEmpty(practicality)){
-      throw new Exception(EXCEPTIONS.PRACTICALITY_NOT_EXSIST);
     };
 
-    if (!this.isInt(costEffectiveness)) {
+    if (!this.isInt(costEffectiveness) || this.isEmpty(costEffectiveness) || costEffectiveness < 0 || costEffectiveness > 10) {
       throw new Exception(EXCEPTIONS.COSTEFFECTIVENESS_FORM);
-    } else if(this.isEmpty(costEffectiveness)){
-      throw new Exception(EXCEPTIONS.COSTEFFECTIVENESS_NOT_EXSIST);
     };
-    return {nickname, content, password, trendy, personality, practicality, costEffectiveness};
+
+    return { styleId, nickname, content, password, trendy, personality, practicality, costEffectiveness };
   }
 }

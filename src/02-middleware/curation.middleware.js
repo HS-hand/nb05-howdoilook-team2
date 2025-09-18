@@ -22,7 +22,7 @@ export class CurationMiddleware {
   };
 
   viewCurationListMiddleware = async (req, res, next) => {
-    const viewCurationListReqDto = new ViewCurationListReqValidator({ query: req.query }).validate();
+    const viewCurationListReqDto = new ViewCurationListReqValidator({ params: req.params, query: req.query }).validate();
     const viewCurationList = await this.#curationService.viewCurationList(viewCurationListReqDto);
     const viewCurationListResDto = new ViewCurationListResDto(viewCurationList);
     return res.json(viewCurationListResDto);

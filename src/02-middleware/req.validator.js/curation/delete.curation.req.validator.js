@@ -9,17 +9,13 @@ export class DeleteCurationReqValidator extends BaseValidator{
   validate() {
     let {curationId} = this.params;
     const {password} = this.body;
-    curationId = Number(curationId);
-    if (!this.isInt(curationId)) {
+    if (!this.isString(curationId) || this.isEmpty(curationId)) {
       throw new Exception(EXCEPTIONS.CURATIONID_FORM);
-    } else if(this.isEmpty(curationId)){
-      throw new Exception(EXCEPTIONS.CURATIONID_NOT_EXSIST);
     };
 
-    if (!this.isString(password)) {
+    if (!this.isString(password) || this.isEmpty(password)
+      || !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(password)) {
       throw new Exception(EXCEPTIONS.PASSWORD_FORM);
-    } else if(this.isEmpty(password)){
-      throw new Exception(EXCEPTIONS.PASSWORD_NOT_EXSIST);
     };
 
     return {

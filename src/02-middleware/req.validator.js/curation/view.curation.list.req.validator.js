@@ -7,11 +7,14 @@ export class ViewCurationListReqValidator extends BaseValidator{
   }
 
   validate() {
-    let { page = 0, pageSize, searchBy = "nickname", keyword} = this.query;
+    const { styleId } = this.params; 
+    let { page = 1, pageSize = 3, searchBy = "nickname", keyword} = this.query;
     page = Number(page);
     pageSize = Number(pageSize);
-    
-    if(!this.isInt(page)){
+    if(!this.isString(styleId) || this.isEmpty(styleId)){
+      throw new Exception(EXCEPTIONS.STYLEID_FORM);
+    }
+    if(!this.isInt(page) || page < 0){
       throw new Exception(EXCEPTIONS.PAGE_FORM);
     }
     if(!this.isInt(pageSize) || this.isEmpty(pageSize) || pageSize <= 0){
@@ -29,6 +32,7 @@ export class ViewCurationListReqValidator extends BaseValidator{
     }
 
     return {
+      styleId,
       page,
       pageSize,
       searchBy,

@@ -1,6 +1,8 @@
 export class Curation {
   #id;
+  #styleId;
   #nickname;
+  #password
   #content;
   #trendy;
   #personality;
@@ -9,9 +11,11 @@ export class Curation {
   #createdAt;
   #updatedAt;
 
-  constructor({id = undefined, nickname, content, trendy, personality, practicality, costEffectiveness, createdAt = undefined, updatedAt = undefined}){
+  constructor({id = undefined, styleId = undefined, nickname, password, content, trendy, personality, practicality, costEffectiveness, createdAt = undefined, updatedAt = undefined}){
     this.#id = id;
+    this.#styleId = styleId;
     this.#nickname = nickname;
+    this.#password = password;
     this.#content = content;
     this.#trendy = trendy;
     this.#personality = personality;
@@ -21,7 +25,7 @@ export class Curation {
     this.#updatedAt = updatedAt;
   }
 
-  static factory ({id, nickname, content, password, trendy, personality, practicality, costEffectiveness}) {
+  static factory ({id, styleId, nickname, content, password, trendy, personality, practicality, costEffectiveness}) {
     if(nickname !== undefined){
       this.validateNicknameRule(nickname);
     }
@@ -43,7 +47,7 @@ export class Curation {
     if(costEffectiveness !== undefined){
       this.validatecostEffectivenessRule(costEffectiveness);
     }
-    return new Curation({id, nickname, content, password, trendy, personality, practicality, costEffectiveness});
+    return new Curation({id, styleId, nickname, content, password, trendy, personality, practicality, costEffectiveness});
   }
 
   // 회의 후 비즈니스 규칙 정하기
@@ -72,9 +76,14 @@ export class Curation {
   get id() {
     return this.#id;
   }
-
+  get styleId() {
+    return this.#styleId;
+  }
   get nickname() {
     return this.#nickname;
+  }
+  get password() {
+    return this.#password;
   }
   get content() {
     return this.#content;

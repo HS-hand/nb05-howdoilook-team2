@@ -13,16 +13,15 @@ export class CurationRepo {
     return curation ? CurationMapper.toEntity(curation) : null;
   }
 
-  findCurationList = async ({ page, pageSize, searchBy, keyword }) => {
+  findCurationList = async ({ styleId, page, pageSize, searchBy, keyword }) => {
     const curations = await this.prisma.curation.findMany({
-      where: keyword
-        ? {
-          [searchBy]: {
-            contains: keyword,
-            mode: "insensitive",
-          },
-        }
-        : {}, // 키워드 없으면 전부 보기
+
+      where: {
+        styleId,
+        ...(keyword
+          ? { [searchBy]: { contains: keyword, mode: "insensitive" } }
+          : {}),
+      },
       skip: (page - 1) * pageSize,
       take: pageSize,
       orderBy: {
@@ -37,6 +36,9 @@ export class CurationRepo {
     const curation = await this.prisma.curation.create({
       data: {
         ...CurationMapper.toPersistent(entity),
+        style: {
+          connect: { id: entity.styleId },
+        },
       },
     });
     return CurationMapper.toEntity(curation);
