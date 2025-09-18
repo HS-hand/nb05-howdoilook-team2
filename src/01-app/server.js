@@ -5,9 +5,9 @@ import { Exception } from "../common/exception.js";
 
 export class Server {
   #server;
-  //#controllers;
-  constructor() {
-    //this.#controllers = controllers;
+  #controllers;
+  constructor(controllers) {
+    this.#controllers = controllers;
     this.#server = express();
   }
 
@@ -35,9 +35,9 @@ export class Server {
   };
 
   registerControllerMiddleware = () => {
-    // for (const controller of this.#controllers) {
-    //   this.#server.use(controller.basePath, controller.router);
-    // }
+    for (const controller of this.#controllers) {
+      this.#server.use(controller.basePath, controller.router);
+    }
   };
 
   start = () => {
