@@ -6,6 +6,22 @@ export class CommentRepo {
     this.prisma = prisma;
   }
 
+  getStylePassword = async (curationId) => {
+    const curation = await this.prisma.curation.findUnique({
+      where: {
+        id: curationId,
+      },
+      include: {
+        style: {
+          select: {
+            password: true,
+          },
+        },
+      },
+    });
+    const stylePassword = curation.style.password;
+    return stylePassword;
+  };
   findCommentById = async (commentId) => {
     const comment = await this.prisma.comment.findUnique({
       where: { id: commentId },

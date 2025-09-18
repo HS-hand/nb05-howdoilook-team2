@@ -2,9 +2,9 @@ import { BaseControlloer } from "./base.controlloer.js";
 
 export class CommentController extends BaseControlloer {
   #commentMiddleware;
-  constructor(CommentMiddleware) {
-    super("/api");
-    this.#commentMiddleware = CommentMiddleware;
+  constructor(commentMiddleware) {
+    super("");
+    this.#commentMiddleware = commentMiddleware;
     this.registerCommentRouter();
   }
 

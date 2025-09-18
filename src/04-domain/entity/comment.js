@@ -49,6 +49,9 @@ export class Comment {
   get content() {
     return this.#content;
   }
+  get password() {
+    return this.#password;
+  }
   get createdAt() {
     return this.#createdAt;
   }

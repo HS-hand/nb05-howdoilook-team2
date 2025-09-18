@@ -31,6 +31,27 @@ model Style {
   StyleContainTag StyleContainTag[]
 }
 
+model CategoryItem {
+  id      String       @id @default(uuid())
+  styleId String
+  type    CATEGORYTYPE
+  name    String
+  brand   String
+  price   Int
+
+  style Style @relation(fields: [styleId], references: [id], onDelete: Cascade)
+}
+
+enum CATEGORYTYPE {
+  top
+  bottom
+  outer
+  dress
+  shoes
+  bag
+  accessory
+}
+
 model Tag {
   id              String            @id @default(uuid())
   name            String
@@ -82,23 +103,4 @@ model Comment {
   updatedAt  DateTime @updatedAt
 }
 
-model CategoryItem {
-  id      String       @id @default(uuid())
-  styleId String
-  type    CATEGORYTYPE
-  name    String
-  brand   String
-  price   Int
 
-  style Style @relation(fields: [styleId], references: [id], onDelete: Cascade)
-}
-
-enum CATEGORYTYPE {
-  top
-  bottom
-  outer
-  dress
-  shoes
-  bag
-  accessory
-}

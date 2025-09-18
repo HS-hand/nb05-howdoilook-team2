@@ -21,7 +21,7 @@ export class DeleteCommentReqValidator extends BaseValidator {
     }
 
     return {
-      id: commentId,
+      commentId,
       password,
     };
   }
