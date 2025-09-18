@@ -20,4 +20,9 @@ export class BaseControlloer {
       }
     };
   };
+
+  registerRoutes() {
+    throw new Error("registerRoutes 메소드를 구현하세요.");
+  }
+
 }

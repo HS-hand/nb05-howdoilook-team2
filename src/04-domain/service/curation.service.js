@@ -15,6 +15,7 @@ export class CurationService{
   }
 
   createCuration = async ({styleId, nickname, content, password, trendy, personality, practicality, costEffectiveness}) => {
+    //const foundStyleId = await this.#curationRepo.findStylebyId(styleId);
     
     const curation = Curation.factory({styleId, nickname, content, password, trendy, personality, practicality, costEffectiveness});
 

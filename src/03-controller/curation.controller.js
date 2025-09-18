@@ -5,10 +5,10 @@ export class CurationController extends BaseControlloer{
   constructor(curationMiddleware) {
     super("/api");
     this.#curationMiddleware = curationMiddleware;
-    this.registerCurationRouter();
+    this.registerRoutes();
   }
 
-  registerCurationRouter = () => {
+  registerRoutes = () => {
     this.router.post(
       "/styles/:styleId/curations",
       this.catchException(this.#curationMiddleware.createCurationMiddleware)

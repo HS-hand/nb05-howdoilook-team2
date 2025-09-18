@@ -12,6 +12,12 @@ export class CurationRepo {
     });
     return curation ? CurationMapper.toEntity(curation) : null;
   }
+  findStyleById = async (id) => {
+    const style = await this.prisma.style.findUnique({
+      where: { id },
+    });
+    return style ? CurationMapper.toEntity(style) : null;
+  }
 
   findCurationList = async ({ styleId, page, pageSize, searchBy, keyword }) => {
     const curations = await this.prisma.curation.findMany({
