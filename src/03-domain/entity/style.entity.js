@@ -7,7 +7,6 @@ export class Style {
   #content;
   #password;
   #viewCount;
-  #curationCount;
   #createdAt;
   #updatedAt;
   #categories;
@@ -15,18 +14,17 @@ export class Style {
   #images;
 
   constructor ({
-    id = undefined,
+    id,
     nickname,
     title,
     content,
     password,
-    viewCount = undefined,
-    curationCount = undefined,
-    createdAt = undefined,
-    updatedAt = undefined,
-    categories,
-    tags,
-    images,
+    viewCount = 0,
+    createdAt,
+    updatedAt,
+    categories = [],
+    tags = [],
+    images = [],
   }) {
     this.#id = id;
     this.#nickname = nickname;
@@ -34,7 +32,6 @@ export class Style {
     this.#content = content;
     this.#password = password;
     this.#viewCount = viewCount;
-    this.#curationCount = curationCount;
     this.#createdAt = createdAt;
     this.#updatedAt = updatedAt;
     this.#categories = categories;
@@ -82,10 +79,7 @@ export class Style {
 
   static validatePasswordRule(password) {
     if (password.length < 8 && password.length > 16) {
-      // 비민번호 영문자, 숫자 혼용 검증
-      if (!true) {
-        throw new Exception('PASSWORD_NOTICE');
-      }
+      throw new Exception('PASSWORD_NOTICE');
     }
   }
 
@@ -125,9 +119,6 @@ export class Style {
   get viewCount() {
     return this.#viewCount;
   }
-  get curationCount() {
-    return this.#curationCount;
-  }
   get createdAt() {
     return this.#createdAt;
   }
@@ -143,8 +134,11 @@ export class Style {
   get images() {
     return this.#images;
   }
+  get password() {
+    return this.#password;
+  }
 
-  passwordMatch(password) {
+  isPasswordMatch(password) {
     return this.#password = password;
   }
 }

@@ -5,11 +5,11 @@ import { Exception } from "../common/exception.js";
 
 export class Server {
   #server;
-  #controllers;
+  // #controllers;
 
   constructor() {
     this.#server = express();
-    this.#controllers = controllers;
+    // this.#controllers = controllers;
   }
 
   listen = () => {

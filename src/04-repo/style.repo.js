@@ -1,83 +1,71 @@
-export class StyleRepo {
-  prisma;
+import { BaseRepo } from "./base.repo.js";
+import { StyleMapper } from "./mapper/style.mapper.js";
 
-  constructor(prisma) {
-    this.prisma = prisma;
+export class StyleRepo extends BaseRepo {
+  constructor({ prisma }) {
+    super(prisma);
   };
 
-  async createStyle(styleData){
-    const { tags, categories, imageUrls, ...rest } = styleData;
+   async create(styleEntity, styleData) {
+    const { categories, tags, imageUrls } = styleData;
+    const persistentData = StyleMapper.toPersistent(styleEntity);
 
-    return this.prisma.style.create({
+    const record = await this.prisma.style.create({
       data: {
-        ...rest,
-        images: {
-          create: imageUrls.map((url) => ({ url })),
-        },
-        categories: {
-          create: categories,
-        },
+        ...persistentData,
+        categories: { create: categories },
         tags: {
-          create: tags.map((tagName) => ({
-            tag: {
-              connectOrCreate: {
-                where: { name: tagName },
-                create: { name: tagName },
-              },
-            },
-          })),
+          connectOrCreate: {
+            where: { name: tagName },
+            create: { name: tagName },
+          },
         },
+        images: { create: imageUrls.map((url) => ({ url })) },
       },
     });
-  };
 
-  async findStyleById(styleId, includePassword = false) {
-    const style = await this.prisma.style.findUnique({
+    return StyleMapper.toEntity(record);
+   };
+
+   async findById(styleId, includePassword = false) {
+    const record = await this.prisma.style.findUnique({
       where: { id: styleId },
       include: {
-        images: { select: { url: true } },
-        tags: { select: { tag: { select: { name: true } } } },
         categories: true,
-        _count: { select: { curations: true } },
+        StyleContainTag: {
+          select: {
+            tag: {
+              select: { name: true },
+            },
+          },
+        },
+        images: { select: { url: true } },
+        _count: { select: { curationns: true } },
       },
     });
 
-    if (!style) return null;
-
-    const { _count, images, tags, password, ...rest } = style;
-    const result = {
-      ...rest,
-      imageUrls: images.map((img) => img.url),
-      tags: tags.map((t) => t.tag.name),
-      curationCount: _count.curations,
+    const styleEntity = StyleMapper.toEntity(record);
+    if (styleEntity && includePassword) {
+      styleEntity.password = record.password;
     };
 
-    if (includePassword) {
-      result.password = password;
-    }
-    
-    return result;
-  };
+    return entity;
+   };
 
-  async updateStyle(styleId, updateData) {
+   async update(styleId, updateData) {
     const { tags, categories, imageUrls, ...rest } = updateData;
 
-    return this.prisma.$transaction(async (tx) => {
-      await tx.tagOnStyle.deleteMany({ where: { styleId } });
-      await tx.category.deleteMany({ where: { styleId } });
-      await tx.image.deleteMany({ where: { styleId } });
+    const record = await this.prisma.$transaction(async (tx) => {
+      await tx.StyleContainTag.deleteMany({ where: { styleId } });
+      await tx.categoryItem.deleteMany({ where: { styleId } });
+      await tx.styleImage.deleteMany({ where: { styleId } });
 
-      return tx.style.update({
+      const updatedRecord = tx.style.update({
         where: { id: styleId },
         data: {
           ...rest,
-          images: {
-            create: imageUrls.map((url) => ({ url })),
-          },
-          categories: {
-            create: categories,
-          },
-          tags: {
+          categories: { create: categories },
+          StyleContainTag: {
             create: tags.map((tagName) => ({
               tag: {
                 connectOrCreate: {
@@ -89,23 +77,16 @@ export class StyleRepo {
           },
         },
       });
-    });
-  };
 
-  async deleteStyle(styleId) {
+      return updatedRecord;
+    });
+
+    return StyleMapper.toEntity(record);
+   };
+
+   async delete(styleId) {
     return this.prisma.style.delete({
-      where: { id: styleId },
-    });
-  };
-
-  async incrementViewCount(styleId) {
-    return this.prisma.style.update({
-      where: { id: styleId },
-      data: {
-        viewCount: {
-          increment: 1,
-        },
-      },
+      where: { id: styleId }
     });
   };
 }
