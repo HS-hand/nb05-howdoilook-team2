@@ -1,7 +1,6 @@
 import { CommentMapper } from "./mapper/comment.mapper.js";
 
 export class CommentRepo {
-  prisma;
   constructor(prisma) {
     this.prisma = prisma;
   }
@@ -30,7 +29,7 @@ export class CommentRepo {
       include: {
         style: {
           select: {
-          nickname: true,
+            nickname: true,
           },
         },
       },
