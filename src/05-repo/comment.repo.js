@@ -5,7 +5,6 @@ export class CommentRepo {
   constructor(prisma) {
     this.prisma = prisma;
   }
-
   getStylePassword = async (curationId) => {
     const curation = await this.prisma.curation.findUnique({
       where: {
@@ -21,6 +20,23 @@ export class CommentRepo {
     });
     const stylePassword = curation.style.password;
     return stylePassword;
+  };
+
+  getStyleNickname = async (curationId) => {
+    const curation = await this.prisma.curation.findUnique({
+      where: {
+        id: curationId,
+      },
+      include: {
+        style: {
+          select: {
+            nickname: true,
+          },
+        },
+      },
+    });
+    const styleNickname = curation.style.nickname;
+    return styleNickname;
   };
   findCommentById = async (commentId) => {
     const comment = await this.prisma.comment.findUnique({

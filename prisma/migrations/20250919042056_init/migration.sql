@@ -1,23 +1,5 @@
-/*
-  Warnings:
-
-  - The primary key for the `Curation` table will be changed. If it partially fails, the table could be left without primary key constraint.
-
-*/
 -- CreateEnum
 CREATE TYPE "public"."CATEGORYTYPE" AS ENUM ('top', 'bottom', 'outer', 'dress', 'shoes', 'bag', 'accessory');
-
--- DropIndex
-DROP INDEX "public"."Curation_nickname_key";
-
--- AlterTable
-ALTER TABLE "public"."Curation" DROP CONSTRAINT "Curation_pkey",
-ADD COLUMN     "password" TEXT NOT NULL DEFAULT 'defaultPassword',
-ADD COLUMN     "styleId" TEXT NOT NULL DEFAULT 'defaultPassword',
-ALTER COLUMN "id" DROP DEFAULT,
-ALTER COLUMN "id" SET DATA TYPE TEXT,
-ADD CONSTRAINT "Curation_pkey" PRIMARY KEY ("id");
-DROP SEQUENCE "Curation_id_seq";
 
 -- CreateTable
 CREATE TABLE "public"."Style" (
@@ -59,6 +41,23 @@ CREATE TABLE "public"."StyleContainTag" (
 );
 
 -- CreateTable
+CREATE TABLE "public"."Curation" (
+    "id" TEXT NOT NULL,
+    "nickname" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
+    "trendy" INTEGER NOT NULL,
+    "personality" INTEGER NOT NULL,
+    "practicality" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "costEffectiveness" INTEGER NOT NULL,
+    "password" TEXT NOT NULL,
+    "styleId" TEXT NOT NULL,
+
+    CONSTRAINT "Curation_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "public"."Comment" (
     "id" TEXT NOT NULL,
     "curationId" TEXT NOT NULL,
@@ -82,19 +81,8 @@ CREATE TABLE "public"."CategoryItem" (
     CONSTRAINT "CategoryItem_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
-CREATE TABLE "public"."_StyleToTag" (
-    "A" TEXT NOT NULL,
-    "B" TEXT NOT NULL,
-
-    CONSTRAINT "_StyleToTag_AB_pkey" PRIMARY KEY ("A","B")
-);
-
 -- CreateIndex
 CREATE UNIQUE INDEX "Comment_curationId_key" ON "public"."Comment"("curationId");
-
--- CreateIndex
-CREATE INDEX "_StyleToTag_B_index" ON "public"."_StyleToTag"("B");
 
 -- AddForeignKey
 ALTER TABLE "public"."StyleImage" ADD CONSTRAINT "StyleImage_styleId_fkey" FOREIGN KEY ("styleId") REFERENCES "public"."Style"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -113,9 +101,3 @@ ALTER TABLE "public"."Comment" ADD CONSTRAINT "Comment_curationId_fkey" FOREIGN 
 
 -- AddForeignKey
 ALTER TABLE "public"."CategoryItem" ADD CONSTRAINT "CategoryItem_styleId_fkey" FOREIGN KEY ("styleId") REFERENCES "public"."Style"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."_StyleToTag" ADD CONSTRAINT "_StyleToTag_A_fkey" FOREIGN KEY ("A") REFERENCES "public"."Style"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."_StyleToTag" ADD CONSTRAINT "_StyleToTag_B_fkey" FOREIGN KEY ("B") REFERENCES "public"."Tag"("id") ON DELETE CASCADE ON UPDATE CASCADE;

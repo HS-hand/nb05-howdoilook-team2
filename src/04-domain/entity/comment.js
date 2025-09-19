@@ -1,5 +1,6 @@
 export class Comment {
   #id;
+  #nickname;
   #curationId;
   #content;
   #password;
@@ -8,6 +9,7 @@ export class Comment {
 
   constructor({
     id = undefined,
+    nickname,
     curationId,
     content,
     password,
@@ -15,6 +17,7 @@ export class Comment {
     updatedAt = undefined,
   }) {
     this.#id = id;
+    this.#nickname = nickname;
     this.#curationId = curationId;
     this.#content = content;
     this.#password = password;
@@ -24,6 +27,7 @@ export class Comment {
 
   static factory({
     id = undefined,
+    nickname,
     curationId,
     content,
     password,
@@ -32,6 +36,7 @@ export class Comment {
   }) {
     return new Comment({
       id,
+      nickname,
       curationId,
       content,
       password,
@@ -42,6 +47,9 @@ export class Comment {
 
   get id() {
     return this.#id;
+  }
+  get nickname() {
+    return this.#nickname;
   }
   get curationId() {
     return this.#curationId;

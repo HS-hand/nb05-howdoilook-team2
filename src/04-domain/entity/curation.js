@@ -10,6 +10,7 @@ export class Curation {
   #costEffectiveness;
   #createdAt;
   #updatedAt;
+  #comment;
 
   constructor({
     id = undefined,
@@ -23,6 +24,7 @@ export class Curation {
     costEffectiveness,
     createdAt = undefined,
     updatedAt = undefined,
+    comment = undefined,
   }) {
     this.#id = id;
     this.#styleId = styleId;
@@ -35,6 +37,7 @@ export class Curation {
     this.#costEffectiveness = costEffectiveness;
     this.#createdAt = createdAt;
     this.#updatedAt = updatedAt;
+    this.#comment = comment;
   }
 
   static factory({
@@ -48,27 +51,6 @@ export class Curation {
     practicality,
     costEffectiveness,
   }) {
-    if (nickname !== undefined) {
-      this.validateNicknameRule(nickname);
-    }
-    if (content !== undefined) {
-      this.validateContentRule(content);
-    }
-    if (password !== undefined) {
-      this.validatePasswordRule(password);
-    }
-    if (trendy !== undefined) {
-      this.validateTrendyRule(trendy);
-    }
-    if (personality !== undefined) {
-      this.validatePersonalityRule(personality);
-    }
-    if (practicality !== undefined) {
-      this.validatePracticalityRule(practicality);
-    }
-    if (costEffectiveness !== undefined) {
-      this.validatecostEffectivenessRule(costEffectiveness);
-    }
     return new Curation({
       id,
       styleId,
@@ -81,15 +63,6 @@ export class Curation {
       costEffectiveness,
     });
   }
-
-  // 회의 후 비즈니스 규칙 정하기
-  static validateNicknameRule(value) {}
-  static validateContentRule(value) {}
-  static validatePasswordRule(value) {}
-  static validateTrendyRule(value) {}
-  static validatePersonalityRule(value) {}
-  static validatePracticalityRule(value) {}
-  static validatecostEffectivenessRule(value) {}
 
   get id() {
     return this.#id;
@@ -123,5 +96,8 @@ export class Curation {
   }
   get updatedAt() {
     return this.#updatedAt;
+  }
+  get comment() {
+    return this.#comment;
   }
 }

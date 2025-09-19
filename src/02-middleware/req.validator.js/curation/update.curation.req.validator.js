@@ -36,13 +36,12 @@ export class UpdateCurationReqValidator extends BaseValidator {
         throw new Exception(EXCEPTIONS.CONTENT_FORM);
       }
     }
-    if (!this.isString(password) || this.isEmpty(password)) {
-      if (
-        !this.isString(password) ||
-        !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(password)
-      ) {
-        throw new Exception(EXCEPTIONS.PASSWORD_FORM);
-      }
+    if (
+      !this.isString(password) ||
+      this.isEmpty(password) ||
+      !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(password)
+    ) {
+      throw new Exception(EXCEPTIONS.PASSWORD_FORM);
     }
     if (!this.isEmpty(trendy)) {
       if (!this.isInt(trendy) || trendy < 0 || trendy > 10) {

@@ -61,42 +61,48 @@ export const EXCEPTIONS = {
   },
   ALL_UNDEFINED: {
     statusCode: 400,
-    message: "값을 입력하세요.",
-    ALL_UNDEFINED: {
-      statusCode: 400,
-      message: "수정한 값을 입력하세요.",
-    },
-    PAGE_FORM: {
-      statusCode: 400,
-      message: "page가 유효하지 않습니다.",
-    },
-    PAGESIZE_FORM: {
-      statusCode: 400,
-      message: "limit가 유효하지 않습니다.",
-    },
-    SEARCHBY_FORM: {
-      statusCode: 400,
-      message: "searchBy가 유효하지 않습니다.",
-    },
-    KEYWORD_FORM: {
-      statusCode: 400,
-      message: "keyword가 유효하지 않습니다.",
-    },
-    CURATION_NOT_EXIST: {
-      statusCode: 400,
-      message: "큐레이팅이 존재하지 않습니다.",
-    },
-    STYLEID_FORM: {
-      statusCode: 400,
-      message: "styleId가 유효하지 않습니다.",
-    },
+    message: "수정한 값을 입력하세요.",
   },
+  PAGE_FORM: {
+    statusCode: 400,
+    message: "page가 유효하지 않습니다.",
+  },
+  PAGESIZE_FORM: {
+    statusCode: 400,
+    message: "limit가 유효하지 않습니다.",
+  },
+  SEARCHBY_FORM: {
+    statusCode: 400,
+    message: "searchBy가 유효하지 않습니다.",
+  },
+  KEYWORD_FORM: {
+    statusCode: 400,
+    message: "keyword가 유효하지 않습니다.",
+  },
+  CURATION_NOT_EXIST: {
+    statusCode: 400,
+    message: "큐레이팅이 존재하지 않습니다.",
+  },
+  STYLEID_FORM: {
+    statusCode: 400,
+    message: "styleId가 유효하지 않습니다.",
+  },
+  CURATION_NOT_EXIST: {
+    statusCode: 404,
+    message: "큐레이팅이 존재하지 않습니다.",
+  },
+  STYLE_NOT_EXIST: {
+    statusCode: 404,
+    message: "스타일 게시글이 존재하지 않습니다.",
+  },
+  PAGESIZE_MAX_5: {
+    statusCode: 400,
+    message: "한 페이지당 5개 제한입니다.",
+  }
 };
 
 export class Exception extends Error {
-  constructor(errObj) {
-    //const errInfo = EXCEPTIONS[key];
-    //let message = errInfo.message;
+  constructor(errObj) {    
     super(errObj.message);
     this.statusCode = errObj.statusCode;
   }
