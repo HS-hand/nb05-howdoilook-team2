@@ -31,8 +31,10 @@ export class CurationRepo {
       orderBy: {
         createdAt: "desc",
       },
+      include: {
+        comment: true
+      }
     });
-
     return curations.map((curation) => CurationMapper.toEntity(curation));
   };
 
