@@ -1,6 +1,6 @@
-import { CreateCommentReqValidator } from "./req.validator.js/comment/create.comment.req.validator.js";
-import { UpdateCommentReqValidator } from "./req.validator.js/comment/update.comment.req.validator.js";
-import { DeleteCommentReqValidator } from "./req.validator.js/comment/delete.comment.req.validator.js";
+import { CreateCommentReqValidator } from "./req.validator/comment/create.comment.req.validator.js";
+import { UpdateCommentReqValidator } from "./req.validator/comment/update.comment.req.validator.js";
+import { DeleteCommentReqValidator } from "./req.validator/comment/delete.comment.req.validator.js";
 import { CreateCommentResDto } from "./res.dto/comment/create.comment.res.dto.js";
 import { UpdateCommentResDto } from "./res.dto/comment/update.comment.res.dto.js";
 import { DeleteCommentResDto } from "./res.dto/comment/delete.comment.res.dto.js";

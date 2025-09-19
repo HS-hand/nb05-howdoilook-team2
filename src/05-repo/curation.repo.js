@@ -1,7 +1,6 @@
 import { CurationMapper } from "./mapper/curation.mapper.js";
 
 export class CurationRepo {
-  prisma;
   constructor(prisma) {
     this.prisma = prisma;
   }

@@ -31,6 +31,9 @@ export class BaseValidator {
   isInt(value) {
     return typeof value === "number";
   }
+  isBoolean(value) {
+    return typeof value === "boolean";
+  }
   validate() {
     throw new Error("validate 함수를 구현하세요.");
   }

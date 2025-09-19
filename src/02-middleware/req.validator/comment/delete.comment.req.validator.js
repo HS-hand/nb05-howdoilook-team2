@@ -11,13 +11,11 @@ export class DeleteCommentReqValidator extends BaseValidator {
     const { password } = this.body;
 
     if (this.isEmpty(commentId)) {
-      throw new Exception(EXCEPTIONS.CURATIONID_NOT_EXSIST);
+      throw new Exception(EXCEPTIONS.BAD_REQUEST);
     }
 
-    if (!this.isString(password)) {
-      throw new Exception(EXCEPTIONS.PASSWORD_FORM);
-    } else if (this.isEmpty(password)) {
-      throw new Exception(EXCEPTIONS.PASSWORD_NOT_EXSIST);
+    if (!this.isString(password) || this.isEmpty(password)) {
+      throw new Exception(EXCEPTIONS.BAD_REQUEST);
     }
 
     return {

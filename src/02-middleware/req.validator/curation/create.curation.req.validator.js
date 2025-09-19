@@ -17,6 +17,7 @@ export class CreateCurationReqValidator extends BaseValidator {
       practicality,
       costEffectiveness,
     } = this.body;
+
     if (!this.isString(styleId) || this.isEmpty(styleId)) {
       throw new Exception(EXCEPTIONS.STYLEID_FORM);
     }

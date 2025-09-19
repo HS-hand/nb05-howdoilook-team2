@@ -1,7 +1,7 @@
-import { CreateCurationReqValidator } from "./req.validator.js/curation/create.curation.req.validator.js";
-import { DeleteCurationReqValidator } from "./req.validator.js/curation/delete.curation.req.validator.js";
-import { UpdateCurationReqValidator } from "./req.validator.js/curation/update.curation.req.validator.js";
-import { ViewCurationListReqValidator } from "./req.validator.js/curation/view.curation.list.req.validator.js";
+import { CreateCurationReqValidator } from "./req.validator/curation/create.curation.req.validator.js";
+import { DeleteCurationReqValidator } from "./req.validator/curation/delete.curation.req.validator.js";
+import { UpdateCurationReqValidator } from "./req.validator/curation/update.curation.req.validator.js";
+import { ViewCurationListReqValidator } from "./req.validator/curation/view.curation.list.req.validator.js";
 import { CreateCurationResDto } from "./res.dto/curation/create.curation.res.dto.js";
 import { DeleteCurationResDto } from "./res.dto/curation/delete.curation.res.dto.js";
 import { UpdateCurationResDto } from "./res.dto/curation/update.curation.res.dto.js";
