@@ -7,16 +7,16 @@ Content-Type: application/json
 	"password": "1234"
 }
 ### 
-PUT http://localhost:3000/comments/c2320740-a32b-41b8-9b5c-599f13057047
+PUT http://localhost:3000/comments/6b694141-9b16-4e59-9f55-38dd112a9c62
 Content-Type: application/json
 
 {
-  "content": "테스트용.",
+  "content": "바뀌어야 되긴해 .",
   "password": "1234"
 }
 
 ###
-DELETE http://localhost:3000/comments/18fc5ff7-26a4-46d2-84a1-7d8c6c47a14b
+DELETE http://localhost:3000/comments/6b694141-9b16-4e59-9f55-38dd112a9c62
 Content-Type: application/json
 
 {

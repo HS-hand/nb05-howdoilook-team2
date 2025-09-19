@@ -40,6 +40,7 @@ export class CommentService {
     if (stylePassword === password) {
       const comment = Comment.factory({
         id: foundComment.id,
+        nickname: foundComment.nickname,
         curationId: foundComment.curationId,
         content: content || foundComment.content,
         password: password || foundComment.password,

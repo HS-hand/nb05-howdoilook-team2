@@ -5,7 +5,7 @@ export const EXCEPTIONS = {
   },
   NOT_FOUND: {
     statusCode: 404,
-    mssage: "존재하지 않습니다.",
+    message: "존재하지 않습니다.",
   },
   FORBIDDEN: {
     statusCode: 403,

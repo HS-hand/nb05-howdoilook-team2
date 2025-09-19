@@ -4,6 +4,7 @@ export class CommentMapper {
   static toEntity(record) {
     return new Comment({
       id: record.id,
+      nickname: record.nickname,
       curationId: record.curationId,
       content: record.content,
       password: record.password,
@@ -13,6 +14,7 @@ export class CommentMapper {
   }
   static toPersistent(entity) {
     return {
+      nickname: entity.nickname,
       curationId: entity.curationId,
       content: entity.content,
       password: entity.password,
