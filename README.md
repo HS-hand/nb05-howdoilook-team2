@@ -40,34 +40,61 @@ https://www.notion.so/NB-5-2-26fa0b8db76380fa81c0e30d66c763f3?source=copy_link
 ## 파일구조
 
 ```
-// 예시 입니다
 src
- ┣ config
- ┃ ┗ db.ts
- ┣ controllers
- ┃ ┣ auth.controller.ts
- ┃ ┗ user.controller.ts
- ┣ middleware
- ┃ ┣ auth.middleware.ts
- ┃ ┗ error.middleware.ts
- ┣ models
- ┃ ┣ user.model.ts
- ┃ ┗ course.model.ts
- ┣ routes
- ┃ ┣ auth.routes.ts
- ┃ ┗ user.routes.ts
- ┣ services
- ┃ ┣ auth.service.ts
- ┃ ┗ user.service.ts
- ┣ utils
- ┃ ┣ jwt.ts
- ┃ ┣ constants.ts
- ┃ ┗ logger.ts
- ┣ app.ts
- ┗ server.ts
+ ┣ 01-app
+ ┃ ┗ sever.js
+ ┣ 02-middleware
+ ┃ ┣ req.validator
+ ┃ ┣ ┣ comment
+ ┃ ┣ ┣ ┣ create.comment.req.validator.js
+ ┃ ┣ ┣ ┣ delete.comment.req.validator.js
+ ┃ ┣ ┣ ┗ update.comment.req.validator.js
+ ┃ ┣ ┣ curation
+ ┃ ┣ ┣ ┣ create.curation.req.validator.js
+ ┃ ┣ ┣ ┣ delete.curation.req.validator.js
+ ┃ ┣ ┣ ┗ update.curation.req.validator.js
+ ┃ ┣ ┗ base.validator.js
+ ┃ ┣ res.dto
+ ┃ ┣ ┣ comment
+ ┃ ┣ ┣ ┣ create.comment.res.dto.js
+ ┃ ┣ ┣ ┣ delete.comment.res.dto.js
+ ┃ ┣ ┣ ┗ update.comment.res.dto.js
+ ┃ ┣ ┣ curation
+ ┃ ┣ ┣ ┣ create.curation.res.dto.js
+ ┃ ┣ ┣ ┣ delete.curation.res.dto.js
+ ┃ ┣ ┣ ┣ view.curation.list.res.dto.js
+ ┃ ┣ ┗ ┗ update.curation.res.dto.js
+ ┃ ┣ comment.middleware.js
+ ┃ ┗ curation.middleware.js
+ ┣ 03-controller
+ ┃ ┣ base.controlloer.js
+ ┃ ┣ comment.controller.js
+ ┃ ┗ curation.controller.js
+ ┣ 04-domain
+ ┃ ┣ entity
+ ┃ ┣ ┣ comment.js
+ ┃ ┣ ┗ curation.js
+ ┃ ┣ service
+ ┃ ┣ ┣ comment.service.js
+ ┃ ┗ ┗ curation.service.js
+ ┣ 05-repo
+ ┃ ┣ mapper
+ ┃ ┣ ┣ comment.mapper.js
+ ┃ ┣ ┣ curation.mapper.js
+ ┃ ┣ comment.repo.js
+ ┃ ┗ curation.repo.js
+ ┣ common
+ ┃ ┣ exception.js
+ ┃ ┗ struct.js
+ ┣ dep-injector.js
+ ┗ index.js
+http
+ ┣ comment-request.http
+ ┣ curation-request.http
+ ┗ style-request.http
 prisma
  ┣ schema.prisma
- ┗ seed.ts
+ ┗ seed.js
 .env
 .gitignore
 package.json
