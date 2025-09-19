@@ -38,10 +38,13 @@ export class UpdateCurationReqValidator extends BaseValidator {
     }
     if (
       !this.isString(password) ||
-      this.isEmpty(password) ||
-      !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(password)
+      this.isEmpty(password)
     ) {
       throw new Exception(EXCEPTIONS.PASSWORD_FORM);
+    }
+
+    if(!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(password)) {
+      throw new Exception(EXCEPTIONS.PASSWORD_REGEX)
     }
     if (!this.isEmpty(trendy)) {
       if (!this.isInt(trendy) || trendy < 0 || trendy > 10) {
