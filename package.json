@@ -1,0 +1,41 @@
+{
+  "name": "howdoilook",
+  "version": "1.0.0",
+  "description": "Node.js 백엔드 트랙 5기 2팀 초급프로젝트 제출 리포지토리입니다.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "format": "prettier . --write",
+    "dev": "nodemon ./src/index.js",
+    "start": "node ./src/index.js"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HS-hand/nb05-howdoilook-team2.git"
+  },
+  "author": "2team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HS-hand/nb05-howdoilook-team2/issues"
+  },
+  "homepage": "https://github.com/HS-hand/nb05-howdoilook-team2#readme",
+  "devDependencies": {
+    "@faker-js/faker": "^10.0.0",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
+    "prisma": "^6.16.1"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.16.1",
+    "axios": "^1.11.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "morgan": "^1.10.1",
+    "multer": "^2.0.2",
+    "prompt-sync": "^4.2.0",
+    "uuid": "^13.0.0"
+  }
+}
