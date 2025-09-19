@@ -98,6 +98,10 @@ export const EXCEPTIONS = {
   PAGESIZE_MAX_5: {
     statusCode: 400,
     message: "한 페이지당 5개 제한입니다.",
+  },
+  PASSWORD_REGEX: {
+    statusCode: 400,
+    message: "영문, 숫자 조합 8~16자리로 입력해주세요.",
   }
 };
 
