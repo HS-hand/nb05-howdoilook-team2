@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  // output   = "../generated/prisma"
 }
 
 datasource db {
@@ -15,39 +14,66 @@ datasource db {
 }
 
 model Style {
-  id              String            @id @default(uuid())
-  nickname        String
-  title           String
-  content         String
-  password        String
-  viewCount       Int               @default(0)
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  categories      CategoryItem[]
-  curations       Curation[]
-  tags            Tag[]
+  id        String   @id @default(uuid())
+  nickname  String
+  title     String
+  content   String
+  password  String
+  viewCount Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  categories CategoryItem[]
+  curations  Curation[]
+
   images          StyleImage[]
   StyleContainTag StyleContainTag[]
 }
 
+model Tag {
+  id              String            @id @default(uuid())
+  name            String
+  StyleContainTag StyleContainTag[]
+}
+
+model StyleImage {
+  id      String @id @default(uuid())
+  url     String
+  style   Style  @relation(fields: [styleId], references: [id], onDelete: Cascade)
+  styleId String
+}
+
+model StyleContainTag {
+  style   Style  @relation(fields: [styleId], references: [id], onDelete: Cascade)
+  styleId String
+  tag     Tag    @relation(fields: [tagId], references: [id], onDelete: Restrict)
+  tagId   String
+
+  @@id([styleId, tagId])
+}
+
 model Curation {
-  id                String   @id @default(uuid())
-  styleId           String
-  style             Style    @relation(fields: [styleId], references: [id], onDelete: Cascade)
-  nickname          String
-  content           String
-  password          String
+  id      String @id @default(uuid())
+  styleId String
+  style   Style  @relation(fields: [styleId], references: [id], onDelete: Cascade)
+
+  nickname String
+  content  String
+  password String
+
   trendy            Int
   personality       Int
   practicality      Int
   costEffectiveness Int
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-  comment           Comment?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  comment   Comment?
 }
 
 model Comment {
   id         String   @id @default(uuid())
+  nickname   String
   curationId String   @unique
   curation   Curation @relation(fields: [curationId], references: [id], onDelete: Cascade)
   content    String
@@ -63,7 +89,8 @@ model CategoryItem {
   name    String
   brand   String
   price   Int
-  style   Style        @relation(fields: [styleId], references: [id], onDelete: Cascade)
+
+  style Style @relation(fields: [styleId], references: [id], onDelete: Cascade)
 }
 
 enum CATEGORYTYPE {
@@ -74,27 +101,4 @@ enum CATEGORYTYPE {
   shoes
   bag
   accessory
-}
-
-model Tag {
-  id              String            @id @default(uuid())
-  name            String
-  style           Style[]
-  StyleContainTag StyleContainTag[]
-}
-
-model StyleContainTag {
-  style   Style  @relation(fields: [styleId], references: [id], onDelete: Cascade)
-  styleId String
-  tag     Tag    @relation(fields: [tagId], references: [id], onDelete: Restrict)
-  tagId   String
-
-  @@id([styleId, tagId])
-}
-
-model StyleImage {
-  id      String @id @default(uuid())
-  url     String
-  style   Style  @relation(fields: [styleId], references: [id], onDelete: Cascade)
-  styleId String
 }
