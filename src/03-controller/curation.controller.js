@@ -3,7 +3,7 @@ import { BaseControlloer } from "./base.controlloer.js";
 export class CurationController extends BaseControlloer {
   #curationMiddleware;
   constructor(curationMiddleware) {
-    super("/api");
+    super("");
     this.#curationMiddleware = curationMiddleware;
     this.registerRoutes();
   }

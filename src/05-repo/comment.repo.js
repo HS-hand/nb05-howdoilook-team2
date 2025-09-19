@@ -30,7 +30,7 @@ export class CommentRepo {
       include: {
         style: {
           select: {
-          nickname: true,
+            nickname: true,
           },
         },
       },

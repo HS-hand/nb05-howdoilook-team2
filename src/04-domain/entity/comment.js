@@ -48,7 +48,7 @@ export class Comment {
   get id() {
     return this.#id;
   }
-  get nickname(){
+  get nickname() {
     return this.#nickname;
   }
   get curationId() {

@@ -1,0 +1,40 @@
+### 
+POST http://localhost:3000/styles/3d98b132-c404-4de9-92c6-79795e40f281/curations
+Content-Type: application/json
+
+{
+	"nickname": "손훈석",
+	"content": "좀 치는데요?",
+	"password": "a123456789",
+	"trendy": 4,
+	"personality": 6,
+	"practicality": 8,
+	"costEffectiveness": 10
+}
+
+### 
+GET http://localhost:3000/styles/3d98b132-c404-4de9-92c6-79795e40f281/curations
+
+### 
+PUT http://localhost:3000/curations/bed7ba85-4b44-4bf9-a676-00fb76ff1fed
+Content-Type: application/json
+
+{
+	"nickname": "손석훈",
+	"content": "사실 별로임",
+	"password": "987654321a",
+	"trendy": 2,
+	"personality": 4,
+	"practicality": 6,
+	"costEffectiveness": 8
+}
+
+
+###
+DELETE http://localhost:3000/curations/bed7ba85-4b44-4bf9-a676-00fb76ff1fed
+Content-Type: application/json
+
+{
+	"password": "12345678asdf"
+}
+
