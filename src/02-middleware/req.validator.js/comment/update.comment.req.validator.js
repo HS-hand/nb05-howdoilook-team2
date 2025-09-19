@@ -10,15 +10,10 @@ export class UpdateCommentReqValidator extends BaseValidator {
     let { commentId } = this.params;
     const { content, password } = this.body;
 
-    if (!this.body) {
-      throw new Exception(EXCEPTIONS.ALL_UNDEFINED);
+    if (this.isEmpty(content)) {
+      throw new Exception(EXCEPTIONS.BAD_REQUEST);
     }
 
-    if (!this.isEmpty(content)) {
-      if (!this.isString(content)) {
-        throw new Exception(EXCEPTIONS.CONTENT_FORM);
-      }
-    }
     if (!this.isEmpty(password)) {
       if (!this.isString(password)) {
         throw new Exception(EXCEPTIONS.PASSWORD_FORM);

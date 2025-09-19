@@ -9,11 +9,14 @@ export class CommentService {
   }
 
   createComment = async ({ curationId, content, password }) => {
+    const nickname = await this.#commentRepo.getStyleNickname(curationId);
     const comment = Comment.factory({
+      nickname,
       curationId,
       content,
       password,
     });
+
     const stylePassword = await this.#commentRepo.getStylePassword(
       comment.curationId,
     );
@@ -29,7 +32,7 @@ export class CommentService {
   updateComment = async ({ commentId, content, password }) => {
     const foundComment = await this.#commentRepo.findCommentById(commentId);
     if (!foundComment) {
-      throw new Exception(EXCEPTIONS.CURATION_NOT_EXIST);
+      throw new Exception(EXCEPTIONS.NOT_FOUND);
     }
     const stylePassword = await this.#commentRepo.getStylePassword(
       foundComment.curationId,
@@ -37,6 +40,7 @@ export class CommentService {
     if (stylePassword === password) {
       const comment = Comment.factory({
         id: foundComment.id,
+        nickname: foundComment.nickname,
         curationId: foundComment.curationId,
         content: content || foundComment.content,
         password: password || foundComment.password,
@@ -46,14 +50,14 @@ export class CommentService {
       const updatedComment = await this.#commentRepo.update(comment);
       return updatedComment;
     } else {
-      throw new Exception(EXCEPTIONS.PASSWORD_NOT_CORRET);
+      throw new Exception(EXCEPTIONS.FORBIDDEN);
     }
   };
 
   deleteComment = async ({ commentId, password }) => {
     const foundComment = await this.#commentRepo.findCommentById(commentId);
     if (!foundComment) {
-      throw new Exception(EXCEPTIONS.COMMENT_NOT_EXSIST);
+      throw new Exception(EXCEPTIONS.NOT_FOUND);
     }
     const stylePassword = await this.#commentRepo.getStylePassword(
       foundComment.curationId,
@@ -63,7 +67,7 @@ export class CommentService {
       const deletedComment = await this.#commentRepo.delete(commentId);
       return deletedComment;
     } else {
-      throw new Exception(EXCEPTIONS.PASSWORD_NOT_CORRET);
+      throw new Exception(EXCEPTIONS.FORBIDDEN);
     }
   };
 }
