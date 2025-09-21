@@ -70,7 +70,7 @@ export class CurationService {
     }
 
     if(password !== foundCuration.password){
-      throw new Exception(EXCEPTIONS.PASSWORD_NOT_CORRET);
+      throw new Exception(EXCEPTIONS.FORBIDDEN);
     }
 
     const curation = Curation.factory({
@@ -95,7 +95,7 @@ export class CurationService {
       throw new Exception(EXCEPTIONS.CURATION_NOT_EXIST);
     }
     if(password !== foundCuration.password){
-      throw new Exception(EXCEPTIONS.PASSWORD_NOT_CORRET);
+      throw new Exception(EXCEPTIONS.FORBIDDEN);
     }
     const deletedCuration = await this.#curationRepo.delete(id);
     return deletedCuration;
