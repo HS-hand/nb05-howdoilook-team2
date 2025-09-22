@@ -9,7 +9,7 @@ async function main() {
       nickname: faker.person.fullName(),
       title: faker.lorem.sentence(),
       content: faker.lorem.paragraphs(),
-      password: "asdf1234",
+      password: "1234",
     },
   });
 
@@ -20,7 +20,7 @@ async function main() {
       styleId: newStyle.id,
       nickname: faker.person.fullName(),
       content: faker.lorem.paragraph(),
-      password: "asdf1234",
+      password: "4321",
       trendy: faker.number.int({ min: 1, max: 10 }),
       personality: faker.number.int({ min: 1, max: 10 }),
       practicality: faker.number.int({ min: 1, max: 10 }),
