@@ -25,7 +25,7 @@ export class CommentService {
       const createdComment = await this.#commentRepo.create(comment);
       return createdComment;
     } else {
-      throw new Exception(EXCEPTIONS.PASSWORD_NOT_CORRET);
+      throw new Exception(EXCEPTIONS.FORBIDDEN);
     }
   };
 
