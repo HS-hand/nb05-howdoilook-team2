@@ -20,21 +20,21 @@ export class BaseValidator {
     this.query = query;
     this.file = file;
     this.files = files;
-  };
+  }
 
   isString(value) {
     return typeof value === "string";
-  };
+  }
   isEmpty(value) {
-    return value === undefined || value === null | value === "";
-  };
+    return value === undefined || (value === null) || (value === "");
+  }
   isInt(value) {
     return typeof value === "number";
-  };
+  }
   isBoolean(value) {
     return typeof value === "boolean";
-  };
+  }
   validate() {
     throw new Error("validate 함수를 구현하세요.");
-  };
+  }
 }

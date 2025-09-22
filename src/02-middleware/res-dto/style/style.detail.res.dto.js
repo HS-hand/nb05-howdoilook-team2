@@ -4,6 +4,7 @@ export class StyleDetailResDto {
   title;
   content;
   viewCount;
+  curationCount;
   createdAt;
   updatedAt;
   tags;
@@ -16,10 +17,11 @@ export class StyleDetailResDto {
     this.title = styleEntity.title;
     this.content = styleEntity.content;
     this.viewCount = styleEntity.viewCount;
+    this.curationCount = styleEntity.curationCount;
     this.createdAt = styleEntity.createdAt;
     this.updatedAt = styleEntity.updatedAt;
     this.tags = styleEntity.tags;
     this.imageUrls = styleEntity.imageUrls;
     this.categories = styleEntity.categories;
-  };
+  }
 }

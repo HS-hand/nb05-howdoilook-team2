@@ -1,14 +1,14 @@
 import { BaseController } from "./base.controller.js";
-import { UploadImageValidator } from "../02-middleware/req-validator/upload.image.req.validator.js";
+import { UploadImageValidator } from "../02-middleware/req-validator/style/upload.image.req.validator.js";
 
 export class ImageController extends BaseController {
   #fileUploader;
 
-  constructor({ fileUploader }) {
-    super("/api/images");
+  constructor(fileUploader) {
+    super("/images");
     this.#fileUploader = fileUploader;
     this.registerRoutes();
-  };
+  }
 
   registerRoutes() {
     this.router.post(
@@ -16,7 +16,7 @@ export class ImageController extends BaseController {
       this.#fileUploader.uploadFileMiddleware("image"),
       this.catchException(this.uploadImageMiddleware),
     );
-  };
+  }
 
   uploadImageMiddleware = async (req, res) => {
     const validateFiles = new UploadImageValidator(req.files).validate();

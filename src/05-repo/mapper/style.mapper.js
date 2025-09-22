@@ -1,13 +1,13 @@
-import { Style } from "../../04-domain/entity/style.entity.js";
+import { Style } from "../../04-domain/entity/style.js";
 
 export class StyleMapper {
   static toEntity(record) {
     if (!record) {
       return null;
-    };
+    }
 
-    const tags = record.StyleContainTag?.map(t => t.tag.name) || [];
-    const imageUrls = record.images?.map(img => img.url) || [];
+    const tags = record.StyleContainTag?.map((t) => t.tag.name) || [];
+    const imageUrls = record.images?.map((img) => img.url) || [];
 
     return new Style({
       id: record.id,
@@ -22,7 +22,7 @@ export class StyleMapper {
       tags: tags,
       imageUrls: imageUrls,
     });
-  };
+  }
 
   static toPersistent(styleEntity) {
     return {
@@ -31,5 +31,5 @@ export class StyleMapper {
       content: styleEntity.content,
       password: styleEntity.password,
     };
-  };
+  }
 }

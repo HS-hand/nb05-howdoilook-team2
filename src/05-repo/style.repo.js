@@ -1,24 +1,23 @@
-import { BaseRepo } from "./base.repo.js";
 import { StyleMapper } from "./mapper/style.mapper.js";
 
-export class StyleRepo extends BaseRepo {
-  constructor({ prisma }) {
-    super(prisma);
-  };
+export class StyleRepo {
+  constructor(prisma) {
+    this.prisma = prisma;
+  }
 
-   async create(styleEntity, styleData) {
+  async create(styleEntity, styleData) {
     const { categories, tags, imageUrls } = styleData;
     const persistentData = StyleMapper.toPersistent(styleEntity);
 
-    // const arrayCategories = Object.entries(categories).map(([type, data]) => ({
-    //   ...data,
-    //   type,
-    // }));
+    const arrayCategories = Object.entries(categories).map(([type, data]) => ({
+      ...data,
+      type,
+    }));
 
     const record = await this.prisma.style.create({
       data: {
         ...persistentData,
-        categories: { create: categories },
+        categories: { create: arrayCategories },
         StyleContainTag: {
           create: tags.map((tagName) => ({
             tag: {
@@ -37,9 +36,9 @@ export class StyleRepo extends BaseRepo {
 
     const result = StyleMapper.toEntity(record);
     return result;
-   };
+  }
 
-   async findById(styleId, includePassword = false) {
+  async findById(styleId, includePassword = false) {
     const record = await this.prisma.style.findUnique({
       where: { id: styleId },
       include: {
@@ -58,15 +57,15 @@ export class StyleRepo extends BaseRepo {
 
     const styleEntity = StyleMapper.toEntity(record);
     return styleEntity;
-   };
+  }
 
-   async update(styleId, updateData) {
+  async update(styleId, updateData) {
     const { tags, categories, imageUrls, ...rest } = updateData;
 
-    // const arrayCategories = Object.entries(categories).map(([type, data]) => ({
-    //   ...data,
-    //   type,
-    // }));
+    const arrayCategories = Object.entries(categories).map(([type, data]) => ({
+      ...data,
+      type,
+    }));
 
     const record = await this.prisma.$transaction(async (tx) => {
       await tx.StyleContainTag.deleteMany({ where: { styleId } });
@@ -77,7 +76,7 @@ export class StyleRepo extends BaseRepo {
         where: { id: styleId },
         data: {
           ...rest,
-          categories: { create: categories },
+          categories: { create: arrayCategories },
           StyleContainTag: {
             create: tags.map((tagName) => ({
               tag: {
@@ -91,27 +90,27 @@ export class StyleRepo extends BaseRepo {
           images: true,
           categories: true,
           StyleContainTag: { include: { tag: true } },
-        }
+        },
       });
 
       return updatedRecord;
     });
 
     return StyleMapper.toEntity(record);
-   };
+  }
 
-   async delete(styleId) {
+  async delete(styleId) {
     return this.prisma.style.delete({
-      where: { id: styleId }
+      where: { id: styleId },
     });
-  };
+  }
 
   async incrementViewCount(styleId) {
     return this.prisma.style.update({
       where: { id: styleId },
       data: {
-        viewCount: { increment: 1 }
+        viewCount: { increment: 1 },
       },
     });
-  };
+  }
 }
