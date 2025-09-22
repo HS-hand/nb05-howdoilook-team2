@@ -1,5 +1,5 @@
 ### 
-POST http://localhost:3000/styles/3d98b132-c404-4de9-92c6-79795e40f281/curations
+POST http://localhost:3000/styles/821a5cce-7ebb-439c-af41-d8d5cc5781c5/curations
 Content-Type: application/json
 
 {
@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ### 
-GET http://localhost:3000/styles/3d98b132-c404-4de9-92c6-79795e40f281/curations
+GET http://localhost:3000/styles/599bae8f-4dd6-4a92-85cc-32b44a446fae/curations
 
 ### 
 PUT http://localhost:3000/curations/88af2a90-2c43-483e-9638-963390112b6e
