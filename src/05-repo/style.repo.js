@@ -7,6 +7,7 @@ export class StyleRepo {
   async create(styleEntity, styleData) {
     const { categories, tags, imageUrls } = styleData;
     const persistentData = StyleMapper.toPersistent(styleEntity);
+    console.log(categories,"------------------");
     const arrayCategories = Object.entries(categories).map(([type, data]) => ({
       ...data,
       type,

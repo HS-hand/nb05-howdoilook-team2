@@ -19,7 +19,7 @@ Content-Type: application/json
 		}
 	},
 	"tags": [
-		"까리",
+		"석훈",
 		"훈석"
 	],
 	"imageUrls": [
@@ -29,11 +29,11 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/styles/0c691cad-6c6c-4e81-a9b8-08ba90e8f2fb
+GET http://localhost:3000/styles/b3ef0c80-a76f-4758-9771-d1df4659610c
 
 ###
 
-DELETE http://localhost:3000/styles/1317a843-e065-4a7e-8675-0fc059a44103
+DELETE http://localhost:3000/styles/821a5cce-7ebb-439c-af41-d8d5cc5781c5
 Content-Type: application/json
 
 {
@@ -41,7 +41,7 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3000/styles/0c691cad-6c6c-4e81-a9b8-08ba90e8f2fb
+PUT http://localhost:3000/styles/b3ef0c80-a76f-4758-9771-d1df4659610c
 Content-Type: application/json
 
 {
