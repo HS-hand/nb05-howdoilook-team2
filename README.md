@@ -5,10 +5,10 @@ https://www.notion.so/NB-5-2-26fa0b8db76380fa81c0e30d66c763f3?source=copy_link
 
 ## 팀원
 손훈석 (https://github.com/HS-hand)  
-정인성 (개인 Github 링크)  
+정인성 (https://github.com/jung-insung)  
 오창섭 (https://github.com/GhostGN95)  
-양승빈 (개인 Github 링크)  
-정지원 (개인 Github 링크)  
+양승빈 (https://github.com/yangseungbin306)  
+정지원 (https://github.com/XOXOXO13)  
 
 ## 프로젝트 소개
 - 프로그래밍 교육 사이트의 백엔드 시스템 구축
@@ -53,35 +53,51 @@ src
  ┃ ┣ ┣ ┣ create.curation.req.validator.js
  ┃ ┣ ┣ ┣ delete.curation.req.validator.js
  ┃ ┣ ┣ ┗ update.curation.req.validator.js
+ ┃ ┣ ┣ style
+ ┃ ┣ ┣ ┣ create.style.req.validator.js
+ ┃ ┣ ┣ ┣ delete.style.req.validator.js
+ ┃ ┣ ┣ ┣ upload.image.req.validator.js
+ ┃ ┣ ┣ ┗ update.style.req.validator.js
  ┃ ┣ ┗ base.validator.js
  ┃ ┣ res.dto
  ┃ ┣ ┣ comment
  ┃ ┣ ┣ ┣ create.comment.res.dto.js
  ┃ ┣ ┣ ┣ delete.comment.res.dto.js
  ┃ ┣ ┣ ┗ update.comment.res.dto.js
+ ┃ ┣ ┣ style
+ ┃ ┣ ┣ ┣ create.style.res.dto.js
+ ┃ ┣ ┣ ┣ delete.style.res.dto.js
+ ┃ ┣ ┣ ┣ style.detail.res.dto.js
+ ┃ ┣ ┣ ┗ update.style.res.dto.js
  ┃ ┣ ┣ curation
  ┃ ┣ ┣ ┣ create.curation.res.dto.js
  ┃ ┣ ┣ ┣ delete.curation.res.dto.js
  ┃ ┣ ┣ ┣ view.curation.list.res.dto.js
  ┃ ┣ ┗ ┗ update.curation.res.dto.js
  ┃ ┣ comment.middleware.js
+ ┃ ┣ style.middleware.js
  ┃ ┗ curation.middleware.js
  ┣ 03-controller
  ┃ ┣ base.controlloer.js
  ┃ ┣ comment.controller.js
+ ┃ ┣ style.controller.js
  ┃ ┗ curation.controller.js
  ┣ 04-domain
  ┃ ┣ entity
  ┃ ┣ ┣ comment.js
+ ┃ ┣ ┣ style.js
  ┃ ┣ ┗ curation.js
  ┃ ┣ service
  ┃ ┣ ┣ comment.service.js
+ ┃ ┣ ┣ style.service.js
  ┃ ┗ ┗ curation.service.js
  ┣ 05-repo
  ┃ ┣ mapper
  ┃ ┣ ┣ comment.mapper.js
- ┃ ┣ ┣ curation.mapper.js
+ ┃ ┣ ┣ style.mapper.js
+ ┃ ┣ ┗ curation.mapper.js
  ┃ ┣ comment.repo.js
+ ┃ ┣ style.repo.js
  ┃ ┗ curation.repo.js
  ┣ common
  ┃ ┣ exception.js
