@@ -1,5 +1,6 @@
 ### 
-POST http://localhost:3000/styles/821a5cce-7ebb-439c-af41-d8d5cc5781c5/curations
+POST http://localhost:3000/styles/b3ef0c80-a76f-4758-9771-d1df4659610c/curations
+
 Content-Type: application/json
 
 {
@@ -13,16 +14,16 @@ Content-Type: application/json
 }
 
 ### 
-GET http://localhost:3000/styles/599bae8f-4dd6-4a92-85cc-32b44a446fae/curations
+GET http://localhost:3000/styles/b3ef0c80-a76f-4758-9771-d1df4659610c/curations
 
 ### 
-PUT http://localhost:3000/curations/88af2a90-2c43-483e-9638-963390112b6e
+PUT http://localhost:3000/curations/09541a21-04bc-43db-b70e-8bad0dc61ede
 Content-Type: application/json
 
 {
 	"nickname": "손석훈",
 	"content": "사실 별로임",
-	"password": "987654321a",
+	"password": "a123456789",
 	"trendy": 2,
 	"personality": 4,
 	"practicality": 6,
@@ -31,10 +32,10 @@ Content-Type: application/json
 
 
 ###
-DELETE http://localhost:3000/curations/88af2a90-2c43-483e-9638-963390112b6e
+DELETE http://localhost:3000/curations/09541a21-04bc-43db-b70e-8bad0dc61ede
 Content-Type: application/json
 
 {
-	"password": "12345678asdf"
+	"password": "a123456789"
 }
 

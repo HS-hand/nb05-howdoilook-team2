@@ -1,9 +1,9 @@
 import { CreateStyleReqValidator } from "./req.validator/style/create.style.req.validator.js";
-import { StyleDetailResDto } from "./res.dto/style/style.detail.res.dto.js";
+import { StyleDetailResDto } from "./res.dto/style/view.style.detail.res.dto.js";
 import { UpdateStyleReqValidator } from "./req.validator/style/update.style.req.validator.js";
 import { DeleteStyleReqValidator } from "./req.validator/style/delete.style.req.validator.js";
 import { UpdateStyleResDto } from "./res.dto/style/update.style.res.dto.js";
-import { DeleteStyleResDto } from "./res.dto/style/delete.curation.res.dto.js";
+import { DeleteStyleResDto } from "./res.dto/style/delete.style.res.dto.js";
 
 export class StyleMiddleware {
   #styleService;
