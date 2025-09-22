@@ -1,5 +1,5 @@
 import { BaseController } from "./base.controller.js";
-import { UploadImageValidator } from "./req-validator/upload.image.req.validator.js";
+import { UploadImageValidator } from "../02-middleware/req-validator/upload.image.req.validator.js";
 
 export class ImageController extends BaseController {
   #fileUploader;

@@ -1,4 +1,4 @@
-import { Style } from "../../03-domain/entity/style.entity.js";
+import { Style } from "../../04-domain/entity/style.entity.js";
 
 export class StyleMapper {
   static toEntity(record) {

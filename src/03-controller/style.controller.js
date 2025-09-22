@@ -1,0 +1,30 @@
+import { BaseController } from "./base.controller.js";
+
+export class StyleController extends BaseController {
+  #styleMiddleware;
+
+  constructor({ styleService }) {
+    super("");
+    this.#styleMiddleware = styleMiddleware;
+    this.registerRoutes();
+  };
+
+  registerRoutes() {
+    this.router.post(
+      "/styles",
+      this.catchException(this.#styleMiddleware.createStyleMiddleware)
+    );
+    this.router.get(
+      '/styles/:styleId',
+      this.catchException(this.#styleMiddleware.viewStyleDetailMiddleware)
+    );
+    this.router.put(
+      "/styles/:styleId",
+      this.catchException(this.#styleMiddleware.updateStyleMiddleware)
+    );
+    this.router.delete(
+      "/styles/:styleId",
+      this.catchException(this.#styleMiddleware.deleteStyleMiddleware)
+    );
+  };
+}

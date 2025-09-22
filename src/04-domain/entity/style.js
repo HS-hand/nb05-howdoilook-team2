@@ -37,7 +37,7 @@ export class Style {
     this.#imageUrls = imageUrls;
   };
 
-  static forCreate({ nickname, title, content, password, categories, tags, imageUrls }) {
+  static factory({ nickname, title, content, password, categories, tags, imageUrls }) {
     return new Style({ nickname, title, content, password, categories, tags, imageUrls });
   };
 

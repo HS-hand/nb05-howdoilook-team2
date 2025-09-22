@@ -10,6 +10,11 @@ export class StyleRepo extends BaseRepo {
     const { categories, tags, imageUrls } = styleData;
     const persistentData = StyleMapper.toPersistent(styleEntity);
 
+    // const arrayCategories = Object.entries(categories).map(([type, data]) => ({
+    //   ...data,
+    //   type,
+    // }));
+
     const record = await this.prisma.style.create({
       data: {
         ...persistentData,
@@ -57,6 +62,11 @@ export class StyleRepo extends BaseRepo {
 
    async update(styleId, updateData) {
     const { tags, categories, imageUrls, ...rest } = updateData;
+
+    // const arrayCategories = Object.entries(categories).map(([type, data]) => ({
+    //   ...data,
+    //   type,
+    // }));
 
     const record = await this.prisma.$transaction(async (tx) => {
       await tx.StyleContainTag.deleteMany({ where: { styleId } });

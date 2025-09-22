@@ -1,4 +1,4 @@
-export class BaseReqValidator {
+export class BaseValidator {
   headers;
   body;
   params;
@@ -22,17 +22,19 @@ export class BaseReqValidator {
     this.files = files;
   };
 
-  validate() {
-    throw new Error("validate 메소드를 구현하세요.");
-  }
-
   isString(value) {
     return typeof value === "string";
   };
-  isNumber(value) {
+  isEmpty(value) {
+    return value === undefined || value === null | value === "";
+  };
+  isInt(value) {
     return typeof value === "number";
   };
   isBoolean(value) {
     return typeof value === "boolean";
+  };
+  validate() {
+    throw new Error("validate 함수를 구현하세요.");
   };
 }
