@@ -150,7 +150,7 @@ export class StyleRepo {
     return result;
   }
 
-  async findById(styleId, includePassword = false) {
+  async findById(styleId) {
     const record = await this.prisma.style.findUnique({
       where: { id: styleId },
       include: {
