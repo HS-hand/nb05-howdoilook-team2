@@ -24,7 +24,7 @@ export class CurationService {
       keyword,
     });
     
-    const curationTotalCount = await this.#curationRepo.count();
+    const curationTotalCount = await this.#curationRepo.count(styleId);
     const foundCurationCount = foundCurationList.length;
     return { page, foundCurationCount, curationTotalCount, foundCurationList };
   };
