@@ -1,6 +1,6 @@
-import { BaseControlloer } from "./base.controlloer.js";
+import { BaseController } from "./base.controller.js";
 
-export class CurationController extends BaseControlloer {
+export class CurationController extends BaseController {
   #curationMiddleware;
   constructor(curationMiddleware) {
     super("");

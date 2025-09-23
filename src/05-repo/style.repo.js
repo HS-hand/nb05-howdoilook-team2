@@ -4,14 +4,128 @@ export class StyleRepo {
   constructor(prisma) {
     this.prisma = prisma;
   }
+
+  async findAll(options = {}) {
+    const {
+      page = 1,
+      pageSize = 10,
+      sortBy = "latest",
+      tagFilter,
+      searchBy,
+      keyword,
+    } = options;
+
+    const where = {};
+
+    if (tagFilter) {
+      where.StyleContainTag = {
+        some: { tag: { name: tagFilter } },
+      };
+    }
+
+    if (searchBy && keyword) {
+      const kw = keyword;
+      switch (searchBy) {
+        case "nickname":
+          where.nickname = { contains: kw };
+          break;
+        case "title":
+          where.title = { contains: kw };
+          break;
+        case "content":
+          where.content = { contains: kw };
+          break;
+        case "tag":
+          where.StyleContainTag = {
+            some: { tag: { name: { contains: kw } } },
+          };
+          break;
+      }
+    }
+
+    let orderBy;
+    if (sortBy === "view") {
+      orderBy = { viewCount: "desc" };
+    } else if (sortBy === "curation") {
+      orderBy = { curations: { _count: "desc" } };
+    } else {
+      orderBy = { createdAt: "desc" };
+    }
+
+    const skip = (page - 1) * pageSize;
+    const take = pageSize;
+
+    const totalCount = await this.prisma.style.count({ where });
+
+    const records = await this.prisma.style.findMany({
+      where,
+      include: {
+        images: { select: { url: true } },
+        categories: true,
+        StyleContainTag: {
+          include: { tag: true },
+        },
+        _count: { select: { curations: true } },
+      },
+      orderBy,
+      skip,
+      take,
+    });
+
+    const entities = records.map((record) => {
+      return new Style({
+        id: record.id,
+        nickname: record.nickname,
+        title: record.title,
+        content: record.content,
+        password: record.password,
+        viewCount: record.viewCount,
+        createdAt: record.createdAt,
+        updatedAt: record.updatedAt,
+        categories: record.categories,
+        tags: record.StyleContainTag.map((ct) => ct.tag.name),
+        imageUrls: record.images.map((img) => img.url),
+        curationCount: record._count.curations,
+      });
+    });
+
+    return {
+      items: entities,
+      pagination: {
+        page,
+        pageSize: take,
+        totalCount,
+        totalPages: Math.ceil(totalCount / take) || 1,
+      },
+    };
+  }
+
+  async getPopularTags(limit = 10) {
+    const tags = await this.prisma.tag.findMany({
+      include: {
+        _count: { select: { StyleContainTag: true } },
+      },
+      orderBy: {
+        StyleContainTag: { _count: "desc" },
+      },
+      take: limit,
+    });
+
+    return tags.map((t) => ({
+      name: t.name,
+      count: t._count.StyleContainTag,
+    }));
+  }
+
   async create(styleEntity, styleData) {
     const { categories, tags, imageUrls } = styleData;
     const persistentData = StyleMapper.toPersistent(styleEntity);
-    console.log(categories, "------------------");
+
     const arrayCategories = Object.entries(categories).map(([type, data]) => ({
       ...data,
       type,
     }));
+
     const record = await this.prisma.style.create({
       data: {
         ...persistentData,
@@ -31,6 +145,7 @@ export class StyleRepo {
         StyleContainTag: { include: { tag: true } },
       },
     });
+
     const result = StyleMapper.toEntity(record);
     return result;
   }
@@ -58,10 +173,12 @@ export class StyleRepo {
 
   async update(styleId, updateData) {
     const { tags, categories, imageUrls, ...rest } = updateData;
+
     const arrayCategories = Object.entries(categories).map(([type, data]) => ({
       ...data,
       type,
     }));
+
     const record = await this.prisma.$transaction(async (tx) => {
       await tx.StyleContainTag.deleteMany({ where: { styleId } });
       await tx.categoryItem.deleteMany({ where: { styleId } });

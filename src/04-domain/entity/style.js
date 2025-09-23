@@ -5,6 +5,7 @@ export class Style {
   #content;
   #password;
   #viewCount;
+  #curationCount;
   #createdAt;
   #updatedAt;
   #categories;
@@ -18,6 +19,7 @@ export class Style {
     content,
     password,
     viewCount = 0,
+    curationCount = 0,
     createdAt,
     updatedAt,
     categories = [],
@@ -30,6 +32,7 @@ export class Style {
     this.#content = content;
     this.#password = password;
     this.#viewCount = viewCount;
+    this.#curationCount = curationCount;
     this.#createdAt = createdAt;
     this.#updatedAt = updatedAt;
     this.#categories = categories;
@@ -71,6 +74,9 @@ export class Style {
   }
   get viewCount() {
     return this.#viewCount;
+  }
+  get curationCount() {
+    return this.#curationCount;
   }
   get createdAt() {
     return this.#createdAt;

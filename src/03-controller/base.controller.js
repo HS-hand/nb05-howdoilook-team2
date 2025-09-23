@@ -1,5 +1,6 @@
 import express from "express";
-export class BaseControlloer {
+
+export class BaseController {
   basePath;
   router;
 
@@ -8,7 +9,7 @@ export class BaseControlloer {
     this.router = express.Router();
   }
 
-  catchException = (controllerFn) => {
+  catchException(controllerFn) {
     return async (req, res, next) => {
       try {
         await controllerFn(req, res, next);
@@ -16,7 +17,7 @@ export class BaseControlloer {
         next(err);
       }
     };
-  };
+  }
 
   registerRoutes() {
     throw new Error("registerRoutes 메소드를 구현하세요.");
