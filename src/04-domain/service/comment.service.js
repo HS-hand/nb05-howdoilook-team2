@@ -9,24 +9,19 @@ export class CommentService {
   }
 
   createComment = async ({ curationId, content, password }) => {
-    const nickname = await this.#commentRepo.getStyleNickname(curationId);
+    const style = await this.#commentRepo.getStyle(curationId);
     const comment = Comment.factory({
-      nickname,
+      nickname: style.nickname,
       curationId,
       content,
       password,
     });
 
-    const stylePassword = await this.#commentRepo.getStylePassword(
-      comment.curationId,
-    );
-
-    if (stylePassword === password) {
-      const createdComment = await this.#commentRepo.create(comment);
-      return createdComment;
-    } else {
+    if (style.password !== password) {
       throw new Exception(EXCEPTIONS.FORBIDDEN);
     }
+    const createdComment = await this.#commentRepo.create(comment);
+    return createdComment;
   };
 
   updateComment = async ({ commentId, content, password }) => {
@@ -34,24 +29,21 @@ export class CommentService {
     if (!foundComment) {
       throw new Exception(EXCEPTIONS.NOT_FOUND);
     }
-    const stylePassword = await this.#commentRepo.getStylePassword(
-      foundComment.curationId,
-    );
-    if (stylePassword === password) {
-      const comment = Comment.factory({
-        id: foundComment.id,
-        nickname: foundComment.nickname,
-        curationId: foundComment.curationId,
-        content: content || foundComment.content,
-        password: password || foundComment.password,
-        createdAt: foundComment.createdAt,
-        updatedAt: foundComment.updatedAt,
-      });
-      const updatedComment = await this.#commentRepo.update(comment);
-      return updatedComment;
-    } else {
+    const style = await this.#commentRepo.getStyle(foundComment.curationId);
+    if (style.password !== password) {
       throw new Exception(EXCEPTIONS.FORBIDDEN);
     }
+    const comment = Comment.factory({
+      id: foundComment.id,
+      nickname: foundComment.nickname,
+      curationId: foundComment.curationId,
+      content: content || foundComment.content,
+      password: password || foundComment.password,
+      createdAt: foundComment.createdAt,
+      updatedAt: foundComment.updatedAt,
+    });
+    const updatedComment = await this.#commentRepo.update(comment);
+    return updatedComment;
   };
 
   deleteComment = async ({ commentId, password }) => {
@@ -59,15 +51,12 @@ export class CommentService {
     if (!foundComment) {
       throw new Exception(EXCEPTIONS.NOT_FOUND);
     }
-    const stylePassword = await this.#commentRepo.getStylePassword(
-      foundComment.curationId,
-    );
+    const style = await this.#commentRepo.getStyle(foundComment.curationId);
 
-    if (stylePassword === password) {
-      const deletedComment = await this.#commentRepo.delete(commentId);
-      return deletedComment;
-    } else {
+    if (style.password !== password) {
       throw new Exception(EXCEPTIONS.FORBIDDEN);
     }
+    const deletedComment = await this.#commentRepo.delete(commentId);
+    return deletedComment;
   };
 }

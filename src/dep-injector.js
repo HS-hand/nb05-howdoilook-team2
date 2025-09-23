@@ -42,8 +42,11 @@ export class DepInjector {
     const styleMiddleware = new StyleMiddleware(styleService);
     const styleController = new StyleController(styleMiddleware);
 
-
-    const controllers = [curationController, commentController, styleController];
+    const controllers = [
+      curationController,
+      commentController,
+      styleController,
+    ];
 
     return new Server(controllers);
   }

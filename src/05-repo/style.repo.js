@@ -7,7 +7,7 @@ export class StyleRepo {
   async create(styleEntity, styleData) {
     const { categories, tags, imageUrls } = styleData;
     const persistentData = StyleMapper.toPersistent(styleEntity);
-    console.log(categories,"------------------");
+    console.log(categories, "------------------");
     const arrayCategories = Object.entries(categories).map(([type, data]) => ({
       ...data,
       type,
@@ -66,7 +66,7 @@ export class StyleRepo {
       await tx.StyleContainTag.deleteMany({ where: { styleId } });
       await tx.categoryItem.deleteMany({ where: { styleId } });
       await tx.styleImage.deleteMany({ where: { styleId } });
-    
+
       const updatedRecord = tx.style.update({
         where: { id: styleId },
         data: {

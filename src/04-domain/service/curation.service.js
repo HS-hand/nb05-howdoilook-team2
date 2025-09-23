@@ -9,7 +9,7 @@ export class CurationService {
   }
 
   viewCurationList = async ({ styleId, page, pageSize, searchBy, keyword }) => {
-    if(pageSize > 5) {
+    if (pageSize > 5) {
       throw new Exception(EXCEPTIONS.PAGESIZE_MAX_5);
     }
     const curationTotalCount = await this.#curationRepo.count();
@@ -35,8 +35,8 @@ export class CurationService {
   }) => {
     const foundStyleId = await this.#curationRepo.findStyleById(styleId);
 
-    if(!foundStyleId) {
-      throw new Exception(EXCEPTIONS.STYLE_NOT_EXIST)
+    if (!foundStyleId) {
+      throw new Exception(EXCEPTIONS.STYLE_NOT_EXIST);
     }
     const curation = Curation.factory({
       styleId,
@@ -69,7 +69,7 @@ export class CurationService {
       throw new Exception(EXCEPTIONS.CURATION_NOT_EXIST);
     }
 
-    if(password !== foundCuration.password){
+    if (password !== foundCuration.password) {
       throw new Exception(EXCEPTIONS.FORBIDDEN);
     }
 
@@ -94,7 +94,7 @@ export class CurationService {
     if (!foundCuration) {
       throw new Exception(EXCEPTIONS.CURATION_NOT_EXIST);
     }
-    if(password !== foundCuration.password){
+    if (password !== foundCuration.password) {
       throw new Exception(EXCEPTIONS.FORBIDDEN);
     }
     const deletedCuration = await this.#curationRepo.delete(id);

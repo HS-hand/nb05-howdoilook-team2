@@ -37,15 +37,12 @@ export class CreateCurationReqValidator extends BaseValidator {
       throw new Exception(EXCEPTIONS.CONTENT_FORM);
     }
 
-    if (
-      !this.isString(password) ||
-      this.isEmpty(password)
-    ) {
+    if (!this.isString(password) || this.isEmpty(password)) {
       throw new Exception(EXCEPTIONS.PASSWORD_FORM);
     }
 
-    if(!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(password)) {
-      throw new Exception(EXCEPTIONS.PASSWORD_REGEX)
+    if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(password)) {
+      throw new Exception(EXCEPTIONS.PASSWORD_REGEX);
     }
 
     if (
