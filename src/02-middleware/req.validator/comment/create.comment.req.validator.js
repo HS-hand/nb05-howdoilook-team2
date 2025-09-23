@@ -10,6 +10,9 @@ export class CreateCommentReqValidator extends BaseValidator {
     const { curationId } = this.params;
     const { content, password } = this.body;
 
+    if (this.isEmpty(curationId)) {
+      throw new Exception(EXCEPTIONS.NOT_FOUND);
+    }
     if (this.isEmpty(content)) {
       throw new Exception(EXCEPTIONS.BAD_REQUEST);
     }

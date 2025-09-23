@@ -10,6 +10,9 @@ export class CommentService {
 
   createComment = async ({ curationId, content, password }) => {
     const style = await this.#commentRepo.getStyle(curationId);
+    if (!style) {
+      throw new Exception(EXCEPTIONS.CURATION_NOT_EXIST);
+    }
     const comment = Comment.factory({
       nickname: style.nickname,
       curationId,

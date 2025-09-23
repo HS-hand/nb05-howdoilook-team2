@@ -14,7 +14,7 @@ export class CommentRepo {
         style: true,
       },
     });
-    return curation.style;
+    return curation ?  curation.style : null;
   };
 
   findCommentById = async (commentId) => {

@@ -1,5 +1,4 @@
 ###
-
 POST http://localhost:3000/styles
 Content-Type: application/json
 
@@ -35,7 +34,7 @@ GET http://localhost:3000/styles/
 
 ###
 
-PUT http://localhost:3000/styles/
+PUT http://localhost:3000/styles/6f71fac7-6544-4783-bc0a-0625d3dc07fd
 Content-Type: application/json
 
 {
@@ -67,7 +66,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/styles/
+DELETE http://localhost:3000/styles/6f71fac7-6544-4783-bc0a-0625d3dc07fd
 Content-Type: application/json
 
 {
