@@ -8,11 +8,10 @@ export class CurationService {
     this.#curationRepo = curationRepo;
   }
 
-  viewCurationList = async ({ styleId, page, pageSize, searchBy, keyword }) => {
-    if (pageSize > 5) {
+  getCurationList = async ({ styleId, page, pageSize, searchBy, keyword }) => {
+    if(pageSize > 5) {
       throw new Exception(EXCEPTIONS.PAGESIZE_MAX_5);
     }
-    const curationTotalCount = await this.#curationRepo.count();
     const foundCurationList = await this.#curationRepo.findCurationList({
       styleId,
       page,
@@ -20,7 +19,10 @@ export class CurationService {
       searchBy,
       keyword,
     });
-    return { page, pageSize, curationTotalCount, foundCurationList };
+    
+    const curationTotalCount = await this.#curationRepo.count();
+    const foundCurationCount = foundCurationList.length;
+    return { page, foundCurationCount, curationTotalCount, foundCurationList };
   };
 
   createCuration = async ({

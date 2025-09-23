@@ -15,7 +15,7 @@ export class CurationController extends BaseControlloer {
     );
     this.router.get(
       "/styles/:styleId/curations",
-      this.catchException(this.#curationMiddleware.viewCurationListMiddleware),
+      this.catchException(this.#curationMiddleware.getCurationListMiddleware),
     );
     this.router.put(
       "/curations/:curationId",

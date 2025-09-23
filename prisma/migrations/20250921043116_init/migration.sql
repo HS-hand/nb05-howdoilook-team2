@@ -43,16 +43,16 @@ CREATE TABLE "public"."StyleContainTag" (
 -- CreateTable
 CREATE TABLE "public"."Curation" (
     "id" TEXT NOT NULL,
+    "styleId" TEXT NOT NULL,
     "nickname" TEXT NOT NULL,
     "content" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "trendy" INTEGER NOT NULL,
     "personality" INTEGER NOT NULL,
     "practicality" INTEGER NOT NULL,
+    "costEffectiveness" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "costEffectiveness" INTEGER NOT NULL,
-    "password" TEXT NOT NULL,
-    "styleId" TEXT NOT NULL,
 
     CONSTRAINT "Curation_pkey" PRIMARY KEY ("id")
 );
