@@ -9,17 +9,23 @@ export class CommentService {
   }
 
   createComment = async ({ curationId, content, password }) => {
-    const style = await this.#commentRepo.getStyle(curationId);
+    const curation = await this.#commentRepo.getCurationById(curationId);
+    if (!curation) {
+      throw new Exception(EXCEPTIONS.CURATION_NOT_EXIST);
+    }
+    if(curation.comment){
+      throw new Exception(EXCEPTIONS.COMMENT_ALREADY_EXISTS);
+    }
+    if (curation.style.password !== password) {
+      throw new Exception(EXCEPTIONS.FORBIDDEN);
+    }
+
     const comment = Comment.factory({
-      nickname: style.nickname,
+      nickname: curation.style.nickname,
       curationId,
       content,
       password,
     });
-
-    if (style.password !== password) {
-      throw new Exception(EXCEPTIONS.FORBIDDEN);
-    }
     const createdComment = await this.#commentRepo.create(comment);
     return createdComment;
   };
@@ -29,8 +35,8 @@ export class CommentService {
     if (!foundComment) {
       throw new Exception(EXCEPTIONS.NOT_FOUND);
     }
-    const style = await this.#commentRepo.getStyle(foundComment.curationId);
-    if (style.password !== password) {
+    const curation = await this.#commentRepo.getCurationById(foundComment.curationId);
+    if (curation.style.password !== password) {
       throw new Exception(EXCEPTIONS.FORBIDDEN);
     }
     const comment = Comment.factory({
@@ -51,11 +57,12 @@ export class CommentService {
     if (!foundComment) {
       throw new Exception(EXCEPTIONS.NOT_FOUND);
     }
-    const style = await this.#commentRepo.getStyle(foundComment.curationId);
+    const curation = await this.#commentRepo.getCurationById(foundComment.curationId);
 
-    if (style.password !== password) {
+    if (curation.style.password !== password) {
       throw new Exception(EXCEPTIONS.FORBIDDEN);
     }
+    
     const deletedComment = await this.#commentRepo.delete(commentId);
     return deletedComment;
   };

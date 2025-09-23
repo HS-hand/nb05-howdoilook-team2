@@ -1,5 +1,5 @@
 ### 
-POST http://localhost:3000/curations/3bec612a-e215-495a-9a14-deb5be891082/comments
+POST http://localhost:3000/curations/4bdee0af-462d-44fc-8808-ca168ce923d8/comments
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/comments/4271b15d-e1a2-46ca-827c-b183b06ea681
+DELETE http://localhost:3000/comments/3ddfb865-1cfa-48e1-8774-def719d208bf
 Content-Type: application/json
 
 {

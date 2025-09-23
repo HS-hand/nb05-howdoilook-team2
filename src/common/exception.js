@@ -123,10 +123,6 @@ export const EXCEPTIONS = {
     statusCode: 400,
     message: "keyword가 유효하지 않습니다.",
   },
-  CURATION_NOT_EXIST: {
-    statusCode: 400,
-    message: "큐레이팅이 존재하지 않습니다.",
-  },
   STYLEID_FORM: {
     statusCode: 400,
     message: "styleId가 유효하지 않습니다.",
@@ -147,6 +143,10 @@ export const EXCEPTIONS = {
     statusCode: 400,
     message: "영문, 숫자 조합 8~16자리로 입력해주세요.",
   },
+  COMMENT_ALREADY_EXISTS: {
+    statusCode: 409,
+    message: "이미 코멘트가 존재합니다."
+  }
 };
 
 export class Exception extends Error {
