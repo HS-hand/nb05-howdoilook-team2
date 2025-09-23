@@ -73,7 +73,7 @@ export class StyleRepo {
     });
 
     const entities = records.map((record) => {
-      return new Style({
+      return new StyleMapper({
         id: record.id,
         nickname: record.nickname,
         title: record.title,
