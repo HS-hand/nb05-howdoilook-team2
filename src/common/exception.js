@@ -112,11 +112,11 @@ export const EXCEPTIONS = {
   PASSWORD_REGEX: {
     statusCode: 400,
     message: "영문, 숫자 조합 8~16자리로 입력해주세요.",
-  }
+  },
 };
 
 export class Exception extends Error {
-  constructor(errObj) {    
+  constructor(errObj) {
     super(errObj.message);
     this.statusCode = errObj.statusCode;
   }

@@ -14,7 +14,7 @@ export class StyleMiddleware {
 
   createStyleMiddleware = async (req, res, next) => {
     const styleData = new CreateStyleReqValidator({
-      body: req.body
+      body: req.body,
     }).validate();
     const newStyleEntity = await this.#styleService.createStyle(styleData);
     const responseDto = new StyleDetailResDto(newStyleEntity);

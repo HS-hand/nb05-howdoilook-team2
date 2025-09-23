@@ -13,8 +13,9 @@ export class Server {
   }
 
   listen = () => {
-    this.#server.listen(3000, () => {
-      console.log("app server listening on port 3000");
+    const port = process.env.PORT;
+    this.#server.listen(port, () => {
+      console.log(`app server listening on port ${port}`);
     });
   };
 

@@ -12,14 +12,14 @@ export class ViewCurationListResDto {
       practicality: Curation.practicality,
       costEffectiveness: Curation.costEffectiveness,
       createdAt: Curation.createdAt,
-      comment: Curation.comment ?
-        {
-          id: Curation.comment.id,
-          nickname: Curation.comment.nickname,
-          content: Curation.comment.content,
-          createdAt: Curation.comment.createdAt
-        }
-        : null
+      comment: Curation.comment
+        ? {
+            id: Curation.comment.id,
+            nickname: Curation.comment.nickname,
+            content: Curation.comment.content,
+            createdAt: Curation.comment.createdAt,
+          }
+        : null,
     }));
   }
 }

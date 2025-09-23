@@ -18,7 +18,6 @@ export class CreateStyleReqValidator extends BaseValidator {
       !password ||
       !categories
     ) {
-
       throw new Exception(EXCEPTIONS.BAD_REQUEST);
     }
 
@@ -30,10 +29,7 @@ export class CreateStyleReqValidator extends BaseValidator {
     ) {
       throw new Exception(EXCEPTIONS.BAD_REQUEST);
     }
-    if (
-      !Array.isArray(tags) ||
-      !Array.isArray(imageUrls)
-    ) {
+    if (!Array.isArray(tags) || !Array.isArray(imageUrls)) {
       throw new Exception(EXCEPTIONS.BAD_REQUEST);
     }
 

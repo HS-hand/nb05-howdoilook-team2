@@ -7,7 +7,7 @@ Content-Type: application/json
 	"password": "a12345678"
 }
 ### 
-PUT http://localhost:3000/comments/fa9c8dce-e06e-44a6-b740-0a809e88a661
+PUT http://localhost:3000/comments/8b957b3a-2996-464c-917c-3d48d53186de
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/comments/fa9c8dce-e06e-44a6-b740-0a809e88a661
+DELETE http://localhost:3000/comments/4271b15d-e1a2-46ca-827c-b183b06ea681
 Content-Type: application/json
 
 {

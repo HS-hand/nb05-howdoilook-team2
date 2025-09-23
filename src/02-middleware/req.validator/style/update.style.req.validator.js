@@ -35,12 +35,9 @@ export class UpdateStyleReqValidator extends BaseValidator {
     ) {
       throw new Exception(EXCEPTIONS.BAD_REQUEST);
     }
-    if (
-      !Array.isArray(tags) ||
-      !Array.isArray(imageUrls)
-    ) {
+    if (!Array.isArray(tags) || !Array.isArray(imageUrls)) {
       throw new Exception(EXCEPTIONS.BAD_REQUEST);
-    }    
+    }
     return {
       styleId,
       updateData: {
