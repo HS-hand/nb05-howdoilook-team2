@@ -1,3 +1,5 @@
+###
+
 POST http://localhost:3000/styles
 Content-Type: application/json
 
@@ -29,19 +31,11 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/styles/b3ef0c80-a76f-4758-9771-d1df4659610c
+GET http://localhost:3000/styles/
 
 ###
 
-DELETE http://localhost:3000/styles/821a5cce-7ebb-439c-af41-d8d5cc5781c5
-Content-Type: application/json
-
-{
-  "password": "a12345678"
-}
-
-###
-PUT http://localhost:3000/styles/b3ef0c80-a76f-4758-9771-d1df4659610c
+PUT http://localhost:3000/styles/
 Content-Type: application/json
 
 {
@@ -70,3 +64,14 @@ Content-Type: application/json
 		"string"
 	]
 }
+
+###
+
+DELETE http://localhost:3000/styles/
+Content-Type: application/json
+
+{
+  "password": "a12345678"
+}
+
+###
