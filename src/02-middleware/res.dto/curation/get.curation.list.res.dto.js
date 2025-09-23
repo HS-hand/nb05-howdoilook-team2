@@ -1,7 +1,7 @@
-export class ViewCurationListResDto {
-  constructor({ page, pageSize, curationTotalCount, foundCurationList }) {
+export class GetCurationListResDto {
+  constructor({ page, foundCurationCount, curationTotalCount, foundCurationList }) {
     this.currentPage = page;
-    this.totalPages = pageSize;
+    this.totalPages = foundCurationCount;
     this.totalItemCount = curationTotalCount;
     this.CurationList = foundCurationList.map((Curation) => ({
       id: Curation.id,
