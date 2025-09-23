@@ -1,14 +1,27 @@
-export class UpdateStyleResDto {
-  constructor(updateStyle) {
-    this.id = updateStyle.id;
-    this.nickname = updateStyle.nickname;
-    this.title = updateStyle.title;
-    this.content = updateStyle.content;
-    this.viewCount = updateStyle.viewCount;
-    this.curationCount = updateStyle.curationCount;
-    this.createdAt = updateStyle.createdAt;
-    this.categories = updateStyle.categories;
-    this.tags = updateStyle.tags;
-    this.imageUrls = updateStyle.imageUrls;
+export class StyleDetailResDto {
+  id;
+  nickname;
+  title;
+  content;
+  viewCount;
+  curationCount;
+  createdAt;
+  updatedAt;
+  tags;
+  imageUrls;
+  categories;
+
+  constructor(styleEntity) {
+    this.id = styleEntity.id;
+    this.nickname = styleEntity.nickname;
+    this.title = styleEntity.title;
+    this.content = styleEntity.content;
+    this.viewCount = styleEntity.viewCount;
+    this.curationCount = styleEntity.curationCount;
+    this.createdAt = styleEntity.createdAt;
+    this.updatedAt = styleEntity.updatedAt;
+    this.tags = styleEntity.tags;
+    this.imageUrls = styleEntity.imageUrls;
+    this.categories = styleEntity.categories;
   }
 }

@@ -12,7 +12,7 @@ export class BaseValidator {
     params = {},
     query = {},
     file = {},
-    files = {},
+    files = [],
   }) {
     this.headers = headers;
     this.body = body;
