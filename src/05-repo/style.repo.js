@@ -150,7 +150,7 @@ export class StyleRepo {
     return result;
   }
 
-  async findById(styleId, includePassword = false) {
+  async findById(styleId) {
     const record = await this.prisma.style.findUnique({
       where: { id: styleId },
       include: {
@@ -179,33 +179,33 @@ export class StyleRepo {
       type,
     }));
 
-    const record = await this.prisma.$transaction(async (tx) => {
-      await tx.StyleContainTag.deleteMany({ where: { styleId } });
-      await tx.categoryItem.deleteMany({ where: { styleId } });
-      await tx.styleImage.deleteMany({ where: { styleId } });
-
-      const updatedRecord = tx.style.update({
-        where: { id: styleId },
-        data: {
-          ...rest,
-          categories: { create: arrayCategories },
-          StyleContainTag: {
-            create: tags.map((tagName) => ({
-              tag: {
-                create: { name: tagName },
-              },
-            })),
-          },
-          images: { create: imageUrls.map((url) => ({ url })) },
+    const record = await this.prisma.style.update({
+      where: { id: styleId },
+      data: {
+        ...rest,
+        categories: {
+          deleteMany: {},
+          create: arrayCategories,
         },
-        include: {
-          images: true,
-          categories: true,
-          StyleContainTag: { include: { tag: true } },
+        StyleContainTag: {
+          deleteMany: {},
+          create: tags.map((tagName) => ({
+            tag: {
+              create: { name: tagName },
+            },
+          })),
         },
-      });
-
-      return updatedRecord;
+        images: {
+          deleteMany: {},
+          create: imageUrls.map((url) => ({ url })),
+        },
+        updatedAt: new Date(),
+      },
+      include: {
+        images: true,
+        categories: true,
+        StyleContainTag: { include: { tag: true } },
+      },
     });
 
     return StyleMapper.toEntity(record);
@@ -222,6 +222,7 @@ export class StyleRepo {
       where: { id: styleId },
       data: {
         viewCount: { increment: 1 },
+        updatedAt: new Date(),
       },
     });
   }

@@ -22,7 +22,7 @@ export class Style {
     curationCount = 0,
     createdAt,
     updatedAt,
-    categories = [],
+    categories = {},
     tags = [],
     imageUrls = [],
   }) {
