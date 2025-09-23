@@ -1,24 +1,24 @@
 ### 
-POST http://localhost:3000/curations/b1e24e11-7d68-4398-b44a-e1c2bdacb788/comments
+POST http://localhost:3000/curations/3bec612a-e215-495a-9a14-deb5be891082/comments
 Content-Type: application/json
 
 {
-	"content": "ㄴㄴ 님말은 아님",
-	"password": "1234"
+	"content": "ㅋㅋ 님말이 맞음",
+	"password": "a12345678"
 }
 ### 
-PUT http://localhost:3000/comments/bd179c9c-5db4-4cd4-a944-df50ce4eb270
+PUT http://localhost:3000/comments/8b957b3a-2996-464c-917c-3d48d53186de
 Content-Type: application/json
 
 {
-  "content": "이걸로 바뀌어야 함.",
-  "password": "1234"
+  "content": "바뀌어야 되긴해 .",
+  "password": "a12345678"
 }
 
 ###
-DELETE http://localhost:3000/comments/bd179c9c-5db4-4cd4-a944-df50ce4eb270
+DELETE http://localhost:3000/comments/4271b15d-e1a2-46ca-827c-b183b06ea681
 Content-Type: application/json
 
 {
-	"password": "1234"
+	"password": "a12345678"
 }

@@ -9,15 +9,16 @@ export class Server {
   #controllers;
   #configManager;
 
-  constructor({ controllers, configManager }) {
+  constructor(controllers, configManager) {
     this.#server = express();
     this.#controllers = controllers;
     this.#configManager = configManager;
   }
 
   listen = () => {
-    this.#server.listen(3000, () => {
-      console.log("app server listening on port 3000");
+    const port = process.env.PORT || 3000;
+    this.#server.listen(port, () => {
+      console.log(`app server listening on port ${port}`);
     });
   };
 

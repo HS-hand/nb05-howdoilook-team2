@@ -1,6 +1,6 @@
-import { BaseControlloer } from "./base.controlloer.js";
+import { BaseController } from "./base.controller.js";
 
-export class CurationController extends BaseControlloer {
+export class CurationController extends BaseController {
   #curationMiddleware;
   constructor(curationMiddleware) {
     super("");
@@ -15,7 +15,7 @@ export class CurationController extends BaseControlloer {
     );
     this.router.get(
       "/styles/:styleId/curations",
-      this.catchException(this.#curationMiddleware.viewCurationListMiddleware),
+      this.catchException(this.#curationMiddleware.getCurationListMiddleware),
     );
     this.router.put(
       "/curations/:curationId",

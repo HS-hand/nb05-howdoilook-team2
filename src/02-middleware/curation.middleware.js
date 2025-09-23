@@ -1,11 +1,11 @@
 import { CreateCurationReqValidator } from "./req.validator/curation/create.curation.req.validator.js";
 import { DeleteCurationReqValidator } from "./req.validator/curation/delete.curation.req.validator.js";
 import { UpdateCurationReqValidator } from "./req.validator/curation/update.curation.req.validator.js";
-import { ViewCurationListReqValidator } from "./req.validator/curation/view.curation.list.req.validator.js";
+import { GetCurationListReqValidator } from "./req.validator/curation/get.curation.list.req.validator.js";
 import { CreateCurationResDto } from "./res.dto/curation/create.curation.res.dto.js";
 import { DeleteCurationResDto } from "./res.dto/curation/delete.curation.res.dto.js";
 import { UpdateCurationResDto } from "./res.dto/curation/update.curation.res.dto.js";
-import { ViewCurationListResDto } from "./res.dto/curation/view.curation.list.res.dto.js";
+import { GetCurationListResDto } from "./res.dto/curation/get.curation.list.res.dto.js";
 
 export class CurationMiddleware {
   #curationService;
@@ -25,16 +25,16 @@ export class CurationMiddleware {
     return res.json(createdCurationResDto);
   };
 
-  viewCurationListMiddleware = async (req, res, next) => {
-    const viewCurationListReqDto = new ViewCurationListReqValidator({
+  getCurationListMiddleware = async (req, res, next) => {
+    const getCurationListReqDto = new GetCurationListReqValidator({
       params: req.params,
       query: req.query,
     }).validate();
-    const viewCurationList = await this.#curationService.viewCurationList(
-      viewCurationListReqDto,
+    const getCurationList = await this.#curationService.getCurationList(
+      getCurationListReqDto,
     );
-    const viewCurationListResDto = new ViewCurationListResDto(viewCurationList);
-    return res.json(viewCurationListResDto);
+    const getCurationListResDto = new GetCurationListResDto(getCurationList);
+    return res.json(getCurationListResDto);
   };
 
   updateCurationMiddleware = async (req, res, next) => {

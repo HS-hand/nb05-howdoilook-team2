@@ -1,6 +1,6 @@
-import { BaseControlloer } from "./base.controlloer.js";
+import { BaseController } from "./base.controller.js";
 
-export class CommentController extends BaseControlloer {
+export class CommentController extends BaseController {
   #commentMiddleware;
   constructor(commentMiddleware) {
     super("");

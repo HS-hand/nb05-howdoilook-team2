@@ -13,7 +13,7 @@ export class CurationMapper {
       practicality: record.practicality,
       costEffectiveness: record.costEffectiveness,
       createdAt: record.createdAt,
-      comment: record.comment ? CommentMapper.toEntity(record.comment) : null
+      comment: record.comment ? CommentMapper.toEntity(record.comment) : null,
     });
   }
   static toPersistent(entity) {

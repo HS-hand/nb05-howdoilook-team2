@@ -8,6 +8,16 @@ export class StyleService {
     this.#styleRepo = styleRepo;
   }
 
+  async getStyleList(options = {}) {
+    const result = await this.#styleRepo.findAll(options);
+    return result;
+  }
+
+  async getPopularTags(limit = 10) {
+    const tags = await this.#styleRepo.getPopularTags(limit);
+    return tags;
+  }
+
   async createStyle(styleData) {
     const styleEntity = Style.factory(styleData);
     const createdStyle = await this.#styleRepo.create(styleEntity, styleData);

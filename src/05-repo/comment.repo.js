@@ -1,42 +1,22 @@
 import { CommentMapper } from "./mapper/comment.mapper.js";
+import { StyleMapper } from "./mapper/style.mapper.js";
 
 export class CommentRepo {
   constructor(prisma) {
     this.prisma = prisma;
   }
-  getStylePassword = async (curationId) => {
+  getStyle = async (curationId) => {
     const curation = await this.prisma.curation.findUnique({
       where: {
         id: curationId,
       },
       include: {
-        style: {
-          select: {
-            password: true,
-          },
-        },
+        style: true,
       },
     });
-    const stylePassword = curation.style.password;
-    return stylePassword;
+    return curation.style;
   };
 
-  getStyleNickname = async (curationId) => {
-    const curation = await this.prisma.curation.findUnique({
-      where: {
-        id: curationId,
-      },
-      include: {
-        style: {
-          select: {
-            nickname: true,
-          },
-        },
-      },
-    });
-    const styleNickname = curation.style.nickname;
-    return styleNickname;
-  };
   findCommentById = async (commentId) => {
     const comment = await this.prisma.comment.findUnique({
       where: { id: commentId },

@@ -1,10 +1,10 @@
 import { BaseController } from "./base.controller.js";
-import { UploadImageValidator } from "../02-middleware/req-validator/style/upload.image.req.validator.js";
+import { UploadImageValidator } from "../02-middleware/req.validator/style/upload.image.req.validator.js";
 
 export class ImageController extends BaseController {
   #fileUploader;
 
-  constructor(fileUploader) {
+  constructor({ fileUploader }) {
     super("/images");
     this.#fileUploader = fileUploader;
     this.registerRoutes();

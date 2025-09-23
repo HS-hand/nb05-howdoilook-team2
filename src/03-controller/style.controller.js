@@ -10,6 +10,14 @@ export class StyleController extends BaseController {
   }
 
   registerRoutes() {
+    this.router.get(
+      "/styles",
+      this.catchException(this.#styleMiddleware.galleryListMiddleware),
+    );
+    this.router.get(
+      "/styles/popular-tags",
+      this.catchException(this.#styleMiddleware.popularTagsMiddleware),
+    );
     this.router.post(
       "/styles",
       this.catchException(this.#styleMiddleware.createStyleMiddleware),

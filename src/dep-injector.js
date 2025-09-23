@@ -25,11 +25,11 @@ export class DepInjector {
 
   constructor() {
     this.#server = this.injectDeps();
-  };
+  }
 
   get server() {
     return this.#server;
-  };
+  }
 
   injectDeps() {
     const prisma = new PrismaClient();
@@ -50,7 +50,7 @@ export class DepInjector {
     const styleService = new StyleService(styleRepo);
     const styleMiddleware = new StyleMiddleware(styleService);
     const styleController = new StyleController(styleMiddleware);
-    const imageController = new ImageController(fileUploader);
+    const imageController = new ImageController({ fileUploader });
 
     const controllers = [
       curationController,
@@ -59,6 +59,6 @@ export class DepInjector {
       imageController,
     ];
 
-    return new Server({ controllers, configManager });
-  };
+    return new Server(controllers, configManager);
+  }
 }
