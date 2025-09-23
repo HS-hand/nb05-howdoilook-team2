@@ -1,4 +1,5 @@
 import { CurationMapper } from "./mapper/curation.mapper.js";
+import { StyleMapper } from "./mapper/style.mapper.js";
 
 export class CurationRepo {
   constructor(prisma) {
@@ -15,7 +16,7 @@ export class CurationRepo {
     const style = await this.prisma.style.findUnique({
       where: { id },
     });
-    return style ? CurationMapper.toEntity(style) : null;
+    return style ? StyleMapper.toEntity(style) : null;
   };
 
   findCurationList = async ({ styleId, page, pageSize, searchBy, keyword }) => {
@@ -69,8 +70,10 @@ export class CurationRepo {
     return deletedCuration;
   };
 
-  count = async () => {
-    const totalCount = await this.prisma.curation.count();
+  count = async (styleId) => {
+    const totalCount = await this.prisma.curation.count({
+      where: {styleId}
+    });
     return totalCount;
   };
 }
