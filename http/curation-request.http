@@ -31,7 +31,7 @@ Content-Type: application/json
 
 
 ###
-DELETE http://localhost:3000/curations/21fbf7a1-cc0b-46a8-a06b-bf7f3eb4333e
+DELETE http://localhost:3000/curations/176c6529-0af9-4ef0-9a9c-70ede82f942a
 Content-Type: application/json
 
 {

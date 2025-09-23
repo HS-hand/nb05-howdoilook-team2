@@ -143,6 +143,10 @@ export const EXCEPTIONS = {
     statusCode: 400,
     message: "영문, 숫자 조합 8~16자리로 입력해주세요.",
   },
+  COMMENT_ALREADY_EXISTS: {
+    statusCode: 409,
+    message: "이미 코멘트가 존재합니다."
+  }
 };
 
 export class Exception extends Error {
