@@ -12,6 +12,10 @@ export class StyleMiddleware {
     this.#styleService = styleService;
   }
 
+  getStylesMiddleware = async (req, res, next) => {
+    
+  }
+
   createStyleMiddleware = async (req, res, next) => {
     const styleData = new CreateStyleReqValidator({
       body: req.body,

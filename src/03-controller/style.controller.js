@@ -26,5 +26,9 @@ export class StyleController extends BaseControlloer {
       "/styles/:styleId",
       this.catchException(this.#styleMiddleware.deleteStyleMiddleware),
     );
+    this.router.get(
+      "/styles",
+      this.catchException(this.#styleMiddleware.getStylesMiddleware)
+    )
   };
 }
