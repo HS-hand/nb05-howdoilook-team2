@@ -9,6 +9,10 @@ export class CurationService {
   }
 
   getCurationList = async ({ styleId, page, pageSize, searchBy, keyword }) => {
+    const foundStyleId = await this.#curationRepo.findStyleById(styleId);
+    if (!foundStyleId) {
+      throw new Exception(EXCEPTIONS.STYLE_NOT_EXIST);
+    }
     if(pageSize > 5) {
       throw new Exception(EXCEPTIONS.PAGESIZE_MAX_5);
     }

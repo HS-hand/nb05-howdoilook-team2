@@ -1,9 +1,9 @@
-import { BaseValidator } from "../base.validator.js";
 import { Exception, EXCEPTIONS } from "../../../common/exception.js";
+import { BaseValidator } from "../base.validator.js";
 
-export class UploadImageReqValidator extends BaseValidator {
+export class UploadImageValidator extends BaseValidator {
   constructor(files) {
-    super(files);
+    super({ files });
   }
 
   validate() {

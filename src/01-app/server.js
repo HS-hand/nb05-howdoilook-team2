@@ -1,19 +1,22 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
+import { CONFIG_KEY } from "../common/config.keys.js";
 import { Exception } from "../common/exception.js";
 
 export class Server {
   #server;
   #controllers;
+  #configManager;
 
-  constructor(controllers) {
-    this.#controllers = controllers;
+  constructor(controllers, configManager) {
     this.#server = express();
+    this.#controllers = controllers;
+    this.#configManager = configManager;
   }
 
   listen = () => {
-    const port = process.env.PORT;
+    const port = process.env.PORT || 3000;
     this.#server.listen(port, () => {
       console.log(`app server listening on port ${port}`);
     });
@@ -23,6 +26,15 @@ export class Server {
     this.#server.use(cors());
     this.#server.use(morgan("dev"));
     this.#server.use(express.json());
+    this.#server.use(
+      express.static(this.#configManager.get(CONFIG_KEY.DISK_STORAGE_PATH)),
+    );
+  };
+
+  registerControllerMiddleware = () => {
+    for (const controller of this.#controllers) {
+      this.#server.use(controller.basePath, controller.router);
+    }
   };
 
   registerExceptionMiddleware = () => {
@@ -34,12 +46,6 @@ export class Server {
         console.error(err);
       }
     });
-  };
-
-  registerControllerMiddleware = () => {
-    for (const controller of this.#controllers) {
-      this.#server.use(controller.basePath, controller.router);
-    }
   };
 
   start = () => {

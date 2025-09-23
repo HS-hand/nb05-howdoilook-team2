@@ -1,6 +1,6 @@
-import { BaseControlloer } from "./base.controlloer.js";
+import { BaseController } from "./base.controller.js";
 
-export class StyleController extends BaseControlloer {
+export class StyleController extends BaseController {
   #styleMiddleware;
 
   constructor(styleMiddleware) {
@@ -9,7 +9,15 @@ export class StyleController extends BaseControlloer {
     this.registerRoutes();
   }
 
-  registerRoutes = () => {
+  registerRoutes() {
+    this.router.get(
+      "/styles",
+      this.catchException(this.#styleMiddleware.galleryListMiddleware),
+    );
+    this.router.get(
+      "/styles/popular-tags",
+      this.catchException(this.#styleMiddleware.popularTagsMiddleware),
+    );
     this.router.post(
       "/styles",
       this.catchException(this.#styleMiddleware.createStyleMiddleware),
@@ -26,9 +34,5 @@ export class StyleController extends BaseControlloer {
       "/styles/:styleId",
       this.catchException(this.#styleMiddleware.deleteStyleMiddleware),
     );
-    this.router.get(
-      "/styles",
-      this.catchException(this.#styleMiddleware.getStylesMiddleware)
-    )
-  };
+  }
 }
