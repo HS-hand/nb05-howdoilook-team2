@@ -30,11 +30,11 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/styles/07247cc8-a476-47e3-987b-c8dcd9e129be
+GET http://localhost:3000/styles/
 
 ###
 
-PUT http://localhost:3000/styles/07247cc8-a476-47e3-987b-c8dcd9e129be
+PUT http://localhost:3000/styles/
 Content-Type: application/json
 
 {
@@ -66,7 +66,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/styles/9b54d578-009b-4a30-8da1-d067c70dc68d
+DELETE http://localhost:3000/styles/
 Content-Type: application/json
 
 {
