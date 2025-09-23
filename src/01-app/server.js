@@ -9,7 +9,7 @@ export class Server {
   #controllers;
   #configManager;
 
-  constructor({ configManager, controllers }) {
+  constructor({ controllers, configManager }) {
     this.#server = express();
     this.#controllers = controllers;
     this.#configManager = configManager;
@@ -41,7 +41,7 @@ export class Server {
       if (err instanceof Exception) {
         res.status(err.statusCode).json({ message: err.message });
       } else {
-        res.status(500).json({ message: "알 수 없는 에러 발생!!!" });
+        res.status(500).json({ message: "알 수 없는 에러 발생" });
         console.error(err);
       }
     });

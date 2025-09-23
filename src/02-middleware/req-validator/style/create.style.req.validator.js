@@ -1,5 +1,5 @@
-import { BaseValidator } from "../base.validator.js";
 import { Exception, EXCEPTIONS } from "../../../common/exception.js";
+import { BaseValidator } from "../base.validator.js";
 
 export class CreateStyleValidator extends BaseValidator {
   constructor(data) {

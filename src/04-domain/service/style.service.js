@@ -1,5 +1,5 @@
-import { Style } from "../entity/style.js";
 import { Exception, EXCEPTIONS } from "../../common/exception.js";
+import { Style } from "../entity/style.js";
 
 export class StyleService {
   #styleRepo;
