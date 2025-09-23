@@ -9,7 +9,6 @@ export class CreateStyleValidator extends BaseValidator {
   validate() {
     const { nickname, title, content, password, categories, tags, imageUrls } =
       this.body;
-
     if (!nickname || !title || !content || !tags || !imageUrls) {
       throw new Exception(EXCEPTIONS.NOTICE);
     }
