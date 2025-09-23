@@ -5,15 +5,17 @@ import { Exception } from "../common/exception.js";
 
 export class Server {
   #server;
-  //#controllers;
-  constructor() {
-    //this.#controllers = controllers;
+  #controllers;
+
+  constructor(controllers) {
+    this.#controllers = controllers;
     this.#server = express();
   }
 
   listen = () => {
-    this.#server.listen(3000, () => {
-      console.log("app server listening on port 3000");
+    const port = process.env.PORT;
+    this.#server.listen(port, () => {
+      console.log(`app server listening on port ${port}`);
     });
   };
 
@@ -28,16 +30,16 @@ export class Server {
       if (err instanceof Exception) {
         res.status(err.statusCode).json({ message: err.message });
       } else {
-        res.status(500).json({ message: "알 수 없는 에러 발생!!!" });
+        res.status(500).json({ message: "알 수 없는 에러 발생" });
         console.error(err);
       }
     });
   };
 
   registerControllerMiddleware = () => {
-    // for (const controller of this.#controllers) {
-    //   this.#server.use(controller.basePath, controller.router);
-    // }
+    for (const controller of this.#controllers) {
+      this.#server.use(controller.basePath, controller.router);
+    }
   };
 
   start = () => {

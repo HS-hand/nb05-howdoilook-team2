@@ -1,0 +1,72 @@
+POST http://localhost:3000/styles
+Content-Type: application/json
+
+{
+	"nickname": "손훈석",
+	"title": "가벼운 일상룩",
+	"content": "가볍게 입을만한 옷들로 준비했어요",
+	"password": "a12345678",
+	"categories": {
+		"top": {
+			"name": "까리한 상의",
+			"brand": "훈석",
+			"price": 10000
+		},
+		"bottom": {
+			"name": "봐줄만한 바지",
+			"brand": "석훈",
+			"price": 10000
+		}
+	},
+	"tags": [
+		"석훈",
+		"훈석"
+	],
+	"imageUrls": [
+		"string",
+		"string"
+	]
+}
+
+###
+GET http://localhost:3000/styles/b3ef0c80-a76f-4758-9771-d1df4659610c
+
+###
+
+DELETE http://localhost:3000/styles/821a5cce-7ebb-439c-af41-d8d5cc5781c5
+Content-Type: application/json
+
+{
+  "password": "a12345678"
+}
+
+###
+PUT http://localhost:3000/styles/b3ef0c80-a76f-4758-9771-d1df4659610c
+Content-Type: application/json
+
+{
+	"nickname": "손훈석",
+	"title": "수정후 무거운 일상룩",
+	"content": "가볍게 입을만한 옷들로 준비했어요",
+	"password": "a12345678",
+	"categories": {
+		"top": {
+			"name": "까리한 상의",
+			"brand": "훈석",
+			"price": 10000
+		},
+		"bottom": {
+			"name": "봐줄만한 바지",
+			"brand": "석훈",
+			"price": 10000
+		}
+	},
+	"tags": [
+		"까리",
+		"훈석"
+	],
+	"imageUrls": [
+		"string",
+		"string"
+	]
+}

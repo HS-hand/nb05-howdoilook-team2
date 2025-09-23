@@ -1,0 +1,24 @@
+### 
+POST http://localhost:3000/curations/3bec612a-e215-495a-9a14-deb5be891082/comments
+Content-Type: application/json
+
+{
+	"content": "ㅋㅋ 님말이 맞음",
+	"password": "a12345678"
+}
+### 
+PUT http://localhost:3000/comments/8b957b3a-2996-464c-917c-3d48d53186de
+Content-Type: application/json
+
+{
+  "content": "바뀌어야 되긴해 .",
+  "password": "a12345678"
+}
+
+###
+DELETE http://localhost:3000/comments/4271b15d-e1a2-46ca-827c-b183b06ea681
+Content-Type: application/json
+
+{
+	"password": "a12345678"
+}

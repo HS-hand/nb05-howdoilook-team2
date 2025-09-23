@@ -1,0 +1,104 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Style {
+  id        String   @id @default(uuid())
+  nickname  String
+  title     String
+  content   String
+  password  String
+  viewCount Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  categories CategoryItem[]
+  curations  Curation[]
+
+  images          StyleImage[]
+  StyleContainTag StyleContainTag[]
+}
+
+model Tag {
+  id              String            @id @default(uuid())
+  name            String
+  StyleContainTag StyleContainTag[]
+}
+
+model StyleImage {
+  id      String @id @default(uuid())
+  url     String
+  style   Style  @relation(fields: [styleId], references: [id], onDelete: Cascade)
+  styleId String
+}
+
+model StyleContainTag {
+  style   Style  @relation(fields: [styleId], references: [id], onDelete: Cascade)
+  styleId String
+  tag     Tag    @relation(fields: [tagId], references: [id], onDelete: Restrict)
+  tagId   String
+
+  @@id([styleId, tagId])
+}
+
+model Curation {
+  id      String @id @default(uuid())
+  styleId String
+  style   Style  @relation(fields: [styleId], references: [id], onDelete: Cascade)
+
+  nickname String
+  content  String
+  password String
+
+  trendy            Int
+  personality       Int
+  practicality      Int
+  costEffectiveness Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  comment   Comment?
+}
+
+model Comment {
+  id         String   @id @default(uuid())
+  nickname   String
+  curationId String   @unique
+  curation   Curation @relation(fields: [curationId], references: [id], onDelete: Cascade)
+  content    String
+  password   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model CategoryItem {
+  id      String       @id @default(uuid())
+  styleId String
+  type    CATEGORYTYPE
+  name    String
+  brand   String
+  price   Int
+
+  style Style @relation(fields: [styleId], references: [id], onDelete: Cascade)
+}
+
+enum CATEGORYTYPE {
+  top
+  bottom
+  outer
+  dress
+  shoes
+  bag
+  accessory
+}
