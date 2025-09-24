@@ -5,14 +5,14 @@ import { CreateCommentResDto } from "./res.dto/comment/create.comment.res.dto.js
 import { UpdateCommentResDto } from "./res.dto/comment/update.comment.res.dto.js";
 import { DeleteCommentResDto } from "./res.dto/comment/delete.comment.res.dto.js";
 
-export class CommentMiddleware {
+export class CommentController {
   #commentService;
 
   constructor(commentService) {
     this.#commentService = commentService;
   }
 
-  createCommentMiddleware = async (req, res, next) => {
+  createCommentController = async (req, res, next) => {
     const createCommentReqDto = new CreateCommentReqValidator({
       params: req.params,
       body: req.body,
@@ -24,7 +24,7 @@ export class CommentMiddleware {
     return res.json(createdCommentResDto);
   };
 
-  updateCommentMiddleware = async (req, res, next) => {
+  updateCommentController = async (req, res, next) => {
     const updateCommentReqDto = new UpdateCommentReqValidator({
       params: req.params,
       body: req.body,
@@ -35,7 +35,7 @@ export class CommentMiddleware {
     return res.json(updatedCommentResDto);
   };
 
-  deleteCommentMiddleware = async (req, res, next) => {
+  deleteCommentController = async (req, res, next) => {
     const deleteCommentReqDto = new DeleteCommentReqValidator({
       params: req.params,
       body: req.body,
