@@ -51,8 +51,8 @@ export class DepInjector {
     const imageRouter = new ImageRouter({ fileUploader });
     const styleRouter = new StyleRouter(styleController);
 
-    const tagRepo = new TagRepo(prisma)
-    const tagController = new TagController(tagRepo); 
+    const tagRepo = new TagRepo(prisma);
+    const tagController = new TagController(tagRepo);
     const tagRouter = new TagRouter(tagController);
 
     const routers = [

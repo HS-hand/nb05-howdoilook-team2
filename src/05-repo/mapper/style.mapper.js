@@ -5,7 +5,6 @@ export class StyleMapper {
     if (!record) {
       return null;
     }
-
     const tags = record.tags?.map((t) => t) || [];
     const imageUrls = record.images?.map((img) => img.url) || [];
 

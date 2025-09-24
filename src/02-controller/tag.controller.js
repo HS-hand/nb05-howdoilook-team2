@@ -1,3 +1,5 @@
+import { GetTagsResDto } from "./res.dto/tag/get.tags.res.dto.js";
+
 export class TagController {
   #tagRepo;
 
@@ -5,7 +7,9 @@ export class TagController {
     this.#tagRepo = tagRepo;
   }
 
-  getTagsController = async(res, req, next)=>{
-    const tags = this.#tagRepo.getAllTags();
-  }
+  getTagsController = async (req, res, next) => {
+    const tags = await this.#tagRepo.getAllTags();
+    const tagsResDto = new GetTagsResDto(tags);
+    return res.json(tagsResDto);
+  };
 }

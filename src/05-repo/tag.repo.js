@@ -3,8 +3,8 @@ export class TagRepo {
     this.prisma = prisma;
   }
 
-  getAllTags = async()=>{
+  getAllTags = async () => {
     const tags = await this.prisma.tag.findMany();
     return tags;
-  }
+  };
 }
