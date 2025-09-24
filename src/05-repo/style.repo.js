@@ -1,4 +1,5 @@
 import { StyleMapper } from "./mapper/style.mapper.js";
+import { Style } from "../04-domain/entity/style.js";
 
 export class StyleRepo {
   constructor(prisma) {
@@ -117,10 +118,10 @@ export class StyleRepo {
     }));
   }
 
-  async create(styleEntity, styleData) {
+  async create(styleData) {
     const { categories, tags, imageUrls } = styleData;
+    const styleEntity = Style.factory(styleData);
     const persistentData = StyleMapper.toPersistent(styleEntity);
-
     const arrayCategories = Object.entries(categories).map(([type, data]) => ({
       ...data,
       type,
@@ -146,8 +147,7 @@ export class StyleRepo {
       },
     });
 
-    const result = StyleMapper.toEntity(record);
-    return result;
+    return StyleMapper.toEntity(record);
   }
 
   async findById(styleId) {
