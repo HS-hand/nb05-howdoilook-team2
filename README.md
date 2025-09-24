@@ -10,7 +10,7 @@ https://www.notion.so/NB-5-2-26fa0b8db76380fa81c0e30d66c763f3?source=copy_link
 정인성 (https://github.com/jung-insung)  
 오창섭 (https://github.com/GhostGN95)  
 양승빈 (https://github.com/yangseungbin306)  
-정지원 (https://github.com/XOXOXO13)  
+정지원 (https://github.com/XOXOXO13)
 
 ## 프로젝트 소개
 

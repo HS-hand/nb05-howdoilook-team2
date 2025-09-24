@@ -48,12 +48,7 @@ export class DepInjector {
     const imageRouter = new ImageRouter({ fileUploader });
     const styleRouter = new StyleRouter(styleController);
 
-    const routers = [
-      curationRouter,
-      commentRouter,
-      styleRouter,
-      imageRouter,
-    ];
+    const routers = [curationRouter, commentRouter, styleRouter, imageRouter];
 
     return new Server(routers, configManager);
   }
