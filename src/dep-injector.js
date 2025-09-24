@@ -15,6 +15,9 @@ import { CurationController } from "./02-controller/curation.controller.js";
 import { StyleController } from "./02-controller/style.controller.js";
 import { ImageRouter } from "./01-app/router/image.router.js";
 import { StyleRouter } from "./01-app/router/style.router.js";
+import { TagRouter } from "./01-app/router/tag.router.js";
+import { TagController } from "./02-controller/tag.controller.js";
+import { TagRepo } from "./05-repo/tag.repo.js";
 
 export class DepInjector {
   #server;
@@ -48,11 +51,16 @@ export class DepInjector {
     const imageRouter = new ImageRouter({ fileUploader });
     const styleRouter = new StyleRouter(styleController);
 
+    const tagRepo = new TagRepo(prisma)
+    const tagController = new TagController(tagRepo); 
+    const tagRouter = new TagRouter(tagController);
+
     const routers = [
       curationRouter,
       commentRouter,
       styleRouter,
       imageRouter,
+      tagRouter,
     ];
 
     return new Server(routers, configManager);

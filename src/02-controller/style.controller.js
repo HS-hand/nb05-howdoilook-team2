@@ -27,9 +27,7 @@ export class StyleController {
       searchBy: validated.searchBy,
       keyword: validated.keyword,
     });
-
     const listDto = items.map((style) => new ListStyleResDto(style));
-
     return res.json({
       items: listDto,
       pagination,
