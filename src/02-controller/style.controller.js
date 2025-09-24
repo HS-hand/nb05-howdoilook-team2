@@ -8,14 +8,14 @@ import { DeleteStyleResDto } from "./res.dto/style/delete.style.res.dto.js";
 import { GetStyleDetailResDto } from "./res.dto/style/get.style.detail.res.dto.js";
 import { ListStyleResDto } from "./res.dto/style/list.style.res.dto.js";
 
-export class StyleMiddleware {
+export class StyleController {
   #styleService;
 
   constructor(styleService) {
     this.#styleService = styleService;
   }
 
-  galleryListMiddleware = async (req, res, next) => {
+  galleryListController = async (req, res, next) => {
     const validator = new ListStyleValidator({ query: req.query });
     const validated = validator.validate();
 
@@ -36,14 +36,14 @@ export class StyleMiddleware {
     });
   };
 
-  popularTagsMiddleware = async (req, res, next) => {
+  popularTagsController = async (req, res, next) => {
     const limit = Number(req.query.limit) || 10;
     const tags = await this.#styleService.getPopularTags(limit);
 
     return res.json({ tags });
   };
 
-  createStyleMiddleware = async (req, res, next) => {
+  createStyleController = async (req, res, next) => {
     const styleData = new CreateStyleValidator({
       body: req.body,
     }).validate();
@@ -53,7 +53,7 @@ export class StyleMiddleware {
     return res.status(201).json(responseDto);
   };
 
-  getStyleDetailMiddleware = async (req, res, next) => {
+  getStyleDetailController = async (req, res, next) => {
     const styleId = req.params.styleId;
     const styleEntity = await this.#styleService.getStyleById(styleId);
     const responseDto = new GetStyleDetailResDto(styleEntity);
@@ -61,7 +61,7 @@ export class StyleMiddleware {
     return res.status(200).json(responseDto);
   };
 
-  updateStyleMiddleware = async (req, res, next) => {
+  updateStyleController = async (req, res, next) => {
     const { styleId, updateData } = new UpdateStyleValidator({
       body: req.body,
       params: req.params,
@@ -77,7 +77,7 @@ export class StyleMiddleware {
     });
   };
 
-  deleteStyleMiddleware = async (req, res, next) => {
+  deleteStyleController = async (req, res, next) => {
     const { styleId, password } = new DeleteStyleValidator({
       body: req.body,
       params: req.params,

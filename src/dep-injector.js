@@ -1,24 +1,20 @@
 import { PrismaClient } from "@prisma/client";
 import { Server } from "./01-app/server.js";
-
-import { CommentMiddleware } from "./02-middleware/comment.middleware.js";
-import { CommentController } from "./03-controller/comment.controller.js";
 import { CommentService } from "./04-domain/service/comment.service.js";
 import { CommentRepo } from "./05-repo/comment.repo.js";
-
-import { CurationMiddleware } from "./02-middleware/curation.middleware.js";
-import { CurationController } from "./03-controller/curation.controller.js";
 import { CurationService } from "./04-domain/service/curation.service.js";
 import { CurationRepo } from "./05-repo/curation.repo.js";
-
-import { StyleMiddleware } from "./02-middleware/style.middleware.js";
-import { StyleController } from "./03-controller/style.controller.js";
-import { ImageController } from "./03-controller/image.controller.js";
 import { StyleService } from "./04-domain/service/style.service.js";
 import { StyleRepo } from "./05-repo/style.repo.js";
-
 import { ConfigManager } from "./common/libs/config.manager.js";
 import { FileUploader } from "./common/libs/file.uploader.js";
+import { CommentRouter } from "./01-app/router/comment.router.js";
+import { CurationRouter } from "./01-app/router/curation.router.js";
+import { CommentController } from "./02-controller/comment.controller.js";
+import { CurationController } from "./02-controller/curation.controller.js";
+import { StyleController } from "./02-controller/style.controller.js";
+import { ImageRouter } from "./01-app/router/image.router.js";
+import { StyleRouter } from "./01-app/router/style.router.js";
 
 export class DepInjector {
   #server;
@@ -38,27 +34,27 @@ export class DepInjector {
 
     const commentRepo = new CommentRepo(prisma);
     const commentService = new CommentService(commentRepo);
-    const commentMiddleware = new CommentMiddleware(commentService);
-    const commentController = new CommentController(commentMiddleware);
+    const commentController = new CommentController(commentService);
+    const commentRouter = new CommentRouter(commentController);
 
     const curationRepo = new CurationRepo(prisma);
     const curationService = new CurationService(curationRepo);
-    const curationMiddleware = new CurationMiddleware(curationService);
-    const curationController = new CurationController(curationMiddleware);
+    const curationController = new CurationController(curationService);
+    const curationRouter = new CurationRouter(curationController);
 
     const styleRepo = new StyleRepo(prisma);
     const styleService = new StyleService(styleRepo);
-    const styleMiddleware = new StyleMiddleware(styleService);
-    const styleController = new StyleController(styleMiddleware);
-    const imageController = new ImageController({ fileUploader });
+    const styleController = new StyleController(styleService);
+    const imageRouter = new ImageRouter({ fileUploader });
+    const styleRouter = new StyleRouter(styleController);
 
-    const controllers = [
-      curationController,
-      commentController,
-      styleController,
-      imageController,
+    const routers = [
+      curationRouter,
+      commentRouter,
+      styleRouter,
+      imageRouter,
     ];
 
-    return new Server(controllers, configManager);
+    return new Server(routers, configManager);
   }
 }

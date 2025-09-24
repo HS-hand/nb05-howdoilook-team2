@@ -1,6 +1,6 @@
 import express from "express";
 
-export class BaseController {
+export class BaseRouter {
   basePath;
   router;
 
