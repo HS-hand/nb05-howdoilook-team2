@@ -113,7 +113,7 @@ export const EXCEPTIONS = {
   },
   PAGESIZE_FORM: {
     statusCode: 400,
-    message: "limit가 유효하지 않습니다.",
+    message: "pagesize가 유효하지 않습니다.",
   },
   SEARCHBY_FORM: {
     statusCode: 400,
