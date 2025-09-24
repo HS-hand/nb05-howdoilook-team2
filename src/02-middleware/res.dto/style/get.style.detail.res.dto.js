@@ -1,4 +1,4 @@
-export class StyleDetailResDto {
+export class GetStyleDetailResDto {
   id;
   nickname;
   title;
