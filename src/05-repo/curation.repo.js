@@ -72,7 +72,7 @@ export class CurationRepo {
 
   count = async (styleId) => {
     const totalCount = await this.prisma.curation.count({
-      where: {styleId}
+      where: { styleId },
     });
     return totalCount;
   };

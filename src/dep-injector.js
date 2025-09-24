@@ -62,7 +62,6 @@ export class DepInjector {
       imageRouter,
       tagRouter,
     ];
-
     return new Server(routers, configManager);
   }
 }

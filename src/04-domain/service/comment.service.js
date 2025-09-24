@@ -13,7 +13,7 @@ export class CommentService {
     if (!curation) {
       throw new Exception(EXCEPTIONS.CURATION_NOT_EXIST);
     }
-    if(curation.comment){
+    if (curation.comment) {
       throw new Exception(EXCEPTIONS.COMMENT_ALREADY_EXISTS);
     }
     if (curation.style.password !== password) {
@@ -35,7 +35,9 @@ export class CommentService {
     if (!foundComment) {
       throw new Exception(EXCEPTIONS.NOT_FOUND);
     }
-    const curation = await this.#commentRepo.getCurationById(foundComment.curationId);
+    const curation = await this.#commentRepo.getCurationById(
+      foundComment.curationId,
+    );
     if (curation.style.password !== password) {
       throw new Exception(EXCEPTIONS.FORBIDDEN);
     }
@@ -57,12 +59,14 @@ export class CommentService {
     if (!foundComment) {
       throw new Exception(EXCEPTIONS.NOT_FOUND);
     }
-    const curation = await this.#commentRepo.getCurationById(foundComment.curationId);
+    const curation = await this.#commentRepo.getCurationById(
+      foundComment.curationId,
+    );
 
     if (curation.style.password !== password) {
       throw new Exception(EXCEPTIONS.FORBIDDEN);
     }
-    
+
     const deletedComment = await this.#commentRepo.delete(commentId);
     return deletedComment;
   };

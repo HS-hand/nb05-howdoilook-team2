@@ -1,3 +1,5 @@
+import { Exception, EXCEPTIONS } from "../../common/exception.js";
+
 export class Curation {
   #id;
   #styleId;
@@ -51,6 +53,28 @@ export class Curation {
     practicality,
     costEffectiveness,
   }) {
+    console.log(nickname);
+    if (nickname) {
+      this.validateNicknameRule(nickname);
+    }
+    if (content) {
+      this.validateContentRule(content);
+    }
+    if (password) {
+      this.validatePasswordRule(password);
+    }
+    if (trendy) {
+      this.validateTrendyRule(trendy);
+    }
+    if (personality) {
+      this.validatePersonalityRule(personality);
+    }
+    if (practicality) {
+      this.validatePracticalityRule(practicality);
+    }
+    if (costEffectiveness) {
+      this.validateCostEffectivenessRule(costEffectiveness);
+    }
     return new Curation({
       id,
       styleId,
@@ -64,6 +88,41 @@ export class Curation {
     });
   }
 
+  static validateNicknameRule(value) {
+    if (value.length > 20) {
+      throw new Exception(EXCEPTIONS.NICKNAME_TOO_LONG);
+    }
+  }
+  static validatePasswordRule(value) {
+    if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(value)) {
+      throw new Exception(EXCEPTIONS.PASSWORD_REGEX);
+    }
+  }
+  static validateContentRule(value) {
+    if (value.length > 150) {
+      throw new Exception(EXCEPTIONS.CONTENT_TOO_LONG);
+    }
+  }
+  static validateTrendyRule(value) {
+    if (value < 0 || value > 10) {
+      throw new Exception(EXCEPTIONS.SCORE_RANGE);
+    }
+  }
+  static validatePersonalityRule(value) {
+    if (value < 0 || value > 10) {
+      throw new Exception(EXCEPTIONS.SCORE_RANGE);
+    }
+  }
+  static validatePracticalityRule(value) {
+    if (value < 0 || value > 10) {
+      throw new Exception(EXCEPTIONS.SCORE_RANGE);
+    }
+  }
+  static validateCostEffectivenessRule(value) {
+    if (value < 0 || value > 10) {
+      throw new Exception(EXCEPTIONS.SCORE_RANGE);
+    }
+  }
   get id() {
     return this.#id;
   }

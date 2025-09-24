@@ -14,7 +14,7 @@ export class CommentRepo {
         comment: true,
       },
     });
-    return curation ?  curation : null;
+    return curation ? curation : null;
   };
   findCommentById = async (commentId) => {
     const comment = await this.prisma.comment.findUnique({
