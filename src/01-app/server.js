@@ -6,12 +6,12 @@ import { Exception } from "../common/exception.js";
 
 export class Server {
   #server;
-  #controllers;
+  #routers;
   #configManager;
 
-  constructor(controllers, configManager) {
+  constructor(routers, configManager) {
     this.#server = express();
-    this.#controllers = controllers;
+    this.#routers = routers;
     this.#configManager = configManager;
   }
 
@@ -32,8 +32,8 @@ export class Server {
   };
 
   registerControllerMiddleware = () => {
-    for (const controller of this.#controllers) {
-      this.#server.use(controller.basePath, controller.router);
+    for (const router of this.#routers) {
+      this.#server.use(router.basePath, router.router);
     }
   };
 
