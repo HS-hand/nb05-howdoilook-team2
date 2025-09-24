@@ -50,27 +50,22 @@ export const EXCEPTIONS = {
     statusCode: 400,
     message: "내용이 유효하지 않습니다.",
   },
-  CONTENT_NOT_EXSIST: {
+  CONTENT_TOO_LONG: {
     statusCode: 400,
-    message: "내용을 입력해주세요.",
+    message: "한줄 큐레이팅 내용이 너무 깁니다.(최대 150자)",
   },
   NICKNAME_FORM: {
     statusCode: 400,
     message: "닉네임이 유효하지 않습니다.",
   },
-  CONTENT_FORM: {
+  NICKNAME_TOO_LONG: {
     statusCode: 400,
-    message: "내용이 유효하지 않습니다.",
+    message: "닉네임이 너무 깁니다.(최대 20자)",
   },
   PASSWORD_FORM: {
     statusCode: 400,
     message: "비밀번호가 유효하지 않습니다.",
   },
-  PASSWORD_NOT_EXSIST: {
-    statusCode: 400,
-    message: "비밀번호를 입력해주세요.",
-  },
-
   TRENDY_FORM: {
     statusCode: 400,
     message: "트렌디가 유효하지 않습니다.",
@@ -145,8 +140,12 @@ export const EXCEPTIONS = {
   },
   COMMENT_ALREADY_EXISTS: {
     statusCode: 409,
-    message: "이미 코멘트가 존재합니다."
-  }
+    message: "이미 코멘트가 존재합니다.",
+  },
+  SCORE_RANGE: {
+    statusCode: 400,
+    message: "점수 범위는 0 ~ 10 사이 입니다.",
+  },
 };
 
 export class Exception extends Error {

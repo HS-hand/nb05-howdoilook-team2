@@ -13,7 +13,7 @@ export class CurationService {
     if (!foundStyleId) {
       throw new Exception(EXCEPTIONS.STYLE_NOT_EXIST);
     }
-    if(pageSize > 5) {
+    if (pageSize > 5) {
       throw new Exception(EXCEPTIONS.PAGESIZE_MAX_5);
     }
     const foundCurationList = await this.#curationRepo.findCurationList({
@@ -23,7 +23,7 @@ export class CurationService {
       searchBy,
       keyword,
     });
-    
+
     const curationTotalCount = await this.#curationRepo.count(styleId);
     const foundCurationCount = foundCurationList.length;
     return { page, foundCurationCount, curationTotalCount, foundCurationList };

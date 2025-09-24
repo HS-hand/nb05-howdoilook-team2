@@ -13,11 +13,13 @@ export class ListStyleValidator extends BaseValidator {
     const rawPageSize = this.isEmpty(pageSize) ? "10" : pageSize;
     const rawSortBy = this.isEmpty(sortBy) ? "latest" : sortBy;
 
-    if (!/^\d+$/.test(String(rawPage))) throw new Exception(EXCEPTIONS.PAGE_FORM);
+    if (!/^\d+$/.test(String(rawPage)))
+      throw new Exception(EXCEPTIONS.PAGE_FORM);
     const pageNum = Number(rawPage);
     if (pageNum < 1) throw new Exception(EXCEPTIONS.PAGE_FORM);
 
-    if (!/^\d+$/.test(String(rawPageSize))) throw new Exception(EXCEPTIONS.PAGESIZE_FORM);
+    if (!/^\d+$/.test(String(rawPageSize)))
+      throw new Exception(EXCEPTIONS.PAGESIZE_FORM);
     const pageSizeNum = Number(rawPageSize);
     if (pageSizeNum < 1) throw new Exception(EXCEPTIONS.PAGESIZE_FORM);
 
@@ -41,7 +43,11 @@ export class ListStyleValidator extends BaseValidator {
         throw new Exception(EXCEPTIONS.SEARCHBY_FORM);
       }
 
-      if (!this.isString(keyword) || keyword.length < 1 || keyword.length > 100) {
+      if (
+        !this.isString(keyword) ||
+        keyword.length < 1 ||
+        keyword.length > 100
+      ) {
         throw new Exception(EXCEPTIONS.KEYWORD_FORM);
       }
 

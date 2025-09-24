@@ -1,5 +1,10 @@
 export class GetCurationListResDto {
-  constructor({ page, foundCurationCount, curationTotalCount, foundCurationList }) {
+  constructor({
+    page,
+    foundCurationCount,
+    curationTotalCount,
+    foundCurationList,
+  }) {
     this.currentPage = page;
     this.totalPages = foundCurationCount;
     this.totalItemCount = curationTotalCount;
