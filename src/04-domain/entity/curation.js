@@ -1,4 +1,5 @@
 import { Exception, EXCEPTIONS } from "../../common/exception.js";
+import { VULGAR_WORDS } from "../../common/vulgar.language.js";
 
 export class Curation {
   #id;
@@ -101,6 +102,11 @@ export class Curation {
   static validateContentRule(value) {
     if (value.length > 150) {
       throw new Exception(EXCEPTIONS.CONTENT_TOO_LONG);
+    }
+    for(const word of VULGAR_WORDS){
+      if(value.includes(word)){
+        throw new Exception(EXCEPTIONS.VULGAR_LANGUAGE);
+      }
     }
   }
   static validateTrendyRule(value) {
