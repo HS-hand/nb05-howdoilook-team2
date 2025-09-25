@@ -73,20 +73,7 @@ export class StyleRepo {
       take,
     });
     const entities = records.map((record) => {
-      return StyleMapper.toEntity({
-        id: record.id,
-        nickname: record.nickname,
-        title: record.title,
-        content: record.content,
-        password: record.password,
-        viewCount: record.viewCount,
-        createdAt: record.createdAt,
-        updatedAt: record.updatedAt,
-        categories: record.categories,
-        tags: record.StyleContainTag.map((ct) => ct.tag.name),
-        imageUrls: record.images.map((img) => img.url),
-        curationCount: record._count.curations,
-      });
+      return StyleMapper.toEntity();
     });
     return {
       items: entities,
