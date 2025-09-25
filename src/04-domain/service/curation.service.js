@@ -44,6 +44,7 @@ export class CurationService {
     if (!foundStyleId) {
       throw new Exception(EXCEPTIONS.STYLE_NOT_EXIST);
     }
+
     const curation = Curation.factory({
       styleId,
       nickname,
@@ -54,6 +55,16 @@ export class CurationService {
       practicality,
       costEffectiveness,
     });
+    
+    const foundCurationNickname = await this.#curationRepo.findCurationByNickname(curation);
+    if(foundCurationNickname){
+      throw new Exception(EXCEPTIONS.NICKNAME_DUPLICATION);
+    }
+
+    const foundCurationPassword = await this.#curationRepo.findCurationByPassword(curation);
+    if(foundCurationPassword){
+      throw new Exception(EXCEPTIONS.PASSWORD_DUPLICATION);
+    }
 
     const createdCuration = await this.#curationRepo.create(curation);
 

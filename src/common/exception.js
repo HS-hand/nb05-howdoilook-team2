@@ -146,6 +146,18 @@ export const EXCEPTIONS = {
     statusCode: 400,
     message: "점수 범위는 0 ~ 10 사이 입니다.",
   },
+  NICKNAME_DUPLICATION: {
+    statusCode: 409,
+    message: "닉네임이 중복되었습니다. 다시 입력하세요."
+  },
+  PASSWORD_DUPLICATION: {
+    statusCode: 409,
+    message: "비밀번호가 중복되었습니다. 다시 입력하세요."
+  },
+  VULGAR_LANGUAGE:{
+    statusCode: 400,
+    message: "비속어가 포함되었습니다. 다시 입력하세요."
+  }
 };
 
 export class Exception extends Error {
