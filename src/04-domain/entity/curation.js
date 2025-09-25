@@ -103,8 +103,8 @@ export class Curation {
     if (value.length > 150) {
       throw new Exception(EXCEPTIONS.CONTENT_TOO_LONG);
     }
-    for(const word of VULGAR_WORDS){
-      if(value.includes(word)){
+    for (const word of VULGAR_WORDS) {
+      if (value.includes(word)) {
         throw new Exception(EXCEPTIONS.VULGAR_LANGUAGE);
       }
     }

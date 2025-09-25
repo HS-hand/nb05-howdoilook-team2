@@ -93,9 +93,10 @@ export class StyleController {
 
   getRankingStylesController = async (req, res, next) => {
     const rankingStyleReqDto = new RankingStyleReqValidator({
-      query : req.query
+      query: req.query,
     }).validate();
-    const rankingStyles = await this.#styleService.getRankingStyles(rankingStyleReqDto);
+    const rankingStyles =
+      await this.#styleService.getRankingStyles(rankingStyleReqDto);
     const rankingStylesResDto = new RankingStyleResDto(rankingStyles);
     return res.json(rankingStylesResDto);
   };

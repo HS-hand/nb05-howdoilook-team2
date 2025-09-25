@@ -1,8 +1,8 @@
 export class GetTagsResDto {
   constructor(tags) {
-    this.tags = tags.map((tag)=>({
+    this.tags = tags.map((tag) => ({
       id: tag.id,
-      name: tag.name
-    }))
+      name: tag.name,
+    }));
   }
 }
