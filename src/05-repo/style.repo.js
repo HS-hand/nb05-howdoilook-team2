@@ -1,4 +1,5 @@
 import { StyleMapper } from "./mapper/style.mapper.js";
+import { Style } from "../04-domain/entity/style.js";
 
 export class StyleRepo {
   constructor(prisma) {
@@ -115,10 +116,10 @@ export class StyleRepo {
     }));
   }
 
-  async create(styleEntity, styleData) {
+  async create(styleData) {
     const { categories, tags, imageUrls } = styleData;
+    const styleEntity = Style.factory(styleData);
     const persistentData = StyleMapper.toPersistent(styleEntity);
-
     const arrayCategories = Object.entries(categories).map(([type, data]) => ({
       ...data,
       type,
@@ -131,7 +132,10 @@ export class StyleRepo {
         StyleContainTag: {
           create: tags.map((tagName) => ({
             tag: {
-              create: { name: tagName },
+              connectOrCreate: {
+                where: { name: tagName },
+                create: { name: tagName },
+              },
             },
           })),
         },
@@ -144,8 +148,7 @@ export class StyleRepo {
       },
     });
 
-    const result = StyleMapper.toEntity(record);
-    return result;
+    return StyleMapper.toEntity(record);
   }
 
   async findById(styleId) {
@@ -177,24 +180,28 @@ export class StyleRepo {
       type,
     }));
 
+    await this.prisma.CategoryItem.deleteMany({ where: { styleId } });
+    await this.prisma.StyleContainTag.deleteMany({ where: { styleId } });
+    await this.prisma.StyleImage.deleteMany({ where: { styleId } });
+
     const record = await this.prisma.style.update({
       where: { id: styleId },
       data: {
         ...rest,
         categories: {
-          deleteMany: {},
           create: arrayCategories,
         },
         StyleContainTag: {
-          deleteMany: {},
           create: tags.map((tagName) => ({
             tag: {
-              create: { name: tagName },
+              connectOrCreate: {
+                where: { name: tagName },
+                create: { name: tagName },
+              },
             },
           })),
         },
         images: {
-          deleteMany: {},
           create: imageUrls.map((url) => ({ url })),
         },
         updatedAt: new Date(),
