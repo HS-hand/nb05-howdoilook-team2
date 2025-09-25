@@ -69,7 +69,6 @@ export class StyleService {
 
       } else {
         avgScore = style._avg[rankBy] ?? 0;
-        console.log(avgScore);
         avgScore = Math.round(avgScore * 10) / 10
       }
       return { styleId: style.styleId, avgScore };
