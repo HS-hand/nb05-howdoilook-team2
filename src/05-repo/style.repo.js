@@ -124,7 +124,6 @@ export class StyleRepo {
       ...data,
       type,
     }));
-
     const record = await this.prisma.style.create({
       data: {
         ...persistentData,
@@ -147,7 +146,6 @@ export class StyleRepo {
         StyleContainTag: { include: { tag: true } },
       },
     });
-
     return StyleMapper.toEntity(record);
   }
 

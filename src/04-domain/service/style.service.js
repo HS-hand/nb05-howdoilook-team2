@@ -19,7 +19,6 @@ export class StyleService {
 
   async createStyle(styleData) {
     const createdStyle = await this.#styleRepo.create(styleData);
-
     return createdStyle;
   }
 
