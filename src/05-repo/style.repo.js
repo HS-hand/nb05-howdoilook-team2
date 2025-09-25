@@ -72,7 +72,6 @@ export class StyleRepo {
       skip,
       take,
     });
-
     const entities = records.map((record) => {
       return StyleMapper.toEntity({
         id: record.id,
@@ -89,7 +88,6 @@ export class StyleRepo {
         curationCount: record._count.curations,
       });
     });
-
     return {
       items: entities,
       pagination: {

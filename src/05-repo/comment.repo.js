@@ -16,14 +16,12 @@ export class CommentRepo {
     });
     return curation ? curation : null;
   };
-
   findCommentById = async (commentId) => {
     const comment = await this.prisma.comment.findUnique({
       where: { id: commentId },
     });
     return comment ? CommentMapper.toEntity(comment) : null;
   };
-
   create = async (entity) => {
     const comment = await this.prisma.comment.create({
       data: {
@@ -32,7 +30,6 @@ export class CommentRepo {
     });
     return CommentMapper.toEntity(comment);
   };
-
   update = async (entity) => {
     const updatedComment = await this.prisma.comment.update({
       where: { id: entity.id },
@@ -41,10 +38,8 @@ export class CommentRepo {
         updatedAt: new Date(),
       },
     });
-
     return CommentMapper.toEntity(updatedComment);
   };
-
   delete = async (id) => {
     const deletedComment = await this.prisma.comment.delete({
       where: { id },

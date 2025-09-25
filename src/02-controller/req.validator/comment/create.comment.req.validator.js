@@ -17,7 +17,7 @@ export class CreateCommentReqValidator extends BaseValidator {
       throw new Exception(EXCEPTIONS.BAD_REQUEST);
     }
 
-    if (!this.isString(password) || this.isEmpty(password)) {
+    if (this.isEmpty(password)) {
       throw new Exception(EXCEPTIONS.BAD_REQUEST);
     }
 
