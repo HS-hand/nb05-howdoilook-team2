@@ -7,9 +7,9 @@ export class CreateStyleValidator extends BaseValidator {
   }
 
   validate() {
-    const { nickname, title, content, password, categories, tags, imageUrls } =
+    const { nickname, title, content, password, categories, tags = [], imageUrls } =
       this.body;
-    if (!nickname || !title || !content || !tags || !imageUrls) {
+    if (!nickname || !title || !content || !imageUrls) {
       throw new Exception(EXCEPTIONS.NOTICE);
     }
     if (!password) {
@@ -48,8 +48,20 @@ export class CreateStyleValidator extends BaseValidator {
     if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(password)) {
       throw new Exception(EXCEPTIONS.PASSWORD_NOTICE);
     }
+    for (const tag of tags) {
+      if (!this.isString(tag) || tag.length > 20) {
+        throw new Exception(EXCEPTIONS.NOTICE_TAG_LENGTH_MAXTWO);
+      }
+    }
     if (tags.length > 3) {
       throw new Exception(EXCEPTIONS.NOTICE_TAGS);
+    }
+    for (let i = 0; i < tags.length; i++) {
+      for (let j = i + 1; j < tags.length; j++) {
+        if (tags[i] === tags[j]) {
+          throw new Exception(EXCEPTIONS.NOTICE_TAG_SAME);
+        }
+      }
     }
 
     return {
