@@ -10,7 +10,7 @@ export class ListStyleValidator extends BaseValidator {
     const { page, pageSize, sortBy, tag, searchBy, keyword } = this.query;
 
     const rawPage = this.isEmpty(page) ? "1" : page;
-    const rawPageSize = this.isEmpty(pageSize) ? "10" : pageSize;
+    const rawPageSize = this.isEmpty(pageSize) ? "12" : pageSize;
     const rawSortBy = this.isEmpty(sortBy) ? "latest" : sortBy;
 
     if (!/^\d+$/.test(String(rawPage)))
@@ -34,26 +34,25 @@ export class ListStyleValidator extends BaseValidator {
 
     let finalSearchBy = undefined;
     let finalKeyword = undefined;
-    if (!this.isEmpty(searchBy) || !this.isEmpty(keyword)) {
-      if (this.isEmpty(searchBy)) throw new Exception(EXCEPTIONS.SEARCHBY_FORM);
-      if (this.isEmpty(keyword)) throw new Exception(EXCEPTIONS.KEYWORD_FORM);
+    // if (!this.isEmpty(searchBy)) {
+    //   if (this.isEmpty(searchBy)) throw new Exception(EXCEPTIONS.SEARCHBY_FORM);
 
-      const allowedSearch = ["nickname", "title", "content", "tag"];
-      if (!this.isString(searchBy) || !allowedSearch.includes(searchBy)) {
-        throw new Exception(EXCEPTIONS.SEARCHBY_FORM);
-      }
+    //   const allowedSearch = ["nickname", "title", "content", "tag"];
+    //   if (!this.isString(searchBy) || !allowedSearch.includes(searchBy)) {
+    //     throw new Exception(EXCEPTIONS.SEARCHBY_FORM);
+    //   }
 
-      if (
-        !this.isString(keyword) ||
-        keyword.length < 1 ||
-        keyword.length > 100
-      ) {
-        throw new Exception(EXCEPTIONS.KEYWORD_FORM);
-      }
+    //   if (
+    //     !this.isString(keyword) ||
+    //     keyword.length < 1 ||
+    //     keyword.length > 100
+    //   ) {
+    //     throw new Exception(EXCEPTIONS.KEYWORD_FORM);
+    //   }
 
-      finalSearchBy = searchBy;
-      finalKeyword = keyword;
-    }
+    //   finalSearchBy = searchBy;
+    //   finalKeyword = keyword;
+    // }
 
     return {
       page: pageNum,

@@ -79,3 +79,5 @@ GET http://localhost:4000/styles
 ###
 GET http://localhost:4000/tags
 
+###
+GET http://localhost:4000/styles?sortBy=latest&searchBy=nickname&keyword=&tag=&page=1&pageSize=12

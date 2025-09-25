@@ -40,6 +40,7 @@ export class Server {
   registerExceptionMiddleware = () => {
     this.#server.use((err, req, res, next) => {
       if (err instanceof Exception) {
+        console.log(err);
         res.status(err.statusCode).json({ message: err.message });
       } else {
         res.status(500).json({ message: "알 수 없는 에러 발생" });
