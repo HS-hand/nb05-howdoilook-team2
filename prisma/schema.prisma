@@ -57,9 +57,9 @@ model Curation {
   styleId String
   style   Style  @relation(fields: [styleId], references: [id], onDelete: Cascade)
 
-  nickname String
+  nickname String @unique
   content  String
-  password String
+  password String @unique
 
   trendy            Int
   personality       Int

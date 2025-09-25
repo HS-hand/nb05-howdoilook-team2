@@ -76,4 +76,21 @@ export class CurationRepo {
     });
     return totalCount;
   };
+
+  findCurationByNickname = async(entity) => {
+    const curation = await this.prisma.curation.findUnique({
+      where: {
+        nickname: entity.nickname,
+      }
+    });
+    return curation;
+  }
+  findCurationByPassword = async(entity) => {
+    const curation = await this.prisma.curation.findUnique({
+      where: {
+        password: entity.password,
+      }
+    });
+    return curation;
+  }
 }
