@@ -239,6 +239,11 @@ export class StyleRepo {
 
     const styles = await this.prisma.style.findMany({
       where: {id: {in: styleIds}},
+      include: {
+        images: true,
+        categories: true,
+        StyleContainTag: { include: { tag: true } },
+      },
     });
 
     return pagingStyles.map((style, index) => ({

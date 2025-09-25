@@ -64,7 +64,7 @@ export class StyleService {
     const rankingStylesAvg = foundStyleScores.map(style => {
       const { trendy, personality, practicality, costEffectiveness } = style._avg;
       const avgScore =
-      (trendy + personality + practicality + costEffectiveness) / 4;
+      ((trendy + personality + practicality + costEffectiveness) / 4).toFixed(1);
 
       return {styleId: style.styleId, avgScore};
     });

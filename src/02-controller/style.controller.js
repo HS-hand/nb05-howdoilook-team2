@@ -91,7 +91,7 @@ export class StyleController {
     return res.status(200).json(deletedStyleResDto);
   };
 
-  getRankingStyleController = async (req, res, next) => {
+  getRankingStylesController = async (req, res, next) => {
     const rankingStyleReqDto = new RankingStyleReqValidator({
       query : req.query
     }).validate();
