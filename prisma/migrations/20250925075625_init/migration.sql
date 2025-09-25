@@ -83,6 +83,15 @@ CREATE TABLE "public"."CategoryItem" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Tag_name_key" ON "public"."Tag"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Curation_nickname_key" ON "public"."Curation"("nickname");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Curation_password_key" ON "public"."Curation"("password");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Comment_curationId_key" ON "public"."Comment"("curationId");
 
 -- AddForeignKey

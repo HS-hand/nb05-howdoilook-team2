@@ -229,4 +229,38 @@ export class StyleRepo {
       },
     });
   }
+
+  async findRankingStyles({ page, pageSize, rankingStylesAvg }) {
+    const sortedStyles = rankingStylesAvg.sort((a, b) => b.avgScore - a.avgScore);
+    const pagingStyles = sortedStyles.slice((page - 1) * pageSize, page * pageSize)
+    const styleIds = sortedStyles.map(sytle => sytle.styleId)
+
+    const styles = await this.prisma.style.findMany({
+      where: {id: {in: styleIds}},
+      include: {
+        images: true,
+        categories: true,
+        StyleContainTag: { include: { tag: true } },
+      },
+    });
+
+    return pagingStyles.map((style, index) => ({
+      ...styles.find((s) => s.id === style.styleId),
+      rating: style.avgScore,
+      ranking: index + 1
+    }));
+  }
+
+  async findRankingStyleScores() {
+    const styleScores = await this.prisma.curation.groupBy({
+      by: ["styleId"],
+      _avg: {
+        trendy: true,
+        personality: true,
+        practicality: true,
+        costEffectiveness: true,
+      }
+    });
+    return styleScores;
+  }
 }
