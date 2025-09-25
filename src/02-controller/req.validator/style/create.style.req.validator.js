@@ -48,6 +48,35 @@ export class CreateStyleValidator extends BaseValidator {
     if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(password)) {
       throw new Exception(EXCEPTIONS.PASSWORD_NOTICE);
     }
+    for (const type in categories) {
+      if(!categories[type].name) {
+        throw new Exception(EXCEPTIONS.NOTICE);
+      } else if (!this.isString(categories[type].name)) {
+        throw new Exception(EXCEPTIONS.BAD_REQUEST);
+      } else {
+        if (categories[type].name.length > 30) {
+          throw new Exception(EXCEPTIONS.NOTICE_MAXTHREE);
+        }
+      }
+      if(!categories[type].brand) {
+        throw new Exception(EXCEPTIONS.NOTICE);
+      } else if (!this.isString(categories[type].brand)) {
+        throw new Exception(EXCEPTIONS.BAD_REQUEST);
+      }else {
+        if (categories[type].brand.length > 30) {
+          throw new Exception(EXCEPTIONS.NOTICE_MAXTHREE);
+        }
+      }
+      if(categories[type].price === undefined || categories[type].price === null) {
+        throw new Exception(EXCEPTIONS.NOTICE);
+      } else if (!this.isInt(categories[type].price)) {
+        throw new Exception(EXCEPTIONS.BAD_REQUEST);
+      } else {
+        if (categories[type].price > 1000000000) {
+          throw new Exception(EXCEPTIONS.NOTICE_PRICE);
+        }
+      }
+    }
     for (const tag of tags) {
       if (!this.isString(tag) || tag.length > 20) {
         throw new Exception(EXCEPTIONS.NOTICE_TAG_LENGTH_MAXTWO);
