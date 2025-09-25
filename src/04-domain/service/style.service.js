@@ -57,4 +57,26 @@ export class StyleService {
 
     return await this.#styleRepo.delete(styleId);
   }
+
+  async getRankingStyles({page, pageSize}) {
+    const foundStyleScores = await this.#styleRepo.findRankingStyleScores();
+
+    const rankingStylesAvg = foundStyleScores.map(style => {
+      const { trendy, personality, practicality, costEffectiveness } = style._avg;
+      const avgScore =
+      (trendy + personality + practicality + costEffectiveness) / 4;
+
+      return {styleId: style.styleId, avgScore};
+    });
+
+    //정렬된 rankingStyles = style 정보 + avgScore
+    const rankingStyles = await this.#styleRepo.findRankingStyles({page, pageSize, rankingStylesAvg});
+    
+    return{
+      currentPage : page,
+      totalRankingStylePages : pageSize,
+      totalrankingStyleCount : foundStyleScores.length,
+      rankingStyles,
+    }
+  }
 }

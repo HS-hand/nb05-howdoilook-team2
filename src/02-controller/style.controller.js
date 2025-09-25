@@ -7,6 +7,8 @@ import { UpdateStyleResDto } from "./res.dto/style/update.style.res.dto.js";
 import { DeleteStyleResDto } from "./res.dto/style/delete.style.res.dto.js";
 import { GetStyleDetailResDto } from "./res.dto/style/get.style.detail.res.dto.js";
 import { ListStyleResDto } from "./res.dto/style/list.style.res.dto.js";
+import { RankingStyleReqValidator } from "./req.validator/style/ranking.style.req.validator.js";
+import { RankingStyleResDto } from "./res.dto/style/ranking,style.res.dto.js";
 
 export class StyleController {
   #styleService;
@@ -87,5 +89,14 @@ export class StyleController {
     );
     const deletedStyleResDto = new DeleteStyleResDto(deletedStyle);
     return res.status(200).json(deletedStyleResDto);
+  };
+
+  getRankingStyleController = async (req, res, next) => {
+    const rankingStyleReqDto = new RankingStyleReqValidator({
+      query : req.query
+    }).validate();
+    const rankingStyles = await this.#styleService.getRankingStyles(rankingStyleReqDto);
+    const rankingStylesResDto = new RankingStyleResDto(rankingStyles);
+    return res.json(rankingStylesResDto);
   };
 }
