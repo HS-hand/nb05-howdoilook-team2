@@ -160,16 +160,20 @@ export const EXCEPTIONS = {
   },
   NICKNAME_DUPLICATION: {
     statusCode: 409,
-    message: "닉네임이 중복되었습니다. 다시 입력하세요."
+    message: "닉네임이 중복되었습니다. 다시 입력하세요.",
   },
   PASSWORD_DUPLICATION: {
     statusCode: 409,
-    message: "비밀번호가 중복되었습니다. 다시 입력하세요."
+    message: "비밀번호가 중복되었습니다. 다시 입력하세요.",
   },
-  VULGAR_LANGUAGE:{
+  VULGAR_LANGUAGE: {
     statusCode: 400,
-    message: "비속어가 포함되었습니다. 다시 입력하세요."
-  }
+    message: "비속어가 포함되었습니다. 다시 입력하세요.",
+  },
+  RANKBY_FORM: {
+    statusCode: 400,
+    message: "rankBy가 유효하지 않습니다.",
+  },
 };
 
 export class Exception extends Error {

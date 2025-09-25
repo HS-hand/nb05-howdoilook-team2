@@ -57,25 +57,36 @@ export class StyleService {
     return await this.#styleRepo.delete(styleId);
   }
 
-  async getRankingStyles({page, pageSize}) {
-    const foundStyleScores = await this.#styleRepo.findRankingStyleScores();
+  async getRankingStyles({ page, pageSize, rankBy }) {
+    const foundStyleScores =
+      await this.#styleRepo.findRankingStyleScores(rankBy);
 
-    const rankingStylesAvg = foundStyleScores.map(style => {
+    const rankingStylesAvg = foundStyleScores.map((style) => {
       const { trendy, personality, practicality, costEffectiveness } = style._avg;
-      const avgScore =
-      ((trendy + personality + practicality + costEffectiveness) / 4).toFixed(1);
+      let avgScore;
+      if (rankBy === "total") {
+        avgScore = Math.round(((trendy + personality + practicality + costEffectiveness) / 4) * 10) / 10;
 
-      return {styleId: style.styleId, avgScore};
+      } else {
+        avgScore = style._avg[rankBy] ?? 0;
+        console.log(avgScore);
+        avgScore = Math.round(avgScore * 10) / 10
+      }
+      return { styleId: style.styleId, avgScore };
     });
 
     //정렬된 rankingStyles = style 정보 + avgScore
-    const rankingStyles = await this.#styleRepo.findRankingStyles({page, pageSize, rankingStylesAvg});
-    
-    return{
-      currentPage : page,
-      totalRankingStylePages : pageSize,
-      totalrankingStyleCount : foundStyleScores.length,
+    const rankingStyles = await this.#styleRepo.findRankingStyles({
+      page,
+      pageSize,
+      rankingStylesAvg,
+    });
+
+    return {
+      currentPage: page,
+      totalRankingStylePages: pageSize,
+      totalrankingStyleCount: foundStyleScores.length,
       rankingStyles,
-    }
+    };
   }
 }

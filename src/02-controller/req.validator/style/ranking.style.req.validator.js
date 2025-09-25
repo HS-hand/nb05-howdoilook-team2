@@ -1,13 +1,13 @@
+import { Exception, EXCEPTIONS } from "../../../common/exception.js";
 import { BaseValidator } from "../base.validator.js";
 
 export class RankingStyleReqValidator extends BaseValidator {
-
   constructor(data) {
     super(data);
   }
 
   validate() {
-    const { page = 1, pageSize = 8 } = this.query;
+    const { page = 1, pageSize = 8, rankBy = "total" } = this.query;
     Number(page);
     Number(pageSize);
     if (!this.isInt(page) || page < 0) {
@@ -16,10 +16,18 @@ export class RankingStyleReqValidator extends BaseValidator {
     if (!this.isInt(pageSize) || pageSize <= 0) {
       throw new Exception(EXCEPTIONS.PAGESIZE_FORM);
     }
-
+    if (
+      !this.isString(rankBy) ||
+      !["total","trendy", "personality", "practicality", "costEffectiveness"].includes(
+        rankBy,
+      )
+    ) {
+      throw new Exception(EXCEPTIONS.RANKBY_FORM);
+    }
     return {
       page,
-      pageSize
-    }
+      pageSize,
+      rankBy,
+    };
   }
 }

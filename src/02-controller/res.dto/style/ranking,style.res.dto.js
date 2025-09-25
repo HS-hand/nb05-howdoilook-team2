@@ -32,9 +32,9 @@ export class RankingStyleResDto {
       categories: style.categories,
       viewCount: style.viewCount,
       curationCount: style.curationCount,
-			createdAt: style.createdAt,
-			ranking: style.ranking,
-			rating: style.rating
+      createdAt: style.createdAt,
+      ranking: style.ranking,
+      rating: style.rating,
     }));
   }
 }

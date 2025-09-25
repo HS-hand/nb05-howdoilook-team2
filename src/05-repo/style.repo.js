@@ -231,12 +231,17 @@ export class StyleRepo {
   }
 
   async findRankingStyles({ page, pageSize, rankingStylesAvg }) {
-    const sortedStyles = rankingStylesAvg.sort((a, b) => b.avgScore - a.avgScore);
-    const pagingStyles = sortedStyles.slice((page - 1) * pageSize, page * pageSize)
-    const styleIds = sortedStyles.map(sytle => sytle.styleId)
+    const sortedStyles = rankingStylesAvg.sort(
+      (a, b) => b.avgScore - a.avgScore,
+    );
+    const pagingStyles = sortedStyles.slice(
+      (page - 1) * pageSize,
+      page * pageSize,
+    );
+    const styleIds = sortedStyles.map((sytle) => sytle.styleId);
 
     const styles = await this.prisma.style.findMany({
-      where: {id: {in: styleIds}},
+      where: { id: { in: styleIds } },
       include: {
         images: true,
         categories: true,
@@ -247,19 +252,35 @@ export class StyleRepo {
     return pagingStyles.map((style, index) => ({
       ...styles.find((s) => s.id === style.styleId),
       rating: style.avgScore,
-      ranking: index + 1
+      ranking: index + 1,
     }));
   }
 
-  async findRankingStyleScores() {
+  async findRankingStyleScores(rankBy) {
     const styleScores = await this.prisma.curation.groupBy({
       by: ["styleId"],
-      _avg: {
-        trendy: true,
-        personality: true,
-        practicality: true,
-        costEffectiveness: true,
-      }
+      _avg:
+        rankBy === "total"
+          ? {
+            trendy: true,
+            personality: true,
+            practicality: true,
+            costEffectiveness: true,
+          }
+          : rankBy === "personality"
+            ? {
+              personality: true,
+            }
+            : rankBy === "practicality"
+              ? {
+                practicality: true,
+              }
+              : rankBy === "trendy"
+                ? {
+                  trendy: true,
+                } : {
+                  costEffectiveness: true,
+                }
     });
     return styleScores;
   }
