@@ -32,7 +32,7 @@ model Style {
 
 model Tag {
   id              String            @id @default(uuid())
-  name            String
+  name            String            @unique
   StyleContainTag StyleContainTag[]
 }
 

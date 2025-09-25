@@ -134,7 +134,10 @@ export class StyleRepo {
         StyleContainTag: {
           create: tags.map((tagName) => ({
             tag: {
-              create: { name: tagName },
+              connectOrCreate: {
+                where: { name: tagName },
+                create: { name: tagName },
+              },
             },
           })),
         },
@@ -179,24 +182,28 @@ export class StyleRepo {
       type,
     }));
 
+    await this.prisma.CategoryItem.deleteMany({ where: { styleId } });
+    await this.prisma.StyleContainTag.deleteMany({ where: { styleId } });
+    await this.prisma.StyleImage.deleteMany({ where: { styleId } });
+
     const record = await this.prisma.style.update({
       where: { id: styleId },
       data: {
         ...rest,
         categories: {
-          deleteMany: {},
           create: arrayCategories,
         },
         StyleContainTag: {
-          deleteMany: {},
           create: tags.map((tagName) => ({
             tag: {
-              create: { name: tagName },
+              connectOrCreate: {
+                where: { name: tagName },
+                create: { name: tagName },
+              },
             },
           })),
         },
         images: {
-          deleteMany: {},
           create: imageUrls.map((url) => ({ url })),
         },
         updatedAt: new Date(),
