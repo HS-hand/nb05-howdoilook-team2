@@ -23,13 +23,21 @@ export class RankingStyleResDto {
     this.currentPage = currentPage;
     this.totalPages = totalRankingStylePages;
     this.totalItemCount = totalrankingStyleCount;
+
     this.data = rankingStyles.map((style) => ({
       id: style.id,
-      thumbnail: style.thumbnail,
+      thumbnail: style.thumbnail || null,
       nickname: style.nickname,
       title: style.title,
-      tags: style.tags,
-      categories: style.categories,
+      tags: style.StyleContainTag.map(sct => sct.tag.name),
+      categories: style.categories.reduce((acc, category) => {
+        acc[category.type] = {
+          name: category.name,
+          brand: category.brand,
+          price: category.price,
+        }
+        return acc;
+      },{}),
       viewCount: style.viewCount,
       curationCount: style.curationCount,
       createdAt: style.createdAt,

@@ -7,7 +7,7 @@ export class ListStyleValidator extends BaseValidator {
   }
 
   validate() {
-    const { page, pageSize, sortBy, tag, searchBy, keyword } = this.query;
+    const { page, pageSize, sortBy, tag, searchBy, keyword} = this.query;
 
     const rawPage = this.isEmpty(page) ? "1" : page;
     const rawPageSize = this.isEmpty(pageSize) ? "12" : pageSize;
@@ -34,25 +34,26 @@ export class ListStyleValidator extends BaseValidator {
 
     let finalSearchBy = undefined;
     let finalKeyword = undefined;
-    // if (!this.isEmpty(searchBy)) {
-    //   if (this.isEmpty(searchBy)) throw new Exception(EXCEPTIONS.SEARCHBY_FORM);
 
-    //   const allowedSearch = ["nickname", "title", "content", "tag"];
-    //   if (!this.isString(searchBy) || !allowedSearch.includes(searchBy)) {
-    //     throw new Exception(EXCEPTIONS.SEARCHBY_FORM);
-    //   }
+    if (!this.isEmpty(searchBy)) {
+      const allowedSearch = ["nickname", "title", "content", "tag"];
+      if (!this.isString(searchBy) || !allowedSearch.includes(searchBy)) {
+        throw new Exception(EXCEPTIONS.SEARCHBY_FORM);
+      }
 
-    //   if (
-    //     !this.isString(keyword) ||
-    //     keyword.length < 1 ||
-    //     keyword.length > 100
-    //   ) {
-    //     throw new Exception(EXCEPTIONS.KEYWORD_FORM);
-    //   }
+      finalSearchBy = searchBy;
 
-    //   finalSearchBy = searchBy;
-    //   finalKeyword = keyword;
-    // }
+      if (!this.isEmpty(keyword)) {
+        if (!this.isString(keyword) || keyword.length > 100) {
+          throw new Exception(EXCEPTIONS.KEYWORD_FORM);
+        }
+        finalKeyword = keyword;
+      }
+    } else {
+      if (!this.isEmpty(keyword)) {
+        throw new Exception(EXCEPTIONS.SEARCHBY_FORM);
+      }
+    }
 
     return {
       page: pageNum,

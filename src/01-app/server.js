@@ -45,7 +45,6 @@ export class Server {
       } else {
         if(err.message==="경로가 없습니다."){
         console.error(err);
-
           res.status(404).json({message : err.message});
         }
         else{res.status(500).json({ message: "알 수 없는 에러 발생" });
