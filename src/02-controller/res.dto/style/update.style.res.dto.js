@@ -6,7 +6,6 @@ export class UpdateStyleResDto {
   viewCount;
   curationCount;
   createdAt;
-  updatedAt;
   categories;
   tags;
   imageUrls;
@@ -19,8 +18,14 @@ export class UpdateStyleResDto {
     this.viewCount = updateStyle.viewCount;
     this.curationCount = updateStyle.curationCount;
     this.createdAt = updateStyle.createdAt;
-    this.updatedAt = updateStyle.updatedAt;
-    this.categories = updateStyle.categories;
+    this.categories = updateStyle.categories.reduce((acc, category) => {
+      acc[category.type] = {
+        name: category.name,
+        brand: category.brand,
+        price: category.price,
+      }
+      return acc;
+    },{});
     this.tags = updateStyle.tags;
     this.imageUrls = updateStyle.imageUrls;
   }
