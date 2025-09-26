@@ -80,7 +80,6 @@ export class StyleService {
       pageSize,
       rankingStylesAvg,
     });
-
     return {
       currentPage: page,
       totalRankingStylePages: pageSize,
