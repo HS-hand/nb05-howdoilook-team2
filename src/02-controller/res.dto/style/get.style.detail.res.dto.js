@@ -6,10 +6,9 @@ export class GetStyleDetailResDto {
   viewCount;
   curationCount;
   createdAt;
-  updatedAt;
+  categories;
   tags;
   imageUrls;
-  categories;
 
   constructor(styleEntity) {
     this.id = styleEntity.id;
@@ -19,9 +18,15 @@ export class GetStyleDetailResDto {
     this.viewCount = styleEntity.viewCount;
     this.curationCount = styleEntity.curationCount;
     this.createdAt = styleEntity.createdAt;
-    this.updatedAt = styleEntity.updatedAt;
+    this.categories = styleEntity.categories.reduce((acc, category) => {
+      acc[category.type] = {
+        name: category.name,
+        brand: category.brand,
+        price: category.price,
+      }
+      return acc;
+    },{});
     this.tags = styleEntity.tags;
     this.imageUrls = styleEntity.imageUrls;
-    this.categories = styleEntity.categories;
   }
 }

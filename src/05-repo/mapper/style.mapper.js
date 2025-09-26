@@ -18,7 +18,6 @@ export class StyleMapper {
       viewCount: record.viewCount,
       curationCount: record._count?.curations || 0,
       createdAt: record.createdAt,
-      updatedAt: record.updatedAt,
       categories: record.categories || [],
       tags: tags,
       imageUrls: imageUrls,

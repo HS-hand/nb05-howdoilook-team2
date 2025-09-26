@@ -7,7 +7,6 @@ export class Style {
   #viewCount;
   #curationCount;
   #createdAt;
-  #updatedAt;
   #categories;
   #tags;
   #imageUrls;
@@ -21,8 +20,7 @@ export class Style {
     viewCount = 0,
     curationCount = 0,
     createdAt,
-    updatedAt,
-    categories = {},
+    categories = [],
     tags = [],
     imageUrls = [],
   }) {
@@ -34,7 +32,6 @@ export class Style {
     this.#viewCount = viewCount;
     this.#curationCount = curationCount;
     this.#createdAt = createdAt;
-    this.#updatedAt = updatedAt;
     this.#categories = categories;
     this.#tags = tags;
     this.#imageUrls = imageUrls;
@@ -80,9 +77,6 @@ export class Style {
   }
   get createdAt() {
     return this.#createdAt;
-  }
-  get updatedAt() {
-    return this.#updatedAt;
   }
   get categories() {
     return this.#categories;
