@@ -26,7 +26,7 @@ export class RankingStyleResDto {
 
     this.data = rankingStyles.map((style) => ({
       id: style.id,
-      thumbnail: style.thumbnail,
+      thumbnail: style.thumbnail || null,
       nickname: style.nickname,
       title: style.title,
       tags: style.StyleContainTag.map(sct => sct.tag.name),

@@ -243,7 +243,7 @@ export class StyleRepo {
     const styles = await this.prisma.style.findMany({
       where: { id: { in: styleIds } },
       include: {
-        images: true,
+        images: {select: {url: true}},
         categories: true,
         StyleContainTag: { include: { tag: true } },
       },

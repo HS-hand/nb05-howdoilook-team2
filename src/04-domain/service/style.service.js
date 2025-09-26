@@ -80,11 +80,19 @@ export class StyleService {
       pageSize,
       rankingStylesAvg,
     });
+
+
+    //썸네일 넣기
+    const result = rankingStyles.map(style => ({
+      ...style,
+      thumbnail: style.images[0]?.url ?? null
+    }))
+
     return {
       currentPage: page,
       totalRankingStylePages: pageSize,
       totalrankingStyleCount: foundStyleScores.length,
-      rankingStyles,
+      rankingStyles: result,
     };
   }
 }

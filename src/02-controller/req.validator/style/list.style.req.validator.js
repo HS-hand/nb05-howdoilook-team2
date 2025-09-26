@@ -7,7 +7,7 @@ export class ListStyleValidator extends BaseValidator {
   }
 
   validate() {
-    const { page, pageSize, sortBy, tag, searchBy, keyword, thumbnail } = this.query;
+    const { page, pageSize, sortBy, tag, searchBy, keyword} = this.query;
 
     const rawPage = this.isEmpty(page) ? "1" : page;
     const rawPageSize = this.isEmpty(pageSize) ? "12" : pageSize;
@@ -55,15 +55,6 @@ export class ListStyleValidator extends BaseValidator {
       }
     }
 
-    let finalThumbnail = false;
-    if (!this.isEmpty(thumbnail)) {
-      const lowerVal = String(thumbnail).toLowerCase();
-      if (lowerVal !== "true" && lowerVal !== "false") {
-        throw new Exception(EXCEPTIONS.BAD_REQUEST);
-      }
-      finalThumbnail = lowerVal === "true";
-    }
-
     return {
       page: pageNum,
       pageSize: pageSizeNum,
@@ -71,7 +62,6 @@ export class ListStyleValidator extends BaseValidator {
       tag: this.isEmpty(tag) ? undefined : tag,
       searchBy: finalSearchBy,
       keyword: finalKeyword,
-      thumbnail: finalThumbnail,
     };
   }
 }
