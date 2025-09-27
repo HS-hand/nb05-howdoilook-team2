@@ -54,7 +54,7 @@ export class Curation {
     practicality,
     costEffectiveness,
   }) {
-    console.log(nickname);
+
     if (nickname) {
       this.validateNicknameRule(nickname);
     }
