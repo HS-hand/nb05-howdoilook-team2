@@ -62,14 +62,18 @@ export class StyleService {
       await this.#styleRepo.findRankingStyleScores(rankBy);
 
     const rankingStylesAvg = foundStyleScores.map((style) => {
-      const { trendy, personality, practicality, costEffectiveness } = style._avg;
+      const { trendy, personality, practicality, costEffectiveness } =
+        style._avg;
       let avgScore;
       if (rankBy === "total") {
-        avgScore = Math.round(((trendy + personality + practicality + costEffectiveness) / 4) * 10) / 10;
-
+        avgScore =
+          Math.round(
+            ((trendy + personality + practicality + costEffectiveness) / 4) *
+              10,
+          ) / 10;
       } else {
         avgScore = style._avg[rankBy] ?? 0;
-        avgScore = Math.round(avgScore * 10) / 10
+        avgScore = Math.round(avgScore * 10) / 10;
       }
       return { styleId: style.styleId, avgScore };
     });
@@ -81,12 +85,11 @@ export class StyleService {
       rankingStylesAvg,
     });
 
-
     //썸네일 넣기
-    const result = rankingStyles.map(style => ({
+    const result = rankingStyles.map((style) => ({
       ...style,
-      thumbnail: style.images[0]?.url ?? null
-    }))
+      thumbnail: style.images[0]?.url ?? null,
+    }));
 
     return {
       currentPage: page,

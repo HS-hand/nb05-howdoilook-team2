@@ -7,8 +7,15 @@ export class CreateStyleValidator extends BaseValidator {
   }
 
   validate() {
-    const { nickname, title, content, password, categories, tags = [], imageUrls } =
-      this.body;
+    const {
+      nickname,
+      title,
+      content,
+      password,
+      categories,
+      tags = [],
+      imageUrls,
+    } = this.body;
     if (!nickname || !title || !content || !imageUrls) {
       throw new Exception(EXCEPTIONS.NOTICE);
     }
@@ -49,7 +56,7 @@ export class CreateStyleValidator extends BaseValidator {
       throw new Exception(EXCEPTIONS.PASSWORD_NOTICE);
     }
     for (const type in categories) {
-      if(!categories[type].name) {
+      if (!categories[type].name) {
         throw new Exception(EXCEPTIONS.NOTICE);
       } else if (!this.isString(categories[type].name)) {
         throw new Exception(EXCEPTIONS.BAD_REQUEST);
@@ -58,16 +65,19 @@ export class CreateStyleValidator extends BaseValidator {
           throw new Exception(EXCEPTIONS.NOTICE_MAXTHREE);
         }
       }
-      if(!categories[type].brand) {
+      if (!categories[type].brand) {
         throw new Exception(EXCEPTIONS.NOTICE);
       } else if (!this.isString(categories[type].brand)) {
         throw new Exception(EXCEPTIONS.BAD_REQUEST);
-      }else {
+      } else {
         if (categories[type].brand.length > 30) {
           throw new Exception(EXCEPTIONS.NOTICE_MAXTHREE);
         }
       }
-      if(categories[type].price === undefined || categories[type].price === null) {
+      if (
+        categories[type].price === undefined ||
+        categories[type].price === null
+      ) {
         throw new Exception(EXCEPTIONS.NOTICE);
       } else if (!this.isInt(categories[type].price)) {
         throw new Exception(EXCEPTIONS.BAD_REQUEST);

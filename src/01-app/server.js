@@ -43,23 +43,23 @@ export class Server {
         console.log(err);
         res.status(err.statusCode).json({ message: err.message });
       } else {
-        if(err.message==="경로가 없습니다."){
-        console.error(err);
-          res.status(404).json({message : err.message});
+        if (err.message === "경로가 없습니다.") {
+          console.error(err);
+          res.status(404).json({ message: err.message });
+        } else {
+          res.status(500).json({ message: "알 수 없는 에러 발생" });
+          console.error(err);
         }
-        else{res.status(500).json({ message: "알 수 없는 에러 발생" });
-        console.error(err);
       }
-    }
     });
   };
 
   start = () => {
     this.registerBaseMiddlewares();
     this.registerControllerMiddleware();
-    this.#server.use((req, res, next)=>{
-      next(new Error({message: "경로가 없습니다."}));
-    })
+    this.#server.use((req, res, next) => {
+      next(new Error({ message: "경로가 없습니다." }));
+    });
     this.registerExceptionMiddleware();
     this.listen();
   };

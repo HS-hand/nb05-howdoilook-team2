@@ -23,9 +23,9 @@ export class UpdateStyleResDto {
         name: category.name,
         brand: category.brand,
         price: category.price,
-      }
+      };
       return acc;
-    },{});
+    }, {});
     this.tags = updateStyle.tags;
     this.imageUrls = updateStyle.imageUrls;
   }

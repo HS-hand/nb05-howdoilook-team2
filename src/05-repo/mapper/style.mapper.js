@@ -6,7 +6,7 @@ export class StyleMapper {
       return null;
     }
 
-    const tags = record.StyleContainTag?.map((data)=>data.tag.name) || [];
+    const tags = record.StyleContainTag?.map((data) => data.tag.name) || [];
     const imageUrls = record.images?.map((img) => img.url) || [];
 
     return new Style({

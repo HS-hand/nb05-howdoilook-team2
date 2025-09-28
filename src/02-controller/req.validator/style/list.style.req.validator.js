@@ -7,7 +7,7 @@ export class ListStyleValidator extends BaseValidator {
   }
 
   validate() {
-    const { page, pageSize, sortBy, tag, searchBy, keyword} = this.query;
+    const { page, pageSize, sortBy, tag, searchBy, keyword } = this.query;
 
     const rawPage = this.isEmpty(page) ? "1" : page;
     const rawPageSize = this.isEmpty(pageSize) ? "12" : pageSize;
