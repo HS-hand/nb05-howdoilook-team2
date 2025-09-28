@@ -17,46 +17,6 @@ export class StyleService {
     return tags;
   }
 
-  async createStyle(styleData) {
-    const createdStyle = await this.#styleRepo.create(styleData);
-    return createdStyle;
-  }
-
-  async getStyleById(styleId) {
-    const styleEntity = await this.#styleRepo.findById(styleId);
-    if (!styleEntity) {
-      throw new Exception(EXCEPTIONS.NOT_FOUND);
-    }
-
-    await this.#styleRepo.incrementViewCount(styleId);
-    return styleEntity;
-  }
-
-  async updateStyle(styleId, updateData) {
-    const { password, ...rest } = updateData;
-    const styleEntity = await this.#styleRepo.findById(styleId);
-    if (!styleEntity) {
-      throw new Exception(EXCEPTIONS.NOT_FOUND);
-    }
-    if (!styleEntity.isPasswordMatch(password)) {
-      throw new Exception(EXCEPTIONS.FORBIDDEN);
-    }
-
-    return await this.#styleRepo.update(styleId, rest);
-  }
-
-  async deleteStyle(styleId, password) {
-    const styleEntity = await this.#styleRepo.findById(styleId);
-    if (!styleEntity) {
-      throw new Exception(EXCEPTIONS.NOT_FOUND);
-    }
-    if (!styleEntity.isPasswordMatch(password)) {
-      throw new Exception(EXCEPTIONS.FORBIDDEN);
-    }
-
-    return await this.#styleRepo.delete(styleId);
-  }
-
   async getRankingStyles({ page, pageSize, rankBy }) {
     const foundStyleScores =
       await this.#styleRepo.findRankingStyleScores(rankBy);
@@ -97,5 +57,47 @@ export class StyleService {
       totalrankingStyleCount: foundStyleScores.length,
       rankingStyles: result,
     };
+  }
+
+  async createStyle(styleData) {
+    const createdStyle = await this.#styleRepo.create(styleData);
+    return createdStyle;
+  }
+
+  async getStyleById(styleId) {
+    const styleEntity = await this.#styleRepo.findById(styleId);
+    if (!styleEntity) {
+      throw new Exception(EXCEPTIONS.NOT_FOUND);
+    }
+
+    await this.#styleRepo.incrementViewCount(styleId);
+    
+    return styleEntity;
+  }
+
+  async updateStyle(styleId, updateData) {
+    const { password, ...rest } = updateData;
+    
+    const styleEntity = await this.#styleRepo.findById(styleId);
+    if (!styleEntity) {
+      throw new Exception(EXCEPTIONS.NOT_FOUND);
+    }
+    if (!styleEntity.isPasswordMatch(password)) {
+      throw new Exception(EXCEPTIONS.FORBIDDEN);
+    }
+
+    return await this.#styleRepo.update(styleId, rest);
+  }
+
+  async deleteStyle(styleId, password) {
+    const styleEntity = await this.#styleRepo.findById(styleId);
+    if (!styleEntity) {
+      throw new Exception(EXCEPTIONS.NOT_FOUND);
+    }
+    if (!styleEntity.isPasswordMatch(password)) {
+      throw new Exception(EXCEPTIONS.FORBIDDEN);
+    }
+
+    return await this.#styleRepo.delete(styleId);
   }
 }
