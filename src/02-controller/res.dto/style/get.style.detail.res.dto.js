@@ -28,5 +28,8 @@ export class GetStyleDetailResDto {
     }, {});
     this.tags = styleEntity.tags;
     this.imageUrls = styleEntity.imageUrls;
+    // },{});
+    // this.tags = styleEntity.tags.map(item => item.tag.name);
+    // this.imageUrls = styleEntity.imageUrls.map(item => item.url);
   }
 }

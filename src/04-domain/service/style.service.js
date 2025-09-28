@@ -86,7 +86,6 @@ export class StyleService {
     if (!styleEntity) {
       throw new Exception(EXCEPTIONS.NOT_FOUND);
     }
-
     await this.#styleRepo.incrementViewCount(styleId);
 
     return styleEntity;

@@ -1,14 +1,18 @@
 export class GetCurationListResDto {
+  currentPage;
+  totalPages;
+  totalItemCount;
+  data;
   constructor({
     page,
-    foundCurationCount,
+    totalPages,
     curationTotalCount,
     foundCurationList,
   }) {
     this.currentPage = page;
-    this.totalPages = foundCurationCount;
+    this.totalPages = totalPages;
     this.totalItemCount = curationTotalCount;
-    this.curationList = foundCurationList.map((Curation) => ({
+    this.data = foundCurationList.map((Curation) => ({
       id: Curation.id,
       nickname: Curation.nickname,
       content: Curation.content,
