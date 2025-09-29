@@ -54,7 +54,7 @@ export class UpdateStyleValidator extends BaseValidator {
     if (title.length > 30) {
       throw new Exception(EXCEPTIONS.NOTICE_MAXTHREE);
     }
-    if (content.length > 300) {
+    if (content.length > 500) {
       throw new Exception(EXCEPTIONS.NOTICE_MAXHUND);
     }
     if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(password)) {
