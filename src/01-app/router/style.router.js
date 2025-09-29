@@ -34,5 +34,9 @@ export class StyleRouter extends BaseRouter {
       "/styles/:styleId",
       this.catchException(this.#styleController.deleteStyleController),
     );
+    this.router.get(
+      "/ranking",
+      this.catchException(this.#styleController.getRankingStylesController),
+    );
   }
 }

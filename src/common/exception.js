@@ -21,21 +21,21 @@ export const EXCEPTIONS = {
     message: "*최소 하나 이상 선택해주세요.",
   },
   NOTICE_PRICE: {
-		statusCode: 400,
-		message: "*10억원 이하로 입력해 주세요.",
-	},
+    statusCode: 400,
+    message: "*10억원 이하로 입력해 주세요.",
+  },
   NOTICE_TAGS: {
     statusCode: 400,
     message: "*태그는 최대 3개까지 등록 가능합니다.",
   },
   NOTICE_TAG_LENGTH_MAXTWO: {
-		statusCode: 400,
-		message: "*태그는 20자 이내로 입력해 주세요.",
-	},
+    statusCode: 400,
+    message: "*태그는 20자 이내로 입력해 주세요.",
+  },
   NOTICE_TAG_SAME: {
-		statusCode: 400,
-		message: "*현재 스타일에 동일한 태그가 있습니다.",
-	},
+    statusCode: 400,
+    message: "*현재 스타일에 동일한 태그가 있습니다.",
+  },
   PASSWORD_NOTICE: {
     statusCode: 400,
     message: "*영문, 숫자 조합 8~16자리로 입력해주세요.",
@@ -160,16 +160,20 @@ export const EXCEPTIONS = {
   },
   NICKNAME_DUPLICATION: {
     statusCode: 409,
-    message: "닉네임이 중복되었습니다. 다시 입력하세요."
+    message: "닉네임이 중복되었습니다. 다시 입력하세요.",
   },
   PASSWORD_DUPLICATION: {
     statusCode: 409,
-    message: "비밀번호가 중복되었습니다. 다시 입력하세요."
+    message: "비밀번호가 중복되었습니다. 다시 입력하세요.",
   },
-  VULGAR_LANGUAGE:{
+  VULGAR_LANGUAGE: {
     statusCode: 400,
-    message: "비속어가 포함되었습니다. 다시 입력하세요."
-  }
+    message: "비속어가 포함되었습니다. 다시 입력하세요.",
+  },
+  RANKBY_FORM: {
+    statusCode: 400,
+    message: "rankBy가 유효하지 않습니다.",
+  },
 };
 
 export class Exception extends Error {

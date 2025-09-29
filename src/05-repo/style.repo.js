@@ -103,14 +103,72 @@ export class StyleRepo {
     }));
   }
 
+  async findRankingStyles({ page, pageSize, rankingStylesAvg }) {
+    const sortedStyles = rankingStylesAvg.sort(
+      (a, b) => b.avgScore - a.avgScore,
+    );
+    const pagingStyles = sortedStyles.slice(
+      (page - 1) * pageSize,
+      page * pageSize,
+    );
+    const styleIds = sortedStyles.map((sytle) => sytle.styleId);
+
+    const styles = await this.prisma.style.findMany({
+      where: { id: { in: styleIds } },
+      include: {
+        images: { select: { url: true } },
+        categories: true,
+        StyleContainTag: { include: { tag: true } },
+      },
+    });
+
+    return pagingStyles.map((style, index) => ({
+      ...styles.find((s) => s.id === style.styleId),
+      rating: style.avgScore,
+      ranking: index + 1,
+    }));
+  }
+
+  async findRankingStyleScores(rankBy) {
+    const styleScores = await this.prisma.curation.groupBy({
+      by: ["styleId"],
+      _avg:
+        rankBy === "total"
+          ? {
+              trendy: true,
+              personality: true,
+              practicality: true,
+              costEffectiveness: true,
+            }
+          : rankBy === "personality"
+            ? {
+                personality: true,
+              }
+            : rankBy === "practicality"
+              ? {
+                  practicality: true,
+                }
+              : rankBy === "trendy"
+                ? {
+                    trendy: true,
+                  }
+                : {
+                    costEffectiveness: true,
+                  },
+    });
+    return styleScores;
+  }
+
   async create(styleData) {
     const { categories, tags, imageUrls } = styleData;
     const styleEntity = Style.factory(styleData);
     const persistentData = StyleMapper.toPersistent(styleEntity);
+
     const arrayCategories = Object.entries(categories).map(([type, data]) => ({
       ...data,
       type,
     }));
+
     const record = await this.prisma.style.create({
       data: {
         ...persistentData,
@@ -128,11 +186,12 @@ export class StyleRepo {
         images: { create: imageUrls.map((url) => ({ url })) },
       },
       include: {
-        images: true,
         categories: true,
         StyleContainTag: { include: { tag: true } },
+        images: true,
       },
     });
+
     return StyleMapper.toEntity(record);
   }
 
@@ -153,8 +212,7 @@ export class StyleRepo {
       },
     });
 
-    const styleEntity = StyleMapper.toEntity(record);
-    return styleEntity;
+    return StyleMapper.toEntity(record);
   }
 
   async update(styleId, updateData) {

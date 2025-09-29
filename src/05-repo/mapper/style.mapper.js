@@ -6,7 +6,7 @@ export class StyleMapper {
       return null;
     }
 
-    const tags = record.StyleContainTag?.map((data)=>data.tag.name) || [];
+    const tags = record.StyleContainTag?.map((data) => data.tag.name) || [];
     const imageUrls = record.images?.map((img) => img.url) || [];
 
     return new Style({
@@ -18,7 +18,6 @@ export class StyleMapper {
       viewCount: record.viewCount,
       curationCount: record._count?.curations || 0,
       createdAt: record.createdAt,
-      updatedAt: record.updatedAt,
       categories: record.categories || [],
       tags: tags,
       imageUrls: imageUrls,

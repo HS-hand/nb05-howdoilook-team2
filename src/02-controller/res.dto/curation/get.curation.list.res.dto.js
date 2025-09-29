@@ -8,12 +8,12 @@ export class GetCurationListResDto {
     this.currentPage = page;
     this.totalPages = foundCurationCount;
     this.totalItemCount = curationTotalCount;
-    this.CurationList = foundCurationList.map((Curation) => ({
+    this.curationList = foundCurationList.map((Curation) => ({
       id: Curation.id,
       nickname: Curation.nickname,
       content: Curation.content,
       trendy: Curation.trendy,
-      personality: Curation.personmality,
+      personality: Curation.personality,
       practicality: Curation.practicality,
       costEffectiveness: Curation.costEffectiveness,
       createdAt: Curation.createdAt,
