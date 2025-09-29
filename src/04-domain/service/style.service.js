@@ -8,9 +8,9 @@ export class StyleService {
   }
 
   async getStyleList(options = {}) {
-    const {items, pagination} = await this.#styleRepo.findAll(options);
+    const { items, pagination } = await this.#styleRepo.findAll(options);
 
-    const result = items.map(style => ({
+    const result = items.map((style) => ({
       id: style.id,
       nickname: style.nickname,
       title: style.title,
