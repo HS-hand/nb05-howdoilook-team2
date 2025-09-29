@@ -8,7 +8,7 @@ export class GetCurationListReqValidator extends BaseValidator {
 
   validate() {
     const { styleId } = this.params;
-    let { page = 1, pageSize = 3, searchBy = "nickname", keyword } = this.query;
+    let { page = 1, pageSize = 5, searchBy = "nickname", keyword } = this.query;
     page = Number(page);
     pageSize = Number(pageSize);
     if (!this.isString(styleId)) {

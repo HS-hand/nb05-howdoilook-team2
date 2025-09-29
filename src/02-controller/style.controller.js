@@ -20,20 +20,17 @@ export class StyleController {
   galleryListController = async (req, res, next) => {
     const validator = new ListStyleValidator({ query: req.query });
     const validated = validator.validate();
-
+    
     const { items, pagination } = await this.#styleService.getStyleList({
       page: validated.page,
       pageSize: validated.pageSize,
       sortBy: validated.sortBy,
       tagFilter: validated.tag,
-      searchBy: validated.searchBy,
+      searchBy: validated.searchBy, 
       keyword: validated.keyword,
     });
-    const listDto = items.map((style) => new ListStyleResDto(style));
-    return res.json({
-      items: listDto,
-      pagination,
-    });
+    const getStylesResDto = new ListStyleResDto({items, pagination});
+    return res.json(getStylesResDto);
   };
 
   popularTagsController = async (req, res, next) => {

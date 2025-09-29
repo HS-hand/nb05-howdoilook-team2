@@ -57,15 +57,12 @@ export class StyleRepo {
     const take = pageSize;
 
     const totalCount = await this.prisma.style.count({ where });
-
     const records = await this.prisma.style.findMany({
       where,
       include: {
         images: { select: { url: true } },
         categories: true,
-        StyleContainTag: {
-          include: { tag: true },
-        },
+        StyleContainTag: { include: { tag: true } },
         _count: { select: { curations: true } },
       },
       orderBy,
@@ -73,15 +70,29 @@ export class StyleRepo {
       take,
     });
     const entities = records.map((record) => {
-      return StyleMapper.toEntity();
+      //const tags = record.StyleContainTag?.map(ct => ct.tag?.name) ?? [];
+      return StyleMapper.toEntity(record);
+      // return StyleMapper.toEntity({
+      //   id: record.id,
+      //   nickname: record.nickname,
+      //   title: record.title,
+      //   content: record.content,
+      //   password: record.password,
+      //   viewCount: record.viewCount,
+      //   createdAt: record.createdAt,
+      //   updatedAt: record.updatedAt,
+      //   categories: record.categories,
+      //   tags: tags,
+      //   imageUrls: record.images.map((img) => img.url),
+      //   curationCount: record._count.curations,
+      // });
     });
     return {
       items: entities,
       pagination: {
-        page,
-        pageSize: take,
-        totalCount,
-        totalPages: Math.ceil(totalCount / take) || 1,
+        page: page,
+        totalPages: Math.ceil(totalCount / pageSize),
+        totalCount: totalCount,
       },
     };
   }
@@ -211,7 +222,6 @@ export class StyleRepo {
         _count: { select: { curations: true } },
       },
     });
-
     return StyleMapper.toEntity(record);
   }
 

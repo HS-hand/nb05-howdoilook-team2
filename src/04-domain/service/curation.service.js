@@ -25,8 +25,8 @@ export class CurationService {
     });
 
     const curationTotalCount = await this.#curationRepo.count(styleId);
-    const foundCurationCount = foundCurationList.length;
-    return { page, foundCurationCount, curationTotalCount, foundCurationList };
+    const totalPages = Math.ceil(curationTotalCount / pageSize);
+    return { page, totalPages, curationTotalCount, foundCurationList };
   };
 
   createCuration = async ({

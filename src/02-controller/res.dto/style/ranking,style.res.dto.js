@@ -17,12 +17,12 @@ export class RankingStyleResDto {
   constructor({
     currentPage,
     totalRankingStylePages,
-    totalrankingStyleCount,
+    totalRankingStyleCount,
     rankingStyles,
   }) {
     this.currentPage = currentPage;
     this.totalPages = totalRankingStylePages;
-    this.totalItemCount = totalrankingStyleCount;
+    this.totalItemCount = totalRankingStyleCount;
 
     this.data = rankingStyles.map((style) => ({
       id: style.id,

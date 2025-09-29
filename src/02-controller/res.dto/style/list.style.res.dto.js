@@ -1,28 +1,38 @@
 export class ListStyleResDto {
-  id;
-  representativeImage;
-  title;
-  nickname;
-  tags;
-  categories;
-  content;
-  viewCount;
-  curationCount;
-  createdAt;
+  pagination;
+  currentPage;
+  totalPages;
+  totalItemCount;
+  data;
+  page;
+  constructor({
+    pagination,
+    items,
+  }) {
+    this.pagination = pagination || { page: 1, totalPages: 1, totalCount: 0 };
+    this.page = pagination.page;
+    this.currentPage = this.page;
+    this.totalPages = pagination.totalPages;
+    this.totalItemCount = pagination.totalCount;
 
-  constructor(styleEntity) {
-    this.id = styleEntity.id;
-    this.representativeImage =
-      styleEntity.imageUrls && styleEntity.imageUrls.length
-        ? styleEntity.imageUrls[0]
-        : null;
-    this.title = styleEntity.title;
-    this.nickname = styleEntity.nickname;
-    this.tags = styleEntity.tags;
-    this.categories = styleEntity.categories;
-    this.content = styleEntity.content;
-    this.viewCount = styleEntity.viewCount;
-    this.curationCount = styleEntity.curationCount ?? 0;
-    this.createdAt = styleEntity.createdAt;
+    this.data = items.map((style) => ({
+      id: style.id,
+      thumbnail: style.thumbnail || null,
+      nickname: style.nickname,
+      title: style.title,
+      tags: style.tags ?? null,
+      categories: style.categories.reduce((acc, category) => {
+        acc[category.type] = {
+          name: category.name,
+          brand: category.brand,
+          price: category.price,
+        }
+        return acc;
+      }, {}),
+      content: style.content,
+      viewCount: style.viewCount,
+      curationCount: style.curationCount ?? 0,
+      createdAt: style.createdAt,
+    }));
   }
 }
