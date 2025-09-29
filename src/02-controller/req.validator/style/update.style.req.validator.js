@@ -88,7 +88,11 @@ export class UpdateStyleValidator extends BaseValidator {
         throw new Exception(EXCEPTIONS.BAD_REQUEST);
       } else {
         if (categories[type].price > 1000000000) {
-          throw new Exception(EXCEPTIONS.NOTICE_PRICE);
+          throw new Exception(EXCEPTIONS.NOTICE_PRICE_LIMIT_DOWN);
+        } else {
+          if (categories[type].price < 0) {
+            throw new Exception(EXCEPTIONS.NOTICE_PRICE_LIMIT_UP);
+          }
         }
       }
     }

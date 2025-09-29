@@ -20,9 +20,13 @@ export const EXCEPTIONS = {
     statusCode: 400,
     message: "*최소 하나 이상 선택해주세요.",
   },
-  NOTICE_PRICE: {
+  NOTICE_PRICE_LIMIT_DOWN: {
     statusCode: 400,
     message: "*10억원 이하로 입력해 주세요.",
+  },
+  NOTICE_PRICE_LIMIT_UP: {
+    statusCode: 400,
+    message: "*0원 이상으로 입력해 주세요.",
   },
   NOTICE_TAGS: {
     statusCode: 400,

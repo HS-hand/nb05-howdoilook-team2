@@ -70,22 +70,7 @@ export class StyleRepo {
       take,
     });
     const entities = records.map((record) => {
-      //const tags = record.StyleContainTag?.map(ct => ct.tag?.name) ?? [];
       return StyleMapper.toEntity(record);
-      // return StyleMapper.toEntity({
-      //   id: record.id,
-      //   nickname: record.nickname,
-      //   title: record.title,
-      //   content: record.content,
-      //   password: record.password,
-      //   viewCount: record.viewCount,
-      //   createdAt: record.createdAt,
-      //   updatedAt: record.updatedAt,
-      //   categories: record.categories,
-      //   tags: tags,
-      //   imageUrls: record.images.map((img) => img.url),
-      //   curationCount: record._count.curations,
-      // });
     });
     return {
       items: entities,
