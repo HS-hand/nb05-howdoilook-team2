@@ -23,9 +23,9 @@ export class CreateStyleResDto {
         name: category.name,
         brand: category.brand,
         price: category.price,
-      }
+      };
       return acc;
-    },{});
+    }, {});
     this.tags = createStyle.tags;
     this.imageUrls = createStyle.imageUrls;
   }

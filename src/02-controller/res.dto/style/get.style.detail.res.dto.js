@@ -23,9 +23,9 @@ export class GetStyleDetailResDto {
         name: category.name,
         brand: category.brand,
         price: category.price,
-      }
+      };
       return acc;
-    },{});
+    }, {});
     this.tags = styleEntity.tags;
     this.imageUrls = styleEntity.imageUrls;
   }

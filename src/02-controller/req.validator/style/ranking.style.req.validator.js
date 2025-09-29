@@ -18,9 +18,13 @@ export class RankingStyleReqValidator extends BaseValidator {
     }
     if (
       !this.isString(rankBy) ||
-      !["total","trendy", "personality", "practicality", "costEffectiveness"].includes(
-        rankBy,
-      )
+      ![
+        "total",
+        "trendy",
+        "personality",
+        "practicality",
+        "costEffectiveness",
+      ].includes(rankBy)
     ) {
       throw new Exception(EXCEPTIONS.RANKBY_FORM);
     }
