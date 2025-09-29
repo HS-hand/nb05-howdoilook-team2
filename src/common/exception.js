@@ -171,7 +171,7 @@ export const EXCEPTIONS = {
     message: "비밀번호가 중복되었습니다. 다시 입력하세요.",
   },
   VULGAR_LANGUAGE: {
-    statusCode: 409,
+    statusCode: 400,
     message: "내용에 비속어가 포함되었습니다. 다시 입력하세요.",
   },
   RANKBY_FORM: {

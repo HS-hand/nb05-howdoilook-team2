@@ -23,7 +23,7 @@ export class ListStyleValidator extends BaseValidator {
     const pageSizeNum = Number(rawPageSize);
     if (pageSizeNum < 1) throw new Exception(EXCEPTIONS.PAGESIZE_FORM);
 
-    const allowedSort = ["latest", "view", "curation"];
+    const allowedSort = ["latest", "mostViewed", "mostCurated"];
     if (!this.isString(rawSortBy) || !allowedSort.includes(rawSortBy)) {
       throw new Exception(EXCEPTIONS.BAD_REQUEST);
     }
