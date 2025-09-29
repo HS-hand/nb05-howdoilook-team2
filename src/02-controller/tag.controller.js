@@ -10,7 +10,6 @@ export class TagController {
   getTagsController = async (req, res, next) => {
     const tags = await this.#tagRepo.getAllTags();
     const tagsResDto = new GetTagsResDto(tags);
-    return res.json({ tags: ["안뇽"] });
     return res.json(tagsResDto);
   };
 }

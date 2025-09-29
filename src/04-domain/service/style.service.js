@@ -71,13 +71,13 @@ export class StyleService {
     }
 
     await this.#styleRepo.incrementViewCount(styleId);
-    
+
     return styleEntity;
   }
 
   async updateStyle(styleId, updateData) {
     const { password, ...rest } = updateData;
-    
+
     const styleEntity = await this.#styleRepo.findById(styleId);
     if (!styleEntity) {
       throw new Exception(EXCEPTIONS.NOT_FOUND);
