@@ -45,9 +45,9 @@ export class StyleRepo {
     }
 
     let orderBy;
-    if (sortBy === "view") {
+    if (sortBy === "mostViewed") {
       orderBy = { viewCount: "desc" };
-    } else if (sortBy === "curation") {
+    } else if (sortBy === "mostCurated") {
       orderBy = { curations: { _count: "desc" } };
     } else {
       orderBy = { createdAt: "desc" };
