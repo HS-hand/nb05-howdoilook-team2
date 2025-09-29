@@ -1,5 +1,5 @@
 ### 
-POST http://localhost:3000/curations/2fbc48fc-5ebc-461c-b56e-5afca03ab885/comments
+POST http://localhost:4000/curations/a7d256e3-8016-439a-b5e6-2fdb8e2847b5/comments
 Content-Type: application/json
 
 {
@@ -7,7 +7,7 @@ Content-Type: application/json
 	"password": "a12345678"
 }
 ### 
-PUT http://localhost:3000/comments/2fbc48fc-5ebc-461c-b56e-5afca03ab885
+PUT http://localhost:4000/comments/30f3f229-1254-4b30-9b26-81672a4937a4
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/comments/8f108ccb-fcea-448a-9864-dd4734fc51f9
+DELETE http://localhost:4000/comments/30f3f229-1254-4b30-9b26-81672a4937a4
 Content-Type: application/json
 
 {

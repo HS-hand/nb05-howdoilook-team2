@@ -1,5 +1,5 @@
 ### 
-POST http://localhost:3000/styles/6590f9a8-64c5-41c7-af57-000771a4f22b/curations
+POST http://localhost:4000/styles/a4cdb85c-05f5-4175-b194-940d5b115547/curations
 Content-Type: application/json
 
 {
@@ -13,10 +13,10 @@ Content-Type: application/json
 }
 
 ### 
-GET http://localhost:3000/styles/6590f9a8-64c5-41c7-af57-000771a4f22b/curations
+GET http://localhost:4000/styles/a4cdb85c-05f5-4175-b194-940d5b115547/curations
 
 ### 
-PUT http://localhost:3000/curations/39fcc7e9-926e-4728-8e25-107362d8e4d7
+PUT http://localhost:4000/curations/abdfb728-d381-4e4f-a023-3fc46ac3e872
 Content-Type: application/json
 
 {
@@ -31,7 +31,7 @@ Content-Type: application/json
 
 
 ###
-DELETE http://localhost:3000/curations/39fcc7e9-926e-4728-8e25-107362d8e4d7
+DELETE http://localhost:4000/curations/abdfb728-d381-4e4f-a023-3fc46ac3e872
 Content-Type: application/json
 
 {
