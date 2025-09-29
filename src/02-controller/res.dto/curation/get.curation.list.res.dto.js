@@ -3,12 +3,7 @@ export class GetCurationListResDto {
   totalPages;
   totalItemCount;
   data;
-  constructor({
-    page,
-    totalPages,
-    curationTotalCount,
-    foundCurationList,
-  }) {
+  constructor({ page, totalPages, curationTotalCount, foundCurationList }) {
     this.currentPage = page;
     this.totalPages = totalPages;
     this.totalItemCount = curationTotalCount;
