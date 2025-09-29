@@ -73,6 +73,7 @@ export class StyleController {
       body: req.body,
       params: req.params,
     }).validate();
+    
     const updatedStyle = await this.#styleService.updateStyle(
       styleId,
       updateData,
@@ -93,6 +94,7 @@ export class StyleController {
       password,
     );
     const deletedStyleResDto = new DeleteStyleResDto(deletedStyle);
+    
     return res.status(200).json(deletedStyleResDto);
   };
 }
