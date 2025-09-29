@@ -78,6 +78,7 @@ export class StyleService {
 
   async createStyle(styleData) {
     const createdStyle = await this.#styleRepo.create(styleData);
+    
     return createdStyle;
   }
 
@@ -86,6 +87,7 @@ export class StyleService {
     if (!styleEntity) {
       throw new Exception(EXCEPTIONS.NOT_FOUND);
     }
+    
     await this.#styleRepo.incrementViewCount(styleId);
 
     return styleEntity;
@@ -115,47 +117,5 @@ export class StyleService {
     }
 
     return await this.#styleRepo.delete(styleId);
-  }
-
-  async getRankingStyles({ page, pageSize, rankBy }) {
-    const foundStyleScores =
-      await this.#styleRepo.findRankingStyleScores(rankBy);
-
-    const rankingStylesAvg = foundStyleScores.map((style) => {
-      const { trendy, personality, practicality, costEffectiveness } =
-        style._avg;
-      let avgScore;
-      if (rankBy === "total") {
-        avgScore =
-          Math.round(
-            ((trendy + personality + practicality + costEffectiveness) / 4) *
-              10,
-          ) / 10;
-      } else {
-        avgScore = style._avg[rankBy] ?? 0;
-        avgScore = Math.round(avgScore * 10) / 10;
-      }
-      return { styleId: style.styleId, avgScore };
-    });
-
-    //정렬된 rankingStyles = style 정보 + avgScore
-    const rankingStyles = await this.#styleRepo.findRankingStyles({
-      page,
-      pageSize,
-      rankingStylesAvg,
-    });
-
-    //썸네일 넣기
-    const result = rankingStyles.map((style) => ({
-      ...style,
-      thumbnail: style.images[0]?.url ?? null,
-    }));
-
-    return {
-      currentPage: page,
-      totalRankingStylePages: Math.ceil(foundStyleScores.length / pageSize),
-      totalRankingStyleCount: foundStyleScores.length,
-      rankingStyles: result,
-    };
   }
 }

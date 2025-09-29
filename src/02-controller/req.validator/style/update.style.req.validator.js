@@ -54,7 +54,7 @@ export class UpdateStyleValidator extends BaseValidator {
     if (title.length > 30) {
       throw new Exception(EXCEPTIONS.NOTICE_MAXTHREE);
     }
-    if (content.length > 300) {
+    if (content.length > 500) {
       throw new Exception(EXCEPTIONS.NOTICE_MAXHUND);
     }
     if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(password)) {
@@ -88,7 +88,11 @@ export class UpdateStyleValidator extends BaseValidator {
         throw new Exception(EXCEPTIONS.BAD_REQUEST);
       } else {
         if (categories[type].price > 1000000000) {
-          throw new Exception(EXCEPTIONS.NOTICE_PRICE);
+          throw new Exception(EXCEPTIONS.NOTICE_PRICE_LIMIT_DOWN);
+        } else {
+          if (categories[type].price < 0) {
+            throw new Exception(EXCEPTIONS.NOTICE_PRICE_LIMIT_UP);
+          }
         }
       }
     }
