@@ -164,7 +164,7 @@ export const EXCEPTIONS = {
   },
   NICKNAME_DUPLICATION: {
     statusCode: 409,
-    message: "닉네임이 중복되었습니다. 다시 입력하세요.",
+    message: "이미 작성한 큐레이팅이 있습니다.",
   },
   PASSWORD_DUPLICATION: {
     statusCode: 409,
@@ -177,6 +177,14 @@ export const EXCEPTIONS = {
   RANKBY_FORM: {
     statusCode: 400,
     message: "rankBy가 유효하지 않습니다.",
+  },
+  PASSWORD_NOT_MATCH: {
+    statusCode: 400,
+    message: "이 닉네임을 쓰는 유저가 있습니다. 닉네임을 다시 입력하시던가 이 닉네임을 쓰는 유저의 비번을 입력하시오.",
+  },
+  NICKNAME_NOT_MATCH: {
+    statusCode: 400,
+    message: "이 비번을 쓰는 유저가 있습니다. 비번을 다시 입력하시던가 이 비번을 쓰는 유저의 닉네임을 입력하시오.",
   },
 };
 

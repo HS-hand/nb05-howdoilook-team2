@@ -9,7 +9,6 @@ export class TagController {
 
   getTagsController = async (req, res, next) => {
     const tags = await this.#tagRepo.getAllTags();
-    console.log(tags);
     const tagsResDto = new GetTagsResDto(tags);
     return res.json(tagsResDto);
   };

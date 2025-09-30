@@ -46,7 +46,7 @@ export class StyleService {
         avgScore =
           Math.round(
             ((trendy + personality + practicality + costEffectiveness) / 4) *
-              10,
+            10,
           ) / 10;
       } else {
         avgScore = style._avg[rankBy] ?? 0;
@@ -69,10 +69,12 @@ export class StyleService {
     }));
 
     return {
-      currentPage: page,
-      totalRankingStylePages: pageSize,
-      totalrankingStyleCount: foundStyleScores.length,
       rankingStyles: result,
+      pagination: {
+        currentPage: page,
+        totalRankingStylePages: Math.ceil(foundStyleScores.length / pageSize),
+        totalRankingStyleCount: foundStyleScores.length,
+      }
     };
   }
 
