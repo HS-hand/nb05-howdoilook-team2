@@ -20,8 +20,9 @@ Content-Type: application/json
 		}
 	},
 	"tags": [
-		"석훈",
-		"훈석"
+		"121212",
+		"111111",
+    "101010"
 	],
 	"imageUrls": [
 		"string",

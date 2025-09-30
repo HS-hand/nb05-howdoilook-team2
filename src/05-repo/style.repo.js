@@ -207,7 +207,7 @@ export class StyleRepo {
         _count: { select: { curations: true } },
       },
     });
-    
+
     return StyleMapper.toEntity(record);
   }
 

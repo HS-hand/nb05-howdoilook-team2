@@ -78,7 +78,7 @@ export class StyleService {
 
   async createStyle(styleData) {
     const createdStyle = await this.#styleRepo.create(styleData);
-    
+
     return createdStyle;
   }
 
@@ -87,7 +87,7 @@ export class StyleService {
     if (!styleEntity) {
       throw new Exception(EXCEPTIONS.NOT_FOUND);
     }
-    
+
     await this.#styleRepo.incrementViewCount(styleId);
 
     return styleEntity;
