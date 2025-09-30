@@ -7,7 +7,7 @@ export class RankingStyleReqValidator extends BaseValidator {
   }
 
   validate() {
-    let { page = 1, pageSize = 8, rankBy = "total" } = this.query;
+    let { page = 1, pageSize = 10, rankBy = "total" } = this.query;
     page = Number(page);
     pageSize = Number(pageSize);
     if (!this.isInt(page) || page < 0) {

@@ -1,4 +1,5 @@
 export class RankingStyleResDto {
+  pagination
   currentPage;
   totalPages;
   totalItemCount;
@@ -15,14 +16,12 @@ export class RankingStyleResDto {
   ranking;
   rating;
   constructor({
-    currentPage,
-    totalRankingStylePages,
-    totalRankingStyleCount,
+    pagination,
     rankingStyles,
   }) {
-    this.currentPage = currentPage;
-    this.totalPages = totalRankingStylePages;
-    this.totalItemCount = totalRankingStyleCount;
+    this.currentPage = pagination.currentPage;
+    this.totalPages = pagination.totalRankingStylePages;
+    this.totalItemCount = pagination.totalRankingStyleCount;
 
     this.data = rankingStyles.map((style) => ({
       id: style.id,
