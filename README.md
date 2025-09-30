@@ -41,21 +41,21 @@ https://www.notion.so/NB-5-2-26fa0b8db76380fa81c0e30d66c763f3?source=copy_link
   - 생성, 상세 조회, 수정, 삭제
 - 기능 사진
   - 1. 스타일 생성_기본 화면 
-    - (![스타일 생성_기본 화면](./README/OH/1.create_1.png))
+  ![스타일 생성_기본 화면](./README/OH/1.create_1.png)
   - 1. 스타일 생성_빈 값 입력시
-    - (![스타일 생성_빈 값 입력시](./README/OH/1.create_2.png))
+  ![스타일 생성_빈 값 입력시](./README/OH/1.create_2.png)
   - 1. 스타일 생성_생성 완료
-    - (![스타일 생성_생성 완료](./README/OH/1.create_3.png))
+  ![스타일 생성_생성 완료](./README/OH/1.create_3.png)
   - 2. 스타일 상세 조회
-    - (![스타일 상세 조회](./README/OH/2.getDetailStyle.png))
+  ![스타일 상세 조회](./README/OH/2.getDetailStyle.png)
   - 3. 스타일 수정_수정 (태그 추가)
-    - (![스타일 수정_수정 (태그 추가)](./README/OH/3.update_1.png))
+  ![스타일 수정_수정 (태그 추가)](./README/OH/3.update_1.png)
   - 3. 스타일 수정_수정 완료
-    - (![스타일 수정_수정 완료](./README/OH/3.update_2.png))
+  ![스타일 수정_수정 완료](./README/OH/3.update_2.png)
   - 4. 스타일 삭제_삭제 (비밀번호 입력)
-    - (![스타일 삭제_삭제 (비밀번호 입력)](./README/OH/4.delete_1.png))
+  ![스타일 삭제_삭제 (비밀번호 입력)](./README/OH/4.delete_1.png)
   - 4. 스타일 삭제_삭제 완료
-    - (![스타일 삭제_삭제 완료](./README/OH/4.delete_2.png))
+  ![스타일 삭제_삭제 완료](./README/OH/4.delete_2.png)
 
 (자신이 개발한 기능에 대한 사진이나 gif 파일 첨부)
 
