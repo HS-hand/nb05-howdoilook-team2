@@ -58,7 +58,7 @@ export class Server {
     this.registerBaseMiddlewares();
     this.registerControllerMiddleware();
     this.#server.use((req, res, next) => {
-      next(new Error({ message: "경로가 없습니다." }));
+      next(new Error("경로가 없습니다."));
     });
     this.registerExceptionMiddleware();
     this.listen();

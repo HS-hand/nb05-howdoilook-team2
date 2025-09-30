@@ -30,8 +30,22 @@ export class TagRepo {
       });
     }
 
-    const filteredTags = await this.prisma.tag.findMany();
-    return filteredTags;
+    const remainingTags = await this.prisma.tag.findMany({
+      orderBy: {
+        StyleContainTag: {
+          _count: "desc",
+        },
+      },
+      select: {
+        name: true,
+      },
+    });
 
+    const filteredTags = remainingTags.map((tag) => tag.name);
+    
+    if(filteredTags.length > 10){
+      return filteredTags.slice(0, 10);
+    }
+    return filteredTags;
   };
 }
