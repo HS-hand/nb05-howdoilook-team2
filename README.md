@@ -59,7 +59,7 @@ https://www.notion.so/NB-5-2-26fa0b8db76380fa81c0e30d66c763f3?source=copy_link
 
 <p align="center">
   <img src="./public/큐레이팅-1759199114325.png" style="width:49%; height:auto; object-fit:cover;"/>
-  <img src="./public/랭킹-1759199114326.png" style="width:49%; height:auto; object-fit:cover;"/>
+  <img src="./public/랭킹-1759216310904.png" style="width:49%; height:auto; object-fit:cover;"/>
 </p>
 
 ### 오창섭
