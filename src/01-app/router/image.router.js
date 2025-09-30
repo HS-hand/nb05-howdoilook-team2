@@ -20,8 +20,9 @@ export class ImageRouter extends BaseRouter {
 
   uploadImageController = async (req, res) => {
     const validateFiles = new UploadImageValidator(req.files).validate();
+    const baseUrl = process.env.SERVER_BASE_URL || "http://localhost:4000";
 
-    const imageUrl = `http://localhost:4000/${req.files[0].filename}`;
+    const imageUrl = `${baseUrl}/${req.files[0].filename}`;
 
     return res.status(200).json({ imageUrl });
   };

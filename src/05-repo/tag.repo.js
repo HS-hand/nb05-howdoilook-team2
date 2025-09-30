@@ -42,8 +42,8 @@ export class TagRepo {
     });
 
     const filteredTags = remainingTags.map((tag) => tag.name);
-    
-    if(filteredTags.length > 10){
+
+    if (filteredTags.length > 10) {
       return filteredTags.slice(0, 10);
     }
     return filteredTags;
