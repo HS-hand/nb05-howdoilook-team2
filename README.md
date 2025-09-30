@@ -27,9 +27,8 @@ https://www.notion.so/NB-5-2-26fa0b8db76380fa81c0e30d66c763f3?source=copy_link
 
 ### 손훈석
 
-(자신이 개발한 기능에 대한 사진이나 gif 파일 첨부)
-
-- 답글 엔티티
+- comment API 구현
+- tag API 구현
 
 ### 정인성
 
@@ -51,9 +50,16 @@ https://www.notion.so/NB-5-2-26fa0b8db76380fa81c0e30d66c763f3?source=copy_link
 
 ```
 src
- ┣ 01-app
+ ┣ app
+ ┃ ┣ router
+ ┃ ┣ ┣ base.router.js
+ ┃ ┣ ┣ comment.router.js
+ ┃ ┣ ┣ curation.router.js
+ ┃ ┣ ┣ image.router.js
+ ┃ ┣ ┣ style.router.js
+ ┃ ┣ ┗ tag.router.js
  ┃ ┗ sever.js
- ┣ 02-middleware
+ ┣ controller
  ┃ ┣ req.validator
  ┃ ┣ ┣ comment
  ┃ ┣ ┣ ┣ create.comment.req.validator.js
@@ -66,6 +72,8 @@ src
  ┃ ┣ ┣ style
  ┃ ┣ ┣ ┣ create.style.req.validator.js
  ┃ ┣ ┣ ┣ delete.style.req.validator.js
+ ┃ ┣ ┣ ┣ list.style.req.validator.js
+ ┃ ┣ ┣ ┣ ranking.style.req.validator.js
  ┃ ┣ ┣ ┣ upload.image.req.validator.js
  ┃ ┣ ┣ ┗ update.style.req.validator.js
  ┃ ┣ ┗ base.validator.js
@@ -74,25 +82,25 @@ src
  ┃ ┣ ┣ ┣ create.comment.res.dto.js
  ┃ ┣ ┣ ┣ delete.comment.res.dto.js
  ┃ ┣ ┣ ┗ update.comment.res.dto.js
- ┃ ┣ ┣ style
- ┃ ┣ ┣ ┣ create.style.res.dto.js
- ┃ ┣ ┣ ┣ delete.style.res.dto.js
- ┃ ┣ ┣ ┣ style.detail.res.dto.js
- ┃ ┣ ┣ ┗ update.style.res.dto.js
  ┃ ┣ ┣ curation
  ┃ ┣ ┣ ┣ create.curation.res.dto.js
  ┃ ┣ ┣ ┣ delete.curation.res.dto.js
  ┃ ┣ ┣ ┣ view.curation.list.res.dto.js
- ┃ ┣ ┗ ┗ update.curation.res.dto.js
- ┃ ┣ comment.middleware.js
- ┃ ┣ style.middleware.js
- ┃ ┗ curation.middleware.js
- ┣ 03-controller
- ┃ ┣ base.controlloer.js
+ ┃ ┣ ┣ ┗ update.curation.res.dto.js
+ ┃ ┣ ┣ style
+ ┃ ┣ ┣ ┣ create.style.res.dto.js
+ ┃ ┣ ┣ ┣ delete.style.res.dto.js
+ ┃ ┣ ┣ ┣ get.style.detail.res.dto.js
+ ┃ ┣ ┣ ┣ list.style.res.dto.js
+ ┃ ┣ ┣ ┣ ranking,style.res.dto.js
+ ┃ ┣ ┣ ┗ update.style.res.dto.js
+ ┃ ┣ ┣ tag
+ ┃ ┣ ┗ ┗ get.tags.res.dto.js
  ┃ ┣ comment.controller.js
  ┃ ┣ style.controller.js
- ┃ ┗ curation.controller.js
- ┣ 04-domain
+ ┃ ┣ curation.controller.js
+ ┃ ┗ tag.controller.js
+ ┣ domain
  ┃ ┣ entity
  ┃ ┣ ┣ comment.js
  ┃ ┣ ┣ style.js
@@ -101,17 +109,22 @@ src
  ┃ ┣ ┣ comment.service.js
  ┃ ┣ ┣ style.service.js
  ┃ ┗ ┗ curation.service.js
- ┣ 05-repo
+ ┣ repo
  ┃ ┣ mapper
  ┃ ┣ ┣ comment.mapper.js
  ┃ ┣ ┣ style.mapper.js
  ┃ ┣ ┗ curation.mapper.js
  ┃ ┣ comment.repo.js
  ┃ ┣ style.repo.js
+ ┃ ┣ tag.repo.js
  ┃ ┗ curation.repo.js
  ┣ common
+ ┃ ┣ libs
+ ┃ ┣ ┣ config.manager.js
+ ┃ ┣ ┗ file.uploader.js
  ┃ ┣ exception.js
- ┃ ┗ struct.js
+ ┃ ┣ config.keys.js
+ ┃ ┗ vulgar.language.js
  ┣ dep-injector.js
  ┗ index.js
 http
@@ -129,8 +142,7 @@ README.md
 ```
 
 ## 구현 홈페이지
-
-(개발한 홈페이지에 대한 링크 게시)
+https://nb05-howdoilook-team2-fe.onrender.com
 
 ## 프로젝트 회고록
 
