@@ -1,5 +1,5 @@
 export class RankingStyleResDto {
-  pagination
+  pagination;
   currentPage;
   totalPages;
   totalItemCount;
@@ -15,10 +15,7 @@ export class RankingStyleResDto {
   createdAt;
   ranking;
   rating;
-  constructor({
-    pagination,
-    rankingStyles,
-  }) {
+  constructor({ pagination, rankingStyles }) {
     this.currentPage = pagination.currentPage;
     this.totalPages = pagination.totalRankingStylePages;
     this.totalItemCount = pagination.totalRankingStyleCount;
