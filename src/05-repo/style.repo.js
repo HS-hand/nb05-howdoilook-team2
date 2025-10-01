@@ -115,19 +115,19 @@ export class StyleRepo {
         images: { select: { url: true } },
         categories: true,
         StyleContainTag: { include: { tag: true } },
-        _count: {select:{curations: true}},
+        _count: { select: { curations: true } },
       },
     });
-   
+
     return pagingStyles.map((style, index) => {
       const matched = styles.find((s) => s.id === style.styleId);
 
-      return{
+      return {
         ...matched,
         curationCount: matched?._count.curations ?? 0,
         rating: style.avgScore,
         ranking: index + 1,
-      }
+      };
     });
   }
 

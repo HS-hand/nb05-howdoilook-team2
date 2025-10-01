@@ -65,7 +65,8 @@ export class CurationService {
     }
 
     // 현재 게시글에 없지만 다른 게시글에 있을 경우
-    const foundTotalCurationNickname = await this.#curationRepo.findCurationByNickname({ curation });
+    const foundTotalCurationNickname =
+      await this.#curationRepo.findCurationByNickname({ curation });
     if (foundTotalCurationNickname) {
       // 이 닉네임을 쓰는 유저가 있으니까 다른 게시글에서 작성시 비번은 일치해야 됨
       console.log(curation.password);

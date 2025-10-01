@@ -44,9 +44,12 @@ export class StyleController {
     const rankingStyleReqDto = new RankingStyleReqValidator({
       query: req.query,
     }).validate();
-    const {rankingStyles, pagination} =
+    const { rankingStyles, pagination } =
       await this.#styleService.getRankingStyles(rankingStyleReqDto);
-    const rankingStylesResDto = new RankingStyleResDto({rankingStyles, pagination});
+    const rankingStylesResDto = new RankingStyleResDto({
+      rankingStyles,
+      pagination,
+    });
     return res.json(rankingStylesResDto);
   };
 

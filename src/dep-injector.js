@@ -18,6 +18,7 @@ import { StyleRouter } from "./01-app/router/style.router.js";
 import { TagRouter } from "./01-app/router/tag.router.js";
 import { TagController } from "./02-controller/tag.controller.js";
 import { TagRepo } from "./05-repo/tag.repo.js";
+import { HealthRouter } from "./01-app/router/health.router.js";
 
 export class DepInjector {
   #server;
@@ -55,12 +56,15 @@ export class DepInjector {
     const tagController = new TagController(tagRepo);
     const tagRouter = new TagRouter(tagController);
 
+    const healthRouter = new HealthRouter()
+
     const routers = [
       curationRouter,
       commentRouter,
       styleRouter,
       imageRouter,
       tagRouter,
+      healthRouter,
     ];
     return new Server(routers, configManager);
   }

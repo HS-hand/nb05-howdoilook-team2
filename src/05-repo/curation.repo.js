@@ -77,20 +77,20 @@ export class CurationRepo {
     return totalCount;
   };
 
-  findCurationByNickname = async ({curation, styleId}) => {
+  findCurationByNickname = async ({ curation, styleId }) => {
     const foundcuration = await this.prisma.curation.findFirst({
       where: {
         nickname: curation.nickname,
-        ...(styleId ? { styleId } : {})
+        ...(styleId ? { styleId } : {}),
       },
     });
     return foundcuration;
   };
-  findCurationByPassword = async ({curation, styleId}) => {
+  findCurationByPassword = async ({ curation, styleId }) => {
     const foundcuration = await this.prisma.curation.findFirst({
       where: {
         password: curation.password,
-        ...(styleId ? { styleId } : {})
+        ...(styleId ? { styleId } : {}),
       },
     });
     return foundcuration;
